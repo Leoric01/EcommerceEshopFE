@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="flex item-center gap-1">
             <div className="flex items-center gap-2">
               <IconButton>
-                <MenuIcon />
+                {!isLarge && <MenuIcon />}
                 <h1 className="logo cursor-pointer text-lg md:text-2xl text-primary-custom">
                   Bazar
                 </h1>
