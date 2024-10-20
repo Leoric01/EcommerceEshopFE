@@ -12,7 +12,12 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.slick-slide {
+  padding: 0px 5px; 
+}
+.slick-list {
+  margin-left: 0px;  
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

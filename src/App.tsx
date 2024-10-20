@@ -12,9 +12,6 @@ function App() {
       <div className="App">
         <Navbar />
         <Home />
-        <h1 className="text-3xl font-bold underline">HASHUBFHASBFHAS</h1>
-        <Button variant="contained">TEST</Button>
-        <AddShoppingCartIcon />
       </div>
     </ThemeProvider>
   );
