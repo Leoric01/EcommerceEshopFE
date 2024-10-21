@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import CartItem from "./CartItem";
-import { LocalOffer } from "@mui/icons-material";
+import { Close, LocalOffer } from "@mui/icons-material";
 import { teal } from "@mui/material/colors";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
+import PricingCard from "./PricingCard";
 
 const Cart = () => {
   const [couponCode, setCouponCode] = useState("");
+  const [isCouponValid, setIsCouponValid] = useState(false);
   const handleChange = (e: any) => {
     setCouponCode(e.target.value);
   };
-  
+
   const handleApplyCoupon = () => {
-    return null;
-  }
+    setIsCouponValid(!isCouponValid);
+  };
 
   return (
     <div className="pt-10 px-5 sm:px-10 md:px-40 min-h-screen">
@@ -31,18 +33,36 @@ const Cart = () => {
               </div>
               <span>Apply Coupons</span>
             </div>
-            <div className="flex align-middle justify-between">
-              <TextField
-                onChange={handleChange}
-                id="outlined-basic"
-                label="Coupon code"
-                size="small"
-                variant="outlined"
-              />
-              <Button size="small" variant="contained" onClick={handleApplyCoupon}>
-                Apply
-              </Button>
-            </div>
+            { isCouponValid ? (
+              <div className="flex align-middle justify-between">
+                <TextField
+                  onChange={handleChange}
+                  id="outlined-basic"
+                  label="Coupon code"
+                  size="small"
+                  variant="outlined"
+                />
+                <Button
+                  size="small"
+                  variant="contained"
+                  onClick={handleApplyCoupon}
+                >
+                  Apply
+                </Button>
+              </div>
+            ) : (
+              <div className="flex">
+                <div className="p-1 pl-5 pr-3 border rounded-md flex gap-2 items-center">
+                  <span className="">COUPON Applied</span>
+                  <IconButton onClick={handleApplyCoupon} size="small">
+                    <Close className="text-red-600" />
+                  </IconButton>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="border rounded-md">
+            <PricingCard/>
           </div>
         </div>
       </div>
