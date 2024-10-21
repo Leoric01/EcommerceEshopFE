@@ -15,7 +15,7 @@ const CartItem = () => {
           <img
             className="w-[90px] border rounded-md"
             src="https://www.goodfreephotos.com/cache/vector-images/officer-in-uniform.png"
-            alt="profile picture"
+            alt="profile face"
           />
         </div>
         <div className="space-y-2">

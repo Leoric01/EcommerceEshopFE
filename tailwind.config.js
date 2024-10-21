@@ -7,9 +7,9 @@
         "secondary-custom": "#EAF0F1",
       },
       //TODO REMOVE THIS, ADDED IT FOR DEVELOPMENT
-      screens: {
-        lg: "770px",
-      },
+      // screens: {
+      //   lg: "770px",
+      // },
     },
   },
   plugins: [],
