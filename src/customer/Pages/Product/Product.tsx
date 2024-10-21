@@ -8,6 +8,7 @@ import {
   IconButton,
   InputLabel,
   MenuItem,
+  Pagination,
   Select,
   useMediaQuery,
   useTheme,
@@ -15,12 +16,19 @@ import {
 import { FilterAlt } from "@mui/icons-material";
 
 const Product = () => {
+  const theme = useTheme();
+  const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
   const [sort, setSort] = useState();
+  const [page, setPage] = useState(1);
+
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
   };
-  const theme = useTheme();
-  const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
+
+  const handlePageChange = (value: number) => {
+    setPage(value);
+  };
+
   return (
     <div className="-z-10 mt-10">
       <div className="">
@@ -64,13 +72,20 @@ const Product = () => {
               </Select>
             </FormControl>
           </div>
-
           <Divider />
           <section className="product_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
             {[1, 1, 1, 1, 1, 1, 1].map((item) => (
               <ProductCard />
             ))}
           </section>
+          <div className="flex ml-8 justify-start py-5">
+            <Pagination
+              onChange={(e, value) => handlePageChange(value)}
+              count={10}
+              variant="outlined"
+              color="primary"
+            />
+          </div>
         </div>
       </div>
     </div>
