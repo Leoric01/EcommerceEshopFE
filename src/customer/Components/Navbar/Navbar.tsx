@@ -6,15 +6,18 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import CategorySheet from "./CategorySheet";
+import { mainCategory } from "../../../Data/MainCategory";
 
 const Navbar = () => {
-  const theme = useTheme(); // Retrieve the theme object
-  const isLarge = useMediaQuery(theme.breakpoints.up("lg")); // Use the theme variable
+  const theme = useTheme();
+  const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
+  const [selectedCategory, setSelectedCategory] = useState("men");
+  const [showCategorySheet, setShowCategorySheet] = useState(false);
 
   return (
     <>
@@ -30,13 +33,20 @@ const Navbar = () => {
               </IconButton>
             </div>
             <ul className="flex items-center font-medium text-gray-800 gap-2">
-              {["Men", "Women", "Home & Furniture", "Electronics"].map(
-                (item) => (
-                  <li className="mainCategory hover:text-primary-custom hover:border-b-2 h-[70px] px-4 border-primary-custom flex items-center">
-                    {item}
-                  </li>
-                )
-              )}
+              {mainCategory.map((item) => (
+                <li
+                  onMouseLeave={() => {
+                    setShowCategorySheet(false);
+                  }}
+                  onMouseEnter={() => {
+                    setShowCategorySheet(true);
+                    setSelectedCategory(item.categoryId);
+                  }}
+                  className="mainCategory hover:text-primary-custom hover:border-b-2 h-[70px] px-4 border-primary-custom flex items-center"
+                >
+                  {item.name}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="flex gap-1 lg:gap-6 items-center">
@@ -66,9 +76,15 @@ const Navbar = () => {
             {isLarge && <Button variant="outlined">Become Seller</Button>}
           </div>
         </div>
-        <div className="categorySheet absolute top-[4.41rem] left-20 right-20 border">
-          <CategorySheet />
-        </div>
+        {showCategorySheet && (
+          <div
+            onMouseLeave={() => setShowCategorySheet(false)}
+            onMouseEnter={() => setShowCategorySheet(true)}
+            className="categorySheet absolute top-[4.41rem] left-20 right-20 border"
+          >
+            <CategorySheet selectedCategory={selectedCategory} />
+          </div>
+        )}
       </Box>
     </>
   );
