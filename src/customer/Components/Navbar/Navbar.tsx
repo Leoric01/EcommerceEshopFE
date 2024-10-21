@@ -27,7 +27,7 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <IconButton>
                 {!isLarge && <MenuIcon />}
-                <h1 className="logo cursor-pointer text-lg md:text-2xl text-primary-custom">
+                <h1 className="logo cursor-pointer text-lg md:text-2xl">
                   ShopAlley
                 </h1>
               </IconButton>

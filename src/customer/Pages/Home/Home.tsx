@@ -33,7 +33,7 @@ const Home = () => {
           <div className="absolute top-1/2 left-4 lg:left-[15rem] transform-translate-y-1/2 font-semibold lg:text-4xl space-y-3 text-start">
             <h1>Sell Your Product</h1>
             <span className="text-lg md:text-2xl">With </span>
-            <span className="logo text-primary-custom">ShopAlley</span>
+            <span className="logo ">ShopAlley</span>
             <div className="pt-6 flex justify-start ">
               <Button
                 className=""

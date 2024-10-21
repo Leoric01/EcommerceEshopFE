@@ -28,7 +28,7 @@ const Product = () => {
           CATEGORy lvl3 name
         </h1>
       </div>
-      <div className="lg:flex">
+      <div className="lg:flex text-primary-custom">
         <section className="filter_section hidden lg:block w-[20%]">
           <FilterSection />
         </section>
@@ -46,7 +46,11 @@ const Product = () => {
                 </Box>
               )}
             </div>
-            <FormControl fullWidth>
+            <FormControl
+              size="small"
+              sx={{ width: "200px" }}
+              className="text-primary-custom"
+            >
               <InputLabel id="sort-select-input">Sort</InputLabel>
               <Select
                 labelId="sort-select-input"
@@ -62,8 +66,10 @@ const Product = () => {
           </div>
 
           <Divider />
-          <section className="product_section">
-            <ProductCard />
+          <section className="product_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
+            {[1, 1, 1, 1, 1, 1, 1].map((item) => (
+              <ProductCard />
+            ))}
           </section>
         </div>
       </div>
