@@ -1,18 +1,37 @@
-import { Box, Button,  Modal } from "@mui/material";
+import { Box, Button, FormControlLabel, Modal } from "@mui/material";
 import React, { useState } from "react";
 import AddressCard from "./AddressCard";
 import AddressForm from "./AddressForm";
+import PricingCard from "../Cart/PricingCard";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 600,
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
 };
+
+const paymentGateWayList = [
+  {
+    value: "STRIPE",
+    image:
+      "https://www.logo.wine/a/logo/Stripe_(company)/Stripe_(company)-Logo.wine.svg",
+    label: "",
+  },
+  {
+    value: "PAYPAL",
+    image:
+      "https://www.urbantool.com/wp-content/uploads/2016/12/paypal-logo-png.png",
+    label: "",
+  },
+];
+
 const Checkout = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -38,6 +57,30 @@ const Checkout = () => {
             <Button onClick={handleOpen}>Add new Address</Button>
           </div>
         </div>
+        <div className="">
+          <div className="border rounded-md pl-4 pt-4 pb-4 pr-0">
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              className="flex justify-evenly pr-0"
+            >
+              {paymentGateWayList.map((item) => (
+                <FormControlLabel
+                className="border w-[40%]"
+                  value={item.value}
+                  control={<Radio />}
+                  label={
+                    <img className={`${item.value=="PAYPAL"?"w-14":""} object-cover`} src={item.image} alt={item.label} />
+                  }
+                />
+              ))}
+            </RadioGroup>
+          </div>
+          <div className="border rounded-md mt-5 gap-5">
+            <PricingCard />
+          </div>
+        </div>
       </div>
       <Modal
         open={open}
@@ -45,7 +88,9 @@ const Checkout = () => {
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <Box sx={style}><AddressForm/></Box>
+        <Box sx={style}>
+          <AddressForm />
+        </Box>
       </Modal>
     </div>
   );

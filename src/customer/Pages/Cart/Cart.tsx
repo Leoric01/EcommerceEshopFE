@@ -33,7 +33,7 @@ const Cart = () => {
               </div>
               <span>Apply Coupons</span>
             </div>
-            { isCouponValid ? (
+            {isCouponValid ? (
               <div className="flex align-middle justify-between">
                 <TextField
                   onChange={handleChange}
@@ -62,7 +62,7 @@ const Cart = () => {
             )}
           </div>
           <div className="border rounded-md">
-            <PricingCard/>
+            <PricingCard />
           </div>
         </div>
       </div>
