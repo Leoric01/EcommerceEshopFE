@@ -1,4 +1,4 @@
-import { Box, Button, FormControlLabel, Modal } from "@mui/material";
+import { Box, Button, Divider, FormControlLabel, Modal } from "@mui/material";
 import React, { useState } from "react";
 import AddressCard from "./AddressCard";
 import AddressForm from "./AddressForm";
@@ -34,9 +34,14 @@ const paymentGateWayList = [
 
 const Checkout = () => {
   const [open, setOpen] = useState(false);
+  const [paymentGateWay, setPaymentGateWay] = useState("STRIPE");
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handlePaymentChange = (event:any) => {
+    setPaymentGateWay(event.target.value)
+  }
+  
   return (
     <div className="pt-10 px-5 sm:px-10 md:px-44 lg:px-55 min-h-screen">
       <div className="space-y-5 lg:space-y-0 lg:grid grid-cols-3 lg:gap-9">
@@ -58,20 +63,36 @@ const Checkout = () => {
           </div>
         </div>
         <div className="">
-          <div className="border rounded-md pl-4 pt-4 pb-4 pr-0">
+          <div className="border rounded-md pl-4 pt-4 pb-4 pr-0 space-y-3">
+            <div>
+              <h1 className="text-primary-custom font-medium pb-2 text-center">
+                Choose Payment Gateway
+              </h1>
+              <div className="pr-3">
+                <Divider />
+              </div>
+            </div>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               className="flex justify-evenly pr-0"
+              onChange={handlePaymentChange}
+              value={paymentGateWay}
             >
               {paymentGateWayList.map((item) => (
                 <FormControlLabel
-                className="border w-[40%]"
+                  className="border w-[40%] rounded-md flex justify-center"
                   value={item.value}
                   control={<Radio />}
                   label={
-                    <img className={`${item.value=="PAYPAL"?"w-14":""} object-cover`} src={item.image} alt={item.label} />
+                    <img
+                      className={`${
+                        item.value == "PAYPAL" ? "w-14" : ""
+                      } object-cover`}
+                      src={item.image}
+                      alt={item.label}
+                    />
                   }
                 />
               ))}
