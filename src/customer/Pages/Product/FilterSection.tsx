@@ -10,25 +10,40 @@ import {
 import { teal } from "@mui/material/colors";
 import { Colors } from "../../../Data/filter/Color";
 import { Price } from "../../../Data/filter/Price";
-import { Discount } from "../../../Data/filter/Discount"; // Import Discount data
+import { Discount } from "../../../Data/filter/Discount";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const FilterSection = () => {
   const [expandColor, setExpandColor] = useState(false);
-  const [expandBrand, setExpandBrand] = useState(false);
+  const [expandPrice, setExpandPrice] = useState(false);
+  const [expandDiscount, setExpandDiscount] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedDiscount, setSelectedDiscount] = useState("");
 
   const handleColorFilterToggle = () => {
     setExpandColor(!expandColor);
   };
 
-  const handleBrandFilterToggle = () => {
-    setExpandBrand(!expandBrand);
+  const handlePriceFilterToggle = () => {
+    setExpandPrice(!expandPrice);
+  };
+
+  const handleDiscountFilterToggle = () => {
+    setExpandDiscount(!expandDiscount);
   };
 
   const updateFilterParams = (e: any) => {
     const { value, name } = e.target;
+    if (name === "color") {
+      setSelectedColor(value);
+    } else if (name === "price") {
+      setSelectedPrice(value);
+    } else if (name === "discount") {
+      setSelectedDiscount(value);
+    }
     if (value) {
       searchParams.set(name, value);
     } else {
@@ -40,6 +55,9 @@ const FilterSection = () => {
   const clearAllFilters = () => {
     const newSearchParams = new URLSearchParams();
     setSearchParams(newSearchParams);
+    setSelectedColor("");
+    setSelectedPrice("");
+    setSelectedDiscount("");
   };
 
   return (
@@ -56,7 +74,6 @@ const FilterSection = () => {
       </div>
       <Divider />
       <div className="px-9 space-y-6 text-left">
-        {/* Color Section */}
         <section>
           <FormControl>
             <FormLabel
@@ -73,12 +90,13 @@ const FilterSection = () => {
             </FormLabel>
             <RadioGroup
               aria-labelledby="color"
-              defaultValue=""
               name="color"
+              value={selectedColor}
               onChange={updateFilterParams}
             >
               {Colors.slice(0, expandColor ? Colors.length : 5).map((item) => (
                 <FormControlLabel
+                  key={item.name}
                   value={item.name}
                   control={<Radio />}
                   label={
@@ -107,10 +125,7 @@ const FilterSection = () => {
             </button>
           </div>
         </section>
-
         <Divider />
-
-        {/* Price Section */}
         <section>
           <FormControl>
             <FormLabel
@@ -127,11 +142,11 @@ const FilterSection = () => {
             </FormLabel>
             <RadioGroup
               name="price"
+              value={selectedPrice}
               onChange={updateFilterParams}
               aria-labelledby="price"
-              defaultValue=""
             >
-              {Price.map((item) => (
+              {Price.slice(0, expandPrice ? Price.length : 5).map((item) => (
                 <FormControlLabel
                   key={item.name}
                   value={item.value}
@@ -141,11 +156,16 @@ const FilterSection = () => {
               ))}
             </RadioGroup>
           </FormControl>
+          <div>
+            <button
+              className="text-primary-custom cursor-pointer hover:text-teal-900 flex items-center"
+              onClick={handlePriceFilterToggle}
+            >
+              {expandPrice ? "Hide " : `+${Price.length - 5} more`}
+            </button>
+          </div>
         </section>
-
         <Divider />
-
-        {/* Discount Section */}
         <section>
           <FormControl>
             <FormLabel
@@ -162,24 +182,33 @@ const FilterSection = () => {
             </FormLabel>
             <RadioGroup
               name="discount"
+              value={selectedDiscount}
               onChange={updateFilterParams}
               aria-labelledby="discount"
-              defaultValue=""
             >
-              {Discount.map((item) => (
-                <FormControlLabel
-                  key={item.value}
-                  value={item.value}
-                  control={<Radio size="small" />}
-                  label={item.name}
-                />
-              ))}
+              {Discount.slice(0, expandDiscount ? Discount.length : 5).map(
+                (item) => (
+                  <FormControlLabel
+                    key={item.value}
+                    value={item.value}
+                    control={<Radio size="small" />}
+                    label={item.name}
+                  />
+                )
+              )}
             </RadioGroup>
           </FormControl>
+          <div>
+            <button
+              className="text-primary-custom cursor-pointer hover:text-teal-900 flex items-center"
+              onClick={handleDiscountFilterToggle}
+            >
+              {expandDiscount ? "Hide " : `+${Discount.length - 5} more`}
+            </button>
+          </div>
         </section>
       </div>
     </div>
   );
 };
-
 export default FilterSection;
