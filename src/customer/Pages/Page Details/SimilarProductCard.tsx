@@ -10,6 +10,7 @@ const SimilarProductCard = () => {
             src={
               "https://images.pexels.com/photos/3766111/pexels-photo-3766111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             }
+            alt="similar product"
           />
         </div>
         <div className="details pt-3 space-y-1 group-hover-effect rounded-md ">

@@ -31,7 +31,7 @@ const ProductDetails = () => {
               />
             ))}
           </div>
-          <div className="w-full lg:w-[85%] ">
+          <div className="w-full lg:w-[85%] lg:max-w-[500px] ">
             <img
               className="w-full rounded-md"
               src="https://images.pexels.com/photos/3766180/pexels-photo-3766180.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -39,7 +39,7 @@ const ProductDetails = () => {
             />
           </div>
         </section>
-        <section className="justify-items-start">
+        <section className="justify-items-start w-full">
           <h1 className="font-bold text-lg text-primary-custom">
             Seller Property
           </h1>
@@ -110,15 +110,16 @@ const ProductDetails = () => {
             </Button>
           </div>
           <div className="mt-5">
-            <p>
+            <p className="text-sm text-left">
               Description of product Description of product Description of
               product Description of product Description of product Description
               of product Description of product Description of product
               Description of product Description of product
             </p>
           </div>
-          <div className="mt-6">
+          <div className="mt-6 w-full">
             <ReviewCard />
+            <Divider />
           </div>
         </section>
       </div>

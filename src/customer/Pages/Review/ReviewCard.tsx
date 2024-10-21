@@ -1,5 +1,6 @@
-import { Avatar, Box } from "@mui/material";
-import Grid2 from "@mui/material/Grid2/Grid2";
+import { Delete } from "@mui/icons-material";
+import { Avatar, Box, IconButton, Rating } from "@mui/material";
+import { red } from "@mui/material/colors";
 import Grid from "@mui/material/Grid2/Grid2";
 import React from "react";
 
@@ -18,14 +19,26 @@ const ReviewCard = () => {
           </Box>
         </Grid>
         <Grid size={{ xs: 9 }}>
-          <div className="space-y-2 text-left">
+          <div className="flex-col justify-items-start  text-left">
             <div className="">
-              <p className="font-semibold text-lg">Username</p>
-              <p className="font-semibold text-lg">01/01/2000T23:01:09.1982</p>
+              <p className="font-bold text-lg">Username</p>
+              <p className="opacity-70">01/01/2000 23:01:09</p>
             </div>
+            <Rating className="" readOnly value={4.5} precision={0.5} />
+            <p>Value for money product</p>
+          </div>
+          <div>
+            <img
+              className="w-20 h-20 object-cover"
+              src="https://images.pexels.com/photos/1320998/pexels-photo-1320998.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="lemonade"
+            />
           </div>
         </Grid>
       </Grid>
+      <IconButton>
+        <Delete sx={{ color: red[700] }} />
+      </IconButton>
     </div>
   );
 };
