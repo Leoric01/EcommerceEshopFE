@@ -24,7 +24,7 @@ const Navbar = () => {
               <IconButton>
                 {!isLarge && <MenuIcon />}
                 <h1 className="logo cursor-pointer text-lg md:text-2xl text-primary-custom">
-                  Bazar
+                  ShopAlley
                 </h1>
               </IconButton>
             </div>
