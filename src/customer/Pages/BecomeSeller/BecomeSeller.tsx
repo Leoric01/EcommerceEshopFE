@@ -26,7 +26,7 @@ const BecomeSeller = () => {
           </Button>
         </div>
       </section>
-      <section className="hidden md:col-span-1 lg:col-span-2 md:flex justify-center items-center">
+      <section className="hidden md:col-span-1 lg:col-span-2 md:flex justify-center items-top mt-10">
         <div className="lg:w-[70%] px-5 space-y-10">
           <div className="space-y-2 font-bold text-center">
             <p className="text-2xl">Join the Marketplace</p>
