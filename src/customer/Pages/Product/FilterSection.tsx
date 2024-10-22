@@ -14,7 +14,7 @@ import { Discount } from "../../../Data/filter/Discount";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-const FilterSection = () => {
+const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
   const [expandColor, setExpandColor] = useState(false);
   const [expandPrice, setExpandPrice] = useState(false);
   const [expandDiscount, setExpandDiscount] = useState(false);
@@ -61,7 +61,7 @@ const FilterSection = () => {
   };
 
   return (
-    <div className="-z-50 space-y-5 bg-white">
+    <div className={`-z-50 bg-white ${isSmallScreen ? 'flex flex-row flex-wrap' : 'space-y-5'}`}>
       <div className="flex items-center justify-between h-[40px] px-9 lg:border-r">
         <p className="text-lg font-semibold">Filters</p>
         <Button
@@ -73,8 +73,10 @@ const FilterSection = () => {
         </Button>
       </div>
       <Divider />
-      <div className="px-9 space-y-6 text-left">
-        <section>
+
+      <div className={`${isSmallScreen ? 'flex flex-row gap-6' : 'px-9 space-y-6 text-left'}`}>
+        {/* Color Filter */}
+        <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
           <FormControl>
             <FormLabel
               sx={{
@@ -125,8 +127,11 @@ const FilterSection = () => {
             </button>
           </div>
         </section>
+
         <Divider />
-        <section>
+
+        {/* Price Filter */}
+        <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
           <FormControl>
             <FormLabel
               sx={{
@@ -165,8 +170,11 @@ const FilterSection = () => {
             </button>
           </div>
         </section>
+
         <Divider />
-        <section>
+
+        {/* Discount Filter */}
+        <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
           <FormControl>
             <FormLabel
               sx={{
