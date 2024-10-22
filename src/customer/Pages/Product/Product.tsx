@@ -21,7 +21,7 @@ const Product = () => {
   const [sort, setSort] = useState();
   const [page, setPage] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
-  const filterRef = useRef<HTMLDivElement>(null); // Ref to the filter container
+  const filterRef = useRef<HTMLDivElement>(null); 
 
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
@@ -35,7 +35,6 @@ const Product = () => {
     setShowFilter(!showFilter);
   };
 
-  // Function to detect clicks outside the filter section
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (filterRef.current && !filterRef.current.contains(event.target)) {
@@ -62,7 +61,6 @@ const Product = () => {
         </h1>
       </div>
       <div className="lg:flex text-primary-custom">
-        {/* Filter section for larger screens only */}
         {isLarge && (
           <section className="filter_section hidden lg:block w-[20%]">
             <FilterSection isSmallScreen={!isLarge} />
@@ -71,19 +69,16 @@ const Product = () => {
 
         <div className="w-full lg:w-[80%] space-y-5">
           <div className="flex justify-between items-center px-9 h-[40px]">
-            {/* Toggle filter button for small screens */}
             {!isLarge && (
               <IconButton onClick={toggleFilter}>
                 <FilterAlt />
               </IconButton>
             )}
 
-            {/* Conditionally render FilterSection for small screens */}
             {!isLarge && showFilter && (
               <Box
-                ref={filterRef} // Reference to the filter section
+                ref={filterRef} 
                 className="absolute top-12 left-0 w-full bg-white z-50 p-4 flex flex-row flex-wrap justify-start space-x-4"
-                // Added flexbox and spacing to make it inline
               >
                 <div className="justify-between">
                   <FilterSection isSmallScreen={!isLarge} />

@@ -75,7 +75,6 @@ const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
       <Divider />
 
       <div className={`${isSmallScreen ? 'flex flex-row gap-6' : 'px-9 space-y-6 text-left'}`}>
-        {/* Color Filter */}
         <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
           <FormControl>
             <FormLabel
@@ -130,7 +129,6 @@ const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
 
         <Divider />
 
-        {/* Price Filter */}
         <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
           <FormControl>
             <FormLabel
@@ -173,7 +171,6 @@ const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
 
         <Divider />
 
-        {/* Discount Filter */}
         <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
           <FormControl>
             <FormLabel

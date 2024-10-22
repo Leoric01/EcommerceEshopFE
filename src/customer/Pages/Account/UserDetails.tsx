@@ -12,11 +12,11 @@ const UserDetails = () => {
           </h1>
         </div>
         <div className="">
-          <ProfileFieldCard keys="Mobile" value={"123456789"} />
+          <ProfileFieldCard keys="Name" value={"Nick"} />
           <Divider/>
           <ProfileFieldCard keys="Email" value={"a@a"} />
           <Divider/>
-          <ProfileFieldCard keys="Name" value={"Nick"} />
+          <ProfileFieldCard keys="Mobile" value={"123456789"} />
         </div>
       </div>
     </div>

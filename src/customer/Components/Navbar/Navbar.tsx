@@ -75,7 +75,7 @@ const Navbar = () => {
                 className="text-gray-700"
               />
             </IconButton>
-            {isLarge && <Button variant="outlined">Become Seller</Button>}
+            {isLarge && <Button onClick={()=> navigate("/become-seller")} variant="outlined">Become Seller</Button>}
           </div>
         </div>
         {showCategorySheet && (
