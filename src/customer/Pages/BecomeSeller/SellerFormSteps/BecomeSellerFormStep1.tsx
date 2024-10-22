@@ -17,12 +17,12 @@ const BecomeSellerFormStep1 = ({ formik }: any) => {
         />
         <TextField
           fullWidth
-          name="GSTIN"
-          label="GSTIN"
-          value={formik.values.GSTIN}
+          name="VAT"
+          label="VAT"
+          value={formik.values.VAT}
           onChange={formik.handleChange}
-          error={formik.touched.GSTIN && Boolean(formik.errors.GSTIN)}
-          helperText={formik.touched.GSTIN && formik.errors.GSTIN}
+          error={formik.touched.VAT && Boolean(formik.errors.VAT)}
+          helperText={formik.touched.VAT && formik.errors.VAT}
         />
       </div>
     </Box>

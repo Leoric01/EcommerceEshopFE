@@ -41,7 +41,7 @@ const Profile = () => {
           <div className="">
             <ProfileFieldCard keys="Business Name/Brand" value={"CoolCompany1"} />
             <Divider />
-            <ProfileFieldCard keys="GSTIN" value={"VAT CODE, GOTTA REFACTOR"} />
+            <ProfileFieldCard keys="VAT" value={"VAT CODE, GOTTA REFACTOR"} />
             <Divider />
             <ProfileFieldCard keys="Mobile" value={"123456789"} />
           </div>

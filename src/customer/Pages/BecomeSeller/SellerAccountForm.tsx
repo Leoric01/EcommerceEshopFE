@@ -22,7 +22,7 @@ const SellerAccountForm = () => {
     initialValues: {
       mobile: "",
       otp: "",
-      gstin: "",
+      vat: "",
       pickupAddress: {
         name: "",
         mobile: "",
