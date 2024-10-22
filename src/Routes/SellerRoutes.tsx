@@ -2,11 +2,11 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../Seller/Pages/Seller Dashboard/Dashboard";
 import Products from "../Seller/Pages/Products/Products";
-import Orders from "../Customer/Pages/Account/Orders";
 import Profile from "../Seller/Pages/Account/Profile";
 import Payment from "../Seller/Pages/Payment/Payment";
 import Transaction from "../Seller/Pages/Payment/Transaction";
 import AddProducts from "../Seller/Pages/Products/AddProducts";
+import Orders from "../Seller/Pages/Orders/Orders";
 
 const SellerRoutes = () => {
   return (
