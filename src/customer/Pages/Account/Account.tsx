@@ -3,6 +3,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Orders from "./Orders";
 import OrderDetails from "./OrderDetails";
+import UserDetails from "./UserDetails";
 
 const menu = [
   { name: "orders", path: "/account/orders" },
@@ -42,7 +43,8 @@ const Account = () => {
         </section>
         <section className="right lg:col-span-2 lg:pl-5 py-5">
           {/* <Orders /> */}
-          <OrderDetails/>
+          {/* <OrderDetails/> */}
+          <UserDetails/>
         </section>
       </div>
     </div>
