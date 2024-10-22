@@ -1,5 +1,15 @@
-import { AccountBalanceWallet, AccountBox, Add, Dashboard, Inventory, Logout, Receipt, ShoppingBag } from "@mui/icons-material";
+import {
+  AccountBalanceWallet,
+  AccountBox,
+  Add,
+  Dashboard,
+  Inventory,
+  Logout,
+  Receipt,
+  ShoppingBag,
+} from "@mui/icons-material";
 import React from "react";
+import DrawerList from "../../../Component/DrawerList";
 
 const menu = [
   {
@@ -40,22 +50,24 @@ const menu = [
   },
 ];
 const menu2 = [
-    {
-      name: "Account",
-      path: "/seller/account",
-      icon: <AccountBox className="text-primary-custom" />,
-      activeIcon: <AccountBox className="text-white" />,
-    },
-    {
-      name: "Logout",
-      path: "/",
-      icon: <Logout className="text-primary-custom" />,
-      activeIcon: <Logout className="text-white" />,
-    }
-]
+  {
+    name: "Account",
+    path: "/seller/account",
+    icon: <AccountBox className="text-primary-custom" />,
+    activeIcon: <AccountBox className="text-white" />,
+  },
+  {
+    name: "Logout",
+    path: "/",
+    icon: <Logout className="text-primary-custom" />,
+    activeIcon: <Logout className="text-white" />,
+  },
+];
 
-const SellerDrawerList = () => {
-  return <div>SellerDrawerList</div>;
+const SellerDrawerList = ({ toggleDrawer }: { toggleDrawer: any }) => {
+  return (
+      <DrawerList menu={menu} menu2={menu2} toggleDrawer={toggleDrawer} />
+  );
 };
 
 export default SellerDrawerList;
