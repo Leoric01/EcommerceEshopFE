@@ -24,7 +24,7 @@ const OrderDetails = () => {
         </div>
       </section>
       <section className="border p-5">
-        <OrderStepper orderStatus={"PENDING"} />
+        <OrderStepper orderStatus={"PLACED"} />
       </section>
     </Box>
   );
