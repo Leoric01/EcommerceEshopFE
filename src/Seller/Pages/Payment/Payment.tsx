@@ -1,8 +1,10 @@
 import { Button, Card, Divider } from "@mui/material";
 import React from "react";
 import TransactionTable from "./TransactionTable";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
+  const navigate = useNavigate();
   return (
     <div className="space-y-6">
       <Card className="rounded-md space-y-4 p-5">
@@ -14,7 +16,7 @@ const Payment = () => {
         </p>
       </Card>
       <div className="mt-10">
-        <Button variant="contained">Transaction</Button>
+        <Button onClick={()=>navigate("/seller/transaction")} variant="contained">Transaction</Button>
       </div>
       <TransactionTable />
     </div>

@@ -66,7 +66,13 @@ const menu2 = [
 
 const SellerDrawerList = ({ toggleDrawer }: { toggleDrawer: any }) => {
   return (
-      <DrawerList menu={menu} menu2={menu2} toggleDrawer={toggleDrawer} />
+    <div>
+      <DrawerList menu={menu} toggleDrawer={toggleDrawer} menu2={[]} />
+
+      <div className="my-4 lg:my-8 md:my-6 sm:my-4 xs:my-2"></div>
+
+      <DrawerList menu={menu2} toggleDrawer={toggleDrawer} menu2={[]} />
+    </div>
   );
 };
 

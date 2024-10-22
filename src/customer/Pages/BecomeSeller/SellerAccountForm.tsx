@@ -26,7 +26,7 @@ const SellerAccountForm = () => {
       pickupAddress: {
         name: "",
         mobile: "",
-        pincode: "",
+        pinCode: "",
         address: "",
         locality: "",
         city: "",
