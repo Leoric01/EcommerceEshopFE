@@ -31,7 +31,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/become-seller" element={<BecomeSeller />} />
           <Route path="/account/*" element={<Account />} />
-          <Route path="/seller/*" element={<SellerDashboard />} />
+          <Route path="/seller" element={<SellerDashboard />} />
         </Routes>
       </div>
     </ThemeProvider>
