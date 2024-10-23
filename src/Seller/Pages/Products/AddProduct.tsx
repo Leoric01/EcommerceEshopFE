@@ -61,6 +61,19 @@ const AddProduct = () => {
     updatedImages.splice(index, 1);
     formik.setFieldValue("images", updatedImages);
   };
+  
+  const childCategory = (category: any, parrentCategoryId: any) => {
+    return category.filter((child: any)=> {
+      return child.parrentCategoryId == parrentCategoryId;
+    })
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackBar(false);
+  }
+  const handleOpenSnackbar = () => {
+    setOpenSnackBar(true);
+  }
 
   return (
     <div className="p-5">
