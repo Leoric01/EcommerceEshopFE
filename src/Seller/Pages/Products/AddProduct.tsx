@@ -67,16 +67,16 @@ const AddProduct = () => {
       <h1 className="text-2xl font-semibold mb-6">Add New Product</h1>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
-          <Grid className="flex flex-wrap gap-5 " size={{ xs: 12 }}>
-            <input
-              id="fileInput"
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              multiple
-              onChange={handleImageChange}
-            />
-            <InputLabel htmlFor="fileInput" className="relative">
+          <Grid className="flex flex-wrap gap-5 items-start" size={{ xs: 12 }}>
+            <InputLabel htmlFor="fileInput" className="relative flex-grow-0">
+              <input
+                id="fileInput"
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                multiple
+                onChange={handleImageChange}
+              />
               <span className="w-24 h-24 cursor-pointer flex items-center justify-center p-3 rounded-md hover:border-primary-custom border">
                 <AddPhotoAlternate className="text-gray-600" />
               </span>
@@ -87,35 +87,32 @@ const AddProduct = () => {
               )}
             </InputLabel>
 
-            <div className="flex flex-wrap gap-2">
-              {formik.values.images.length > 0 ? (
-                formik.values.images.map((image, index) => (
-                  <div key={index} className="relative">
-                    <img
-                      className="w-24 h-24 object-cover"
-                      src={image}
-                      alt={`Product image ${index + 1}`}
-                    />
-                    <IconButton
-                      onClick={() => handleRemoveImage(index)}
-                      size="small"
-                      color="error"
-                      
-                      sx={{
-                        position: "absolute",
-                        top: 0,
-                        right: 0,
-                        outline: 0,
-                      }}
-                    >
-                      <CloseIcon sx={{ fontSize: "1rem", color: "gray" }} />
-                    </IconButton>
-                  </div>
-                ))
-              ) : (
-                <p>No images to display</p>
-              )}
-            </div>
+            {formik.values.images.length > 0 ? (
+              formik.values.images.map((image, index) => (
+                <div key={index} className="relative flex-grow-0">
+                  <img
+                    className="w-24 h-24 object-cover"
+                    src={image}
+                    alt={`Product image ${index + 1}`}
+                  />
+                  <IconButton
+                    onClick={() => handleRemoveImage(index)}
+                    size="small"
+                    color="error"
+                    sx={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      outline: 0,
+                    }}
+                  >
+                    <CloseIcon sx={{ fontSize: "1rem", color: "gray" }} />
+                  </IconButton>
+                </div>
+              ))
+            ) : (
+              <p>No images to display</p>
+            )}
           </Grid>
 
           <Grid size={{ xs: 12 }}>
