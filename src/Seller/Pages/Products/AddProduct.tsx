@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import {
-  Box,
   TextField,
   Button,
   InputLabel,
@@ -64,7 +63,7 @@ const AddProduct = () => {
   };
 
   return (
-    <Box className="p-5">
+    <div className="p-5">
       <h1 className="text-2xl font-semibold mb-6">Add New Product</h1>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
@@ -101,15 +100,15 @@ const AddProduct = () => {
                       onClick={() => handleRemoveImage(index)}
                       size="small"
                       color="error"
+                      
                       sx={{
                         position: "absolute",
                         top: 0,
                         right: 0,
                         outline: 0,
-                        zIndex: 10,
                       }}
                     >
-                      <CloseIcon sx={{ fontSize: "1rem" }} />
+                      <CloseIcon sx={{ fontSize: "1rem", color: "gray" }} />
                     </IconButton>
                   </div>
                 ))
@@ -217,32 +216,6 @@ const AddProduct = () => {
               required
             />
           </Grid>
-
-          {/* <Grid size={{ xs: 12 }}>
-            <InputLabel htmlFor="imageUpload">Upload Images</InputLabel>
-            <input
-              id="imageUpload"
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleImageUpload}
-            />
-            <Box mt={2}>
-              {imageUrls.length > 0 &&
-                imageUrls.map((url, index) => (
-                  <img
-                    key={index}
-                    src={url}
-                    alt={`Uploaded ${index + 1}`}
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      marginRight: "10px",
-                    }}
-                  />
-                ))}
-            </Box>
-          </Grid> */}
           <Grid size={{ xs: 12 }}>
             <Button fullWidth variant="contained" type="submit">
               Add Product
@@ -250,7 +223,7 @@ const AddProduct = () => {
           </Grid>
         </Grid>
       </form>
-    </Box>
+    </div>
   );
 };
 
