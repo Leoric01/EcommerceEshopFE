@@ -169,13 +169,13 @@ export interface User {
      * @type {boolean}
      * @memberof User
      */
-    'accountNonExpired'?: boolean;
+    'credentialsNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof User
      */
-    'credentialsNonExpired'?: boolean;
+    'accountNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}

@@ -34,13 +34,13 @@ export interface PageProduct {
      * @type {number}
      * @memberof PageProduct
      */
-    'totalElements'?: number;
+    'totalPages'?: number;
     /**
      * 
      * @type {number}
      * @memberof PageProduct
      */
-    'totalPages'?: number;
+    'totalElements'?: number;
     /**
      * 
      * @type {number}

@@ -118,10 +118,10 @@ export interface Seller {
     'signedOut'?: boolean;
     /**
      * 
-     * @type {string}
+     * @type {Array<GrantedAuthority>}
      * @memberof Seller
      */
-    'vat'?: string;
+    'authorities'?: Array<GrantedAuthority>;
     /**
      * 
      * @type {boolean}
@@ -130,10 +130,10 @@ export interface Seller {
     'emailVerified'?: boolean;
     /**
      * 
-     * @type {Array<GrantedAuthority>}
+     * @type {string}
      * @memberof Seller
      */
-    'authorities'?: Array<GrantedAuthority>;
+    'vat'?: string;
     /**
      * 
      * @type {boolean}
@@ -145,13 +145,13 @@ export interface Seller {
      * @type {boolean}
      * @memberof Seller
      */
-    'accountNonExpired'?: boolean;
+    'credentialsNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Seller
      */
-    'credentialsNonExpired'?: boolean;
+    'accountNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
