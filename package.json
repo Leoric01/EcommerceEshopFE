@@ -36,7 +36,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "openapibuild": "openapi-generator-cli generate -i ./src/OpenApi/openapi.json -o ./src/Api",
+    "openapibuild": "openapi-generator-cli generate -i ./src/OpenApi/openapi.json -g typescript-fetch -o ./src/Api",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
