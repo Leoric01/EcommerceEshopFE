@@ -27,9 +27,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-5 lg:px-5 h-[70px] border-b">
           <div className="flex item-center gap-1">
             <div className="flex items-center gap-2">
-              <IconButton >
+              <IconButton onClick={() => navigate("/")}>
                 {!isLarge && <MenuIcon />}
-                <h1 onClick={()=> navigate("/")} className="logo cursor-pointer text-lg md:text-2xl">
+                <h1 className="logo cursor-pointer text-lg md:text-2xl">
                   ShopAlley
                 </h1>
               </IconButton>
@@ -37,6 +37,7 @@ const Navbar = () => {
             <ul className="flex items-center font-medium text-gray-800 gap-2">
               {mainCategory.map((item) => (
                 <li
+                  key={item.categoryId}
                   onMouseLeave={() => {
                     setShowCategorySheet(false);
                   }}
@@ -56,7 +57,10 @@ const Navbar = () => {
               <SearchIcon />
             </IconButton>
             {true ? (
-              <Button onClick={()=> navigate("/account/orders")} className="flex items-center gap-2">
+              <Button
+                onClick={() => navigate("/account/orders")}
+                className="flex items-center gap-2"
+              >
                 <Avatar
                   sx={{ width: 49, height: 49 }}
                   src="https://img.freepik.com/premium-photo/logotype-goat-gaming-channel-marvel-style-goat_643382-1192.jpg?w=826"
@@ -66,16 +70,23 @@ const Navbar = () => {
             ) : (
               <Button variant="contained">Login</Button>
             )}
-            <IconButton onClick={()=> navigate("/wishlist")}>
+            <IconButton onClick={() => navigate("/wishlist")}>
               <FavoriteBorder sx={{ fontSize: 29 }} />
             </IconButton>
-            <IconButton onClick={()=> navigate("/cart")}>
+            <IconButton onClick={() => navigate("/cart")}>
               <AddShoppingCart
                 sx={{ fontSize: 29 }}
                 className="text-gray-700"
               />
             </IconButton>
-            {isLarge && <Button onClick={()=> navigate("/become-seller")} variant="outlined">Become Seller</Button>}
+            {isLarge && (
+              <Button
+                onClick={() => navigate("/become-seller")}
+                variant="outlined"
+              >
+                Become Seller
+              </Button>
+            )}
           </div>
         </div>
         {showCategorySheet && (

@@ -35,7 +35,7 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
                   key={index}
                   onClick={() => handleNavigate(item.path)}
                 >
-                  <p
+                  <span
                     className={`${
                       item.path == location.pathname
                         ? "bg-primary-custom text-white"
@@ -46,7 +46,7 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
                       {isActive ? item.activeIcon : item.icon}
                     </ListItemIcon>
                     <ListItemText>{item.name}</ListItemText>
-                  </p>
+                  </span>
                 </div>
               );
             })}
@@ -62,7 +62,7 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
                   key={index}
                   onClick={() => handleNavigate(item.path)}
                 >
-                  <p
+                  <span
                     className={`${
                       item.path == location.pathname
                         ? "bg-primary-custom text-white"
@@ -73,7 +73,7 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
                       {isActive ? item.activeIcon : item.icon}
                     </ListItemIcon>
                     <ListItemText>{item.name}</ListItemText>
-                  </p>
+                  </span>
                 </div>
               );
             })}

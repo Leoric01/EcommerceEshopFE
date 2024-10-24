@@ -177,7 +177,9 @@ const AddProduct = () => {
                 </div>
               ))
             ) : (
-              <p>No images to display</p>
+              <div>
+                <p>No images to display</p>
+              </div>
             )}
           </Grid>
 
