@@ -13,7 +13,7 @@ const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<SellersTable />} />
-      <Route path="/coupon" element={<Coupon />} />
+      <Route path="/coupons" element={<Coupon />} />
       <Route path="/add-coupon" element={<AddNewCouponForm />} />
       <Route path="/home-grid" element={<GridTable />} />
       <Route path="/electronics-category" element={<ElectronicTable />} />
