@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { FilterAlt } from "@mui/icons-material";
 import { productApi } from "../../../State/confaxios/productApi";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const Product = () => {
   const theme = useTheme();
@@ -24,11 +25,15 @@ const Product = () => {
   const [showFilter, setShowFilter] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
   const [productsListAll, setProductsListAll] = useState<any>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const { categoryId } = useParams();
 
   const fetchAllProducts = async () => {
     try {
       const response = await productApi.getAllProducts();
-      const actualProducts = response?.data?.data || [];
+      const actualProducts = response?.data?.data?.content || [];
+      console.log("Actual products", actualProducts);
+
       setProductsListAll(actualProducts);
     } catch (err) {
       console.error("Failed to fetch user profile:", err);
@@ -69,11 +74,38 @@ const Product = () => {
     };
   }, [showFilter]);
 
+  useEffect(() => {
+    const priceParam = searchParams.get("price");
+
+    let minPrice: number | null = null;
+    let maxPrice: number | null = null;
+
+    if (priceParam) {
+      const priceParts = priceParam.split("-");
+
+      if (priceParts.length === 2) {
+        minPrice = parseInt(priceParts[0], 10);
+        maxPrice = parseInt(priceParts[1], 10);
+      } else if (priceParts.length === 1) {
+        const priceValue = parseInt(priceParts[0], 10);
+        if (priceValue <= 500) {
+          maxPrice = priceValue;
+        } else if (priceValue >= 10001) {
+          minPrice = priceValue;
+          maxPrice = null;
+        }
+      }
+    }
+    console.log({ minPrice, maxPrice });
+  }, [searchParams]);
+
   return (
     <div className="-z-10 mt-10">
       <div className="">
         <h1 className="text-3xl text-center font-bold text-gray-700 pb-5 px-9 uppercase space-x-2">
-          CATEGORY lvl3 name
+          {productsListAll && productsListAll.length > 0
+            ? productsListAll[0].category?.categoryId
+            : "Uncategorized"}
         </h1>
       </div>
       <div className="lg:flex text-primary-custom">
