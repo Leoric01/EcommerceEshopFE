@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import HomeCategoryTable from "./HomeCategoryTable";
 
 const GridTable = () => {
   return (
-    <div>GridTable</div>
-  )
-}
+    <div>
+      <HomeCategoryTable />
+    </div>
+  );
+};
 
-export default GridTable
+export default GridTable;
