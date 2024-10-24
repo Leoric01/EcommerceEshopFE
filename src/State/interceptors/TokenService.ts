@@ -34,7 +34,8 @@ export class TokenService {
 
   clearToken() {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('jwt');
+      console.log("REMOVE JWT")
+      localStorage.removeItem("jwt");
     }
   }
 

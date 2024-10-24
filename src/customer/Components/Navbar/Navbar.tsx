@@ -13,6 +13,8 @@ import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import CategorySheet from "./CategorySheet";
 import { mainCategory } from "../../../Data/MainCategory";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../State/Store";
+import { TokenService } from "../../../State/interceptors/TokenService";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -20,6 +22,22 @@ const Navbar = () => {
   const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
   const [selectedCategory, setSelectedCategory] = useState("men");
   const [showCategorySheet, setShowCategorySheet] = useState(false);
+  const tokenService = new TokenService();
+  const role = tokenService.getUserRoles();
+  const handleAccountClick = () => {
+    if (role.includes("ROLE_USER")) {
+      navigate("/account/orders");
+    } else if (role.includes("ROLE_SELLER")) {
+      navigate("/seller");
+    } else {
+      console.log("No valid role assigned");
+    }
+  };
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+  const isLoggedIn = role.includes("ROLE_USER") || role.includes("ROLE_SELLER");
 
   return (
     <>
@@ -38,9 +56,7 @@ const Navbar = () => {
               {mainCategory.map((item) => (
                 <li
                   key={item.categoryId}
-                  onMouseLeave={() => {
-                    setShowCategorySheet(false);
-                  }}
+                  onMouseLeave={() => setShowCategorySheet(false)}
                   onMouseEnter={() => {
                     setShowCategorySheet(true);
                     setSelectedCategory(item.categoryId);
@@ -56,9 +72,9 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-            {true ? (
+            {isLoggedIn ? (
               <Button
-                onClick={() => navigate("/account/orders")}
+                onClick={handleAccountClick}
                 className="flex items-center gap-2"
               >
                 <Avatar
@@ -68,7 +84,13 @@ const Navbar = () => {
                 <h1 className="font-semibold hidden lg:block">Leoric</h1>
               </Button>
             ) : (
-              <Button variant="contained">Login</Button>
+              <Button variant="contained" disabled>
+                <Avatar
+                  sx={{ width: 49, height: 49 }}
+                  // src="https://example.com/guest-avatar.png"
+                />
+                Guest
+              </Button>
             )}
             <IconButton onClick={() => navigate("/wishlist")}>
               <FavoriteBorder sx={{ fontSize: 29 }} />

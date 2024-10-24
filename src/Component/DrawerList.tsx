@@ -1,6 +1,7 @@
 import { Divider, ListItemIcon, ListItemText } from "@mui/material";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { TokenService } from "../State/interceptors/TokenService";
 
 type DrawerListProps = {
   menu: menuItem[];
@@ -18,68 +19,78 @@ type menuItem = {
 const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const tokenService = new TokenService();
+
   const handleNavigate = (path: string) => {
     navigate(path);
     toggleDrawer();
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <div className="h-full">
       <div className="flex flex-col justify-between h-full w-[300px] border-r py-5">
-          <div className="space-y-2">
-            {menu.map((item: menuItem, index: number) => {
-              const isActive = location.pathname === item.path;
+        <div className="space-y-2">
+          {menu.map((item: menuItem, index: number) => {
+            const isActive = location.pathname === item.path;
 
-              return (
-                <div
-                  className="pr-9 cursor-pointer"
-                  key={index}
-                  onClick={() => handleNavigate(item.path)}
+            return (
+              <div
+                className="pr-9 cursor-pointer"
+                key={index}
+                onClick={() => handleNavigate(item.path)}
+              >
+                <span
+                  className={`${
+                    item.path === location.pathname
+                      ? "bg-primary-custom text-white"
+                      : "text-primary-custom bg-white"
+                  } flex items-center px-5 py-3 rounded-r-full`}
                 >
-                  <span
-                    className={`${
-                      item.path == location.pathname
-                        ? "bg-primary-custom text-white"
-                        : "text-primary-custom bg-white"
-                    } flex items-center px-5 py-3 rounded-r-full`}
-                  >
-                    <ListItemIcon>
-                      {isActive ? item.activeIcon : item.icon}
-                    </ListItemIcon>
-                    <ListItemText>{item.name}</ListItemText>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-          <Divider/>
-          <div className="space-y-2">
-            {menu2.map((item: menuItem, index: number) => {
-              const isActive = location.pathname === item.path;
+                  <ListItemIcon>
+                    {isActive ? item.activeIcon : item.icon}
+                  </ListItemIcon>
+                  <ListItemText>{item.name}</ListItemText>
+                </span>
+              </div>
+            );
+          })}
+        </div>
 
-              return (
-                <div
-                  className="pr-9 cursor-pointer"
-                  key={index}
-                  onClick={() => handleNavigate(item.path)}
+        <Divider />
+
+        <div className="space-y-2">
+          {menu2.map((item: menuItem, index: number) => {
+            const isActive = location.pathname === item.path;
+
+            return (
+              <div
+                className="pr-9 cursor-pointer"
+                key={index}
+                onClick={item.name === "Logout" ? handleLogout : () => handleNavigate(item.path)}
+              >
+                <span
+                  className={`${
+                    item.path === location.pathname
+                      ? "bg-primary-custom text-white"
+                      : "text-primary-custom bg-white"
+                  } flex items-center px-5 py-3 rounded-r-full`}
                 >
-                  <span
-                    className={`${
-                      item.path == location.pathname
-                        ? "bg-primary-custom text-white"
-                        : "text-primary-custom bg-white"
-                    } flex items-center px-5 py-3 rounded-r-full`}
-                  >
-                    <ListItemIcon>
-                      {isActive ? item.activeIcon : item.icon}
-                    </ListItemIcon>
-                    <ListItemText>{item.name}</ListItemText>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+                  <ListItemIcon>
+                    {isActive ? item.activeIcon : item.icon}
+                  </ListItemIcon>
+                  <ListItemText>{item.name}</ListItemText>
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
+    </div>
   );
 };
 

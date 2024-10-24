@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileFieldCard from "../../../Component/ProfileFieldCard";
 import { Avatar, Box, Button, Divider, Modal, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
@@ -8,6 +8,10 @@ import PersonalDetails from "./PersonalDetails";
 import BusinessDetails from "./BusinessDetails";
 import BankDetails from "./BankDetails";
 import PickupAddress from "./PickupAddress";
+import { userApi } from "../../../State/interceptors/userApi";
+import { sellerApi } from "../../../State/confaxios/sellerApi";
+import { TokenService } from "../../../State/interceptors/TokenService";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute" as "absolute",
@@ -20,13 +24,62 @@ const style = {
   p: 4,
 };
 const Profile = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+  const [selectedForm, setSelectedForm] = useState("personalDetails");
+  const [sellerProfile, setSellerProfile] = useState<any>(null);
+  const tokenService = new TokenService();
+  const role = tokenService.getUserRoles();
   const handleOpen = (formName: string) => {
     setOpen(true);
     setSelectedForm(formName);
   };
-  const [selectedForm, setSelectedForm] = useState("personalDetails");
+
+  const fetchUserProfile = async () => {
+    try {
+      const userProfileResponse = await userApi.getUserProfile();
+      const fetchedUserProfile = userProfileResponse.data?.data;
+      console.log("User profile fetched successfully:", fetchedUserProfile);
+      if (fetchedUserProfile && fetchedUserProfile.id) {
+        fetchSellerById(fetchedUserProfile.id);
+      }
+    } catch (error) {
+      console.error("Failed to fetch user profile:", error);
+    }
+  };
+
+  const fetchSellerById = async (id: number) => {
+    try {
+      const sellerResponse = await sellerApi.getSellerById(id);
+      const fetchedSellerProfile = sellerResponse.data?.data;
+      setSellerProfile(fetchedSellerProfile);
+      console.log("Seller fetched successfully:", fetchedSellerProfile);
+    } catch (error) {
+      console.error("Failed to fetch seller by ID:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+    if (role.includes("ROLE_USER")) {
+      navigate("/account/orders");
+    }
+  }, []);
+
+  // const renderSelectedForm = () => {
+  //   switch (selectedForm) {
+  //     case "businessDetails":
+  //       return <BusinessDetails userProfile={userProfile} />; // Pass the user profile to the form
+  //     case "accountDetails":
+  //       return <BankDetails userProfile={userProfile} />;
+  //     case "pickupAddress":
+  //       return <PickupAddress userProfile={userProfile} />;
+  //     default:
+  //       return <PersonalDetails userProfile={userProfile} />;
+  //   }
+  // };
+
   const renderSelectedForm = () => {
     switch (selectedForm) {
       case "businessDetails":
@@ -62,11 +115,20 @@ const Profile = () => {
             src="https://img.freepik.com/premium-photo/logotype-goat-gaming-channel-marvel-style-goat_643382-1192.jpg?w=826"
           />
           <div className="mt-10">
-            <ProfileFieldCard keys="Seller's Name" value={"Nick"} />
+            <ProfileFieldCard
+              keys="Seller's Name"
+              value={sellerProfile?.name || "No Data"}
+            />
             <Divider />
-            <ProfileFieldCard keys="Email" value={"a@a"} />
+            <ProfileFieldCard
+              keys="Email"
+              value={sellerProfile?.email || "No Data"}
+            />
             <Divider />
-            <ProfileFieldCard keys="Mobile" value={"123456789"} />
+            <ProfileFieldCard
+              keys="Mobile"
+              value={sellerProfile?.mobile || "No Data"}
+            />
           </div>
         </div>
       </div>
@@ -86,11 +148,20 @@ const Profile = () => {
           </div>
         </div>
         <div className="">
-          <ProfileFieldCard keys="Business Name/Brand" value={"CoolCompany1"} />
+          <ProfileFieldCard
+            keys="Business Name/Brand"
+            value={sellerProfile?.businessName || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="VAT" value={"465465746798"} />
+          <ProfileFieldCard
+            keys="VAT"
+            value={sellerProfile?.vat || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="Account Status" value={"PENDING"} />
+          <ProfileFieldCard
+            keys="Account Status"
+            value={sellerProfile?.accountStatus || "No Data"}
+          />
         </div>
       </div>
       <div className="w-full lg:w-[70%]">
@@ -109,19 +180,40 @@ const Profile = () => {
           </div>
         </div>
         <div className="">
-          <ProfileFieldCard keys="Name" value={"John Doe"} />
+          <ProfileFieldCard
+            keys="Name"
+            value={sellerProfile?.pickupAddress?.name || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="Mobile" value={"+1 234 567 890"} />
+          <ProfileFieldCard
+            keys="Mobile"
+            value={sellerProfile?.pickupAddress?.mobile || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="Pincode" value={"123456"} />
+          <ProfileFieldCard
+            keys="Pincode"
+            value={sellerProfile?.pickupAddress?.pincode || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="Address" value={"1234 Elm St"} />
+          <ProfileFieldCard
+            keys="Address"
+            value={sellerProfile?.pickupAddress?.address || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="Locality" value={"Downtown"} />
+          <ProfileFieldCard
+            keys="Locality"
+            value={sellerProfile?.pickupAddress?.locality || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="City" value={"New York"} />
+          <ProfileFieldCard
+            keys="City"
+            value={sellerProfile?.pickupAddress?.city || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="State" value={"NY"} />
+          <ProfileFieldCard
+            keys="State"
+            value={sellerProfile?.pickupAddress?.state || "No Data"}
+          />
         </div>
       </div>
       <div className="w-full lg:w-[70%]">
@@ -140,11 +232,20 @@ const Profile = () => {
           </div>
         </div>
         <div className="">
-          <ProfileFieldCard keys="Account Holder Name" value={"Name"} />
+          <ProfileFieldCard
+            keys="Account Holder Name"
+            value={sellerProfile?.bankDetails?.holderName || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="Account Number" value={"465465746798"} />
+          <ProfileFieldCard
+            keys="Account Number"
+            value={sellerProfile?.bankDetails?.accountNumber || "No Data"}
+          />
           <Divider />
-          <ProfileFieldCard keys="IBAN" value={"IBAN48946465165"} />
+          <ProfileFieldCard
+            keys="IBAN"
+            value={sellerProfile?.bankDetails?.iban || "No Data"}
+          />
         </div>
       </div>
       <Modal
@@ -153,10 +254,7 @@ const Profile = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          
-          {renderSelectedForm()}
-        </Box>
+        <Box sx={style}>{renderSelectedForm()}</Box>
       </Modal>
     </div>
   );
