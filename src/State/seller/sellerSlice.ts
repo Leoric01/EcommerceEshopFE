@@ -5,7 +5,7 @@ export const fetchSellerProfile = createAsyncThunk(
     "/sellers/fetchSellerProfile",
     async (jwt: string, { rejectWithValue }) => {
         try {
-            const response = await api.get("/sellers/profile", {
+            const response = await api.get("/users/profile", {
                 headers: {
                     Authorization: `Bearer ${jwt}`,
                 },
@@ -18,3 +18,4 @@ export const fetchSellerProfile = createAsyncThunk(
         }
     }
 );
+
