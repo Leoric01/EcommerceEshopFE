@@ -28,8 +28,7 @@ import { HomeFurnitureLevelTwo } from "../../../Data/leveltwo/HomeFurnitureLevel
 import { HomeFurnitureLevelThree } from "../../../Data/levelthree/HomeFurnitureLevelThree";
 import { ElectronicsLevelTwo } from "../../../Data/leveltwo/ElectronicsLevelTwo";
 import { ElectronicsLevelThree } from "../../../Data/levelthree/ElectronicsLevelThree";
-// import {useAppDispatch, useAppSelector} from "../../../Redux Toolkit/Store";
-// import {createProduct} from "../../../Redux Toolkit/Seller/sellerProductSlice";
+import { sellerProductApi } from "../../../State/confaxios/sellerProductApi";
 
 const AddProduct = () => {
   const validationSchema = Yup.object({
@@ -39,29 +38,16 @@ const AddProduct = () => {
     description: Yup.string()
       .min(10, "Description should be at least 10 characters long")
       .required("Description is required"),
-    price: Yup.number()
+    mrpPrice: Yup.number()
       .positive("Price should be greater than zero")
       .required("Price is required"),
-    discountedPrice: Yup.number()
-      .positive("Discounted Price should be greater than zero")
-      .required("Discounted Price is required"),
-    discountPercent: Yup.number()
-      .positive("Discount Percent should be greater than zero")
-      .required("Discount Percent is required"),
-    quantity: Yup.number()
-      .positive("Quantity should be greater than zero")
-      .required("Quantity is required"),
+    sellingPrice: Yup.number()
+      .positive("Selling Price should be greater than zero")
+      .required("Selling Price is required"),
     color: Yup.string().required("Color is required"),
-    // category: Yup.string()
-    //   .required("Category is required"),
-    // sizes: Yup.string()
-    //   .required("Sizes are required"),
   });
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploadImage, setUploadingImage] = useState(false);
-  // const dispatch = useAppDispatch();
-  // const {sellers, sellerProduct} = useAppSelector(store => store);
-  const [snackbarOpen, setOpenSnackBar] = useState(false);
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -77,7 +63,7 @@ const AddProduct = () => {
     },
     onSubmit: async (values) => {
       const formValues = { ...values, images: imageUrls };
-      // dispatchEvent(createProduct({request: values, jwt: localStorage.getItem("jwt")}));
+      const response = await sellerProductApi.createProduct(values);
       console.log("Form submitted with values: ", formValues);
     },
   });
@@ -106,26 +92,6 @@ const AddProduct = () => {
     const updatedImages = [...formik.values.images];
     updatedImages.splice(index, 1);
     formik.setFieldValue("images", updatedImages);
-  };
-
-  const childCategory = (category: any, parrentCategoryId: any) => {
-    return category.filter((child: any) => {
-      return child.parrentCategoryId == parrentCategoryId;
-    });
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackBar(false);
-  };
-
-  // useEffect(() =>{
-  //   if (sellerProduct.productCreated || sellerProduct.error){
-  //     handleOpenSnackbar;
-  //   }
-  // },[sellerProduct.productCreated, sellerProduct.error])
-
-  const handleOpenSnackbar = () => {
-    setOpenSnackBar(true);
   };
 
   return (
@@ -356,28 +322,13 @@ const AddProduct = () => {
               fullWidth
               variant="contained"
               type="submit"
-              sx={{padding:"15px"}}
-              // disabled={sellerProduct.loading}
+              sx={{ padding: "15px" }}
             >
               Add Product
             </Button>
           </Grid>
         </Grid>
       </form>
-      {/* <Snackbar
-      anchorOrigin={{vertical: "top", horizontal: "right"}}
-      open={snackbarOpen} autoHideDuration={6000}
-      onClose={handleCloseSnackbar}
-      >
-        <Alert
-        onClose={handleCloseSnackbar}
-        severity={sellerProduct.error ? "error" : "success"}
-        variant="filled"
-        sx={{width:'100%'}}
-        >
-{sellerProduct.error? sellerProduct.error : "Product created successfully"}
-        </Alert>
-      </Snackbar> */}
     </div>
   );
 };

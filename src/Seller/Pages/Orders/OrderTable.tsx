@@ -1,12 +1,15 @@
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { sellerOrderApi } from "../../../State/confaxios/sellerOrderApi"; // Adjust the path as per your project
+import { useState, useEffect } from "react";
 
+// Styled components for table cells and rows
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -18,40 +21,38 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 export default function OrderTable() {
+  const [orders, setOrders] = useState<any[]>([]);
+
+  const fetchOrdersOfConnectedSeller = async () => {
+    try {
+      const response = await sellerOrderApi.getAllSellersOrders();
+      const sellerOrders = response.data?.data || [];
+      setOrders(sellerOrders);
+      console.log("Successfully fetched this seller's orders:", sellerOrders);
+    } catch (err) {
+      console.error("Failed to fetch seller orders:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrdersOfConnectedSeller();
+  }, []);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Order Id</StyledTableCell>
+            <StyledTableCell>Order ID</StyledTableCell>
             <StyledTableCell>Products</StyledTableCell>
             <StyledTableCell align="right">Shipping Address</StyledTableCell>
             <StyledTableCell align="right">Order Status</StyledTableCell>
@@ -59,15 +60,31 @@ export default function OrderTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {orders.map((order) => (
+            <StyledTableRow key={order.id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {order.id}
               </StyledTableCell>
-              <StyledTableCell>{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+
+              <StyledTableCell>
+                {order.products?.map((product: any, index: number) => (
+                  <div key={index}>
+                    {product.title} (x{product.quantity})
+                  </div>
+                ))}
+              </StyledTableCell>
+
+              <StyledTableCell align="right">
+                {order.shippingAddress?.address}, {order.shippingAddress?.city},{" "}
+                {order.shippingAddress?.state} -{" "}
+                {order.shippingAddress?.pinCode}
+              </StyledTableCell>
+
+              <StyledTableCell align="right">{order.status}</StyledTableCell>
+
+              <StyledTableCell align="right">
+                <button>Update</button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

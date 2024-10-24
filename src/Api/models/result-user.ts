@@ -15,49 +15,37 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SortObject } from './sort-object';
+import type { User } from './user';
 
 /**
  * 
  * @export
- * @interface PageableObject
+ * @interface ResultUser
  */
-export interface PageableObject {
-    /**
-     * 
-     * @type {number}
-     * @memberof PageableObject
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {Array<SortObject>}
-     * @memberof PageableObject
-     */
-    'sort'?: Array<SortObject>;
+export interface ResultUser {
     /**
      * 
      * @type {boolean}
-     * @memberof PageableObject
+     * @memberof ResultUser
      */
-    'paged'?: boolean;
+    'success'?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof PageableObject
+     * @memberof ResultUser
      */
-    'pageSize'?: number;
+    'code'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof PageableObject
+     * @type {string}
+     * @memberof ResultUser
      */
-    'pageNumber'?: number;
+    'message'?: string;
     /**
      * 
-     * @type {boolean}
-     * @memberof PageableObject
+     * @type {User}
+     * @memberof ResultUser
      */
-    'unpaged'?: boolean;
+    'data'?: User;
 }
 

@@ -533,10 +533,48 @@
         }
       }
     },
+    "/users/profile": {
+      "get": {
+        "tags": ["user-controller"],
+        "operationId": "getUserProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultAccountDetailDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["user-controller"],
+        "operationId": "updateSeller",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserUpdateReqDto" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": { "schema": { "$ref": "#/components/schemas/ResultUser" } }
+            }
+          }
+        }
+      }
+    },
     "/seller": {
       "patch": {
         "tags": ["seller-controller"],
-        "operationId": "updateSeller",
+        "operationId": "updateSeller_1",
         "requestBody": {
           "content": {
             "application/json": {
@@ -863,24 +901,6 @@
         }
       }
     },
-    "/users/profile": {
-      "get": {
-        "tags": ["user-controller"],
-        "operationId": "getUserProfile",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultAccountDetailDto"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/seller/report": {
       "get": {
         "tags": ["seller-controller"],
@@ -924,7 +944,7 @@
     "/seller/order": {
       "get": {
         "tags": ["seller-order-controller"],
-        "operationId": "getAllOrders",
+        "operationId": "getAllSellersOrders",
         "responses": {
           "200": {
             "description": "OK",
@@ -1397,7 +1417,6 @@
         "properties": {
           "id": { "type": "integer", "format": "int64" },
           "orderId": { "type": "string" },
-          "user": { "$ref": "#/components/schemas/User" },
           "sellerId": { "type": "integer", "format": "int64" },
           "orderItems": {
             "type": "array",
@@ -1524,8 +1543,8 @@
           "emailVerified": { "type": "boolean" },
           "vat": { "type": "string" },
           "enabled": { "type": "boolean" },
-          "credentialsNonExpired": { "type": "boolean" },
           "accountNonExpired": { "type": "boolean" },
+          "credentialsNonExpired": { "type": "boolean" },
           "accountNonLocked": { "type": "boolean" }
         }
       },
@@ -1580,8 +1599,8 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/GrantedAuthority" }
           },
-          "credentialsNonExpired": { "type": "boolean" },
           "accountNonExpired": { "type": "boolean" },
+          "credentialsNonExpired": { "type": "boolean" },
           "accountNonLocked": { "type": "boolean" }
         }
       },
@@ -1886,6 +1905,24 @@
           "data": { "$ref": "#/components/schemas/Deal" }
         }
       },
+      "UserUpdateReqDto": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "password": { "type": "string" },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" }
+        }
+      },
+      "ResultUser": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "code": { "type": "integer", "format": "int32" },
+          "message": { "type": "string" },
+          "data": { "$ref": "#/components/schemas/User" }
+        }
+      },
       "ResultSeller": {
         "type": "object",
         "properties": {
@@ -1994,10 +2031,10 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "unpaged": { "type": "boolean" },
-          "pageSize": { "type": "integer", "format": "int32" },
           "paged": { "type": "boolean" },
-          "pageNumber": { "type": "integer", "format": "int32" }
+          "pageSize": { "type": "integer", "format": "int32" },
+          "pageNumber": { "type": "integer", "format": "int32" },
+          "unpaged": { "type": "boolean" }
         }
       },
       "ResultPageProduct": {

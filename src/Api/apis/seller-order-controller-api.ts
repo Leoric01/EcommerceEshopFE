@@ -36,7 +36,7 @@ export const SellerOrderControllerApiAxiosParamCreator = function (configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllOrders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllSellersOrders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/seller/order`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -112,10 +112,10 @@ export const SellerOrderControllerApiFp = function(configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllOrders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultListOrder>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllOrders(options);
+        async getAllSellersOrders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultListOrder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllSellersOrders(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SellerOrderControllerApi.getAllOrders']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SellerOrderControllerApi.getAllSellersOrders']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -146,8 +146,8 @@ export const SellerOrderControllerApiFactory = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllOrders(options?: RawAxiosRequestConfig): AxiosPromise<ResultListOrder> {
-            return localVarFp.getAllOrders(options).then((request) => request(axios, basePath));
+        getAllSellersOrders(options?: RawAxiosRequestConfig): AxiosPromise<ResultListOrder> {
+            return localVarFp.getAllSellersOrders(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -175,8 +175,8 @@ export class SellerOrderControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SellerOrderControllerApi
      */
-    public getAllOrders(options?: RawAxiosRequestConfig) {
-        return SellerOrderControllerApiFp(this.configuration).getAllOrders(options).then((request) => request(this.axios, this.basePath));
+    public getAllSellersOrders(options?: RawAxiosRequestConfig) {
+        return SellerOrderControllerApiFp(this.configuration).getAllSellersOrders(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

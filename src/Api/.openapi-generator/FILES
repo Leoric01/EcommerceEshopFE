@@ -70,6 +70,7 @@ models/result-product.ts
 models/result-seller-report.ts
 models/result-seller.ts
 models/result-string.ts
+models/result-user.ts
 models/result-verification-code-req.ts
 models/result-void.ts
 models/result-wishlist.ts
@@ -81,6 +82,7 @@ models/sign-in-request.ts
 models/signup-request.ts
 models/sort-object.ts
 models/transaction.ts
+models/user-update-req-dto.ts
 models/user.ts
 models/verification-code-req.ts
 models/verification-code.ts

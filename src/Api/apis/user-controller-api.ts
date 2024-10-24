@@ -23,6 +23,10 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import type { ResultAccountDetailDto } from '../models';
+// @ts-ignore
+import type { ResultUser } from '../models';
+// @ts-ignore
+import type { UserUpdateReqDto } from '../models';
 /**
  * UserControllerApi - axios parameter creator
  * @export
@@ -58,6 +62,41 @@ export const UserControllerApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {UserUpdateReqDto} userUpdateReqDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSeller: async (userUpdateReqDto: UserUpdateReqDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userUpdateReqDto' is not null or undefined
+            assertParamExists('updateSeller', 'userUpdateReqDto', userUpdateReqDto)
+            const localVarPath = `/users/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(userUpdateReqDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -79,6 +118,18 @@ export const UserControllerApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['UserControllerApi.getUserProfile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {UserUpdateReqDto} userUpdateReqDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateSeller(userUpdateReqDto: UserUpdateReqDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultUser>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateSeller(userUpdateReqDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UserControllerApi.updateSeller']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -96,6 +147,15 @@ export const UserControllerApiFactory = function (configuration?: Configuration,
          */
         getUserProfile(options?: RawAxiosRequestConfig): AxiosPromise<ResultAccountDetailDto> {
             return localVarFp.getUserProfile(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UserUpdateReqDto} userUpdateReqDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateSeller(userUpdateReqDto: UserUpdateReqDto, options?: RawAxiosRequestConfig): AxiosPromise<ResultUser> {
+            return localVarFp.updateSeller(userUpdateReqDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -115,6 +175,17 @@ export class UserControllerApi extends BaseAPI {
      */
     public getUserProfile(options?: RawAxiosRequestConfig) {
         return UserControllerApiFp(this.configuration).getUserProfile(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UserUpdateReqDto} userUpdateReqDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserControllerApi
+     */
+    public updateSeller(userUpdateReqDto: UserUpdateReqDto, options?: RawAxiosRequestConfig) {
+        return UserControllerApiFp(this.configuration).updateSeller(userUpdateReqDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -22,9 +22,6 @@ import type { OrderItem } from './order-item';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { PaymentDetails } from './payment-details';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { User } from './user';
 
 /**
  * 
@@ -44,12 +41,6 @@ export interface Order {
      * @memberof Order
      */
     'orderId'?: string;
-    /**
-     * 
-     * @type {User}
-     * @memberof Order
-     */
-    'user'?: User;
     /**
      * 
      * @type {number}
