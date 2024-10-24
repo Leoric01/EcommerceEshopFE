@@ -12,14 +12,10 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
-import type { HomeCategory } from './HomeCategory';
-import {
-    HomeCategoryFromJSON,
-    HomeCategoryFromJSONTyped,
-    HomeCategoryToJSON,
-    HomeCategoryToJSONTyped,
-} from './HomeCategory';
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { HomeCategory } from './home-category';
 
 /**
  * 
@@ -32,58 +28,18 @@ export interface Deal {
      * @type {number}
      * @memberof Deal
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {number}
      * @memberof Deal
      */
-    discount?: number;
+    'discount'?: number;
     /**
      * 
      * @type {HomeCategory}
      * @memberof Deal
      */
-    category?: HomeCategory;
-}
-
-/**
- * Check if a given object implements the Deal interface.
- */
-export function instanceOfDeal(value: object): value is Deal {
-    return true;
-}
-
-export function DealFromJSON(json: any): Deal {
-    return DealFromJSONTyped(json, false);
-}
-
-export function DealFromJSONTyped(json: any, ignoreDiscriminator: boolean): Deal {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'discount': json['discount'] == null ? undefined : json['discount'],
-        'category': json['category'] == null ? undefined : HomeCategoryFromJSON(json['category']),
-    };
-}
-
-  export function DealToJSON(json: any): Deal {
-      return DealToJSONTyped(json, false);
-  }
-
-  export function DealToJSONTyped(value?: Deal | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'discount': value['discount'],
-        'category': HomeCategoryToJSON(value['category']),
-    };
+    'category'?: HomeCategory;
 }
 

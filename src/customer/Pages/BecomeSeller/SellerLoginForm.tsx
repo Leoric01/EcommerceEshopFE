@@ -1,12 +1,13 @@
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { AuthControllerApi, LoginRequest } from "../../../Api";
+import { AuthControllerApi, SignInRequest } from "../../../Api";
 import { TokenService } from "../../../State/interceptors/TokenService"; 
 
 const SellerLoginForm = () => {
   const authApi = new AuthControllerApi(); 
   const tokenService = new TokenService();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,20 +23,17 @@ const SellerLoginForm = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const loginRequest: LoginRequest = {
-          signInRequest: {
-            email: values.email,
-            password: values.password,
-          },
+        const signInRequest: SignInRequest = {
+          email: values.email,
+          password: values.password,
         };
+        const response = await authApi.login(signInRequest);
 
-        const response = await authApi.login(loginRequest);
-
-        if (response && response.data?.token) {
+        if (response && response.data.data?.token) {
           console.log("Logged in successfully:", response);
-          tokenService.setToken(response.data.token); 
+          tokenService.setToken(response.data.data?.token);
         } else {
-          console.error("Login failed");
+          console.error("Login failed: No token found");
         }
       } catch (error) {
         console.error("Error during login:", error);
@@ -65,7 +63,7 @@ const SellerLoginForm = () => {
             fullWidth
             id="password"
             name="password"
-            label="password"
+            label="Password"
             type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
@@ -81,5 +79,4 @@ const SellerLoginForm = () => {
     </form>
   );
 };
-
 export default SellerLoginForm;

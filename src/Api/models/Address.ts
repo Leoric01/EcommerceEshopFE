@@ -12,21 +12,13 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
-import type { Order } from './Order';
-import {
-    OrderFromJSON,
-    OrderFromJSONTyped,
-    OrderToJSON,
-    OrderToJSONTyped,
-} from './Order';
-import type { User } from './User';
-import {
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-    UserToJSONTyped,
-} from './User';
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Order } from './order';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { User } from './user';
 
 /**
  * 
@@ -39,114 +31,60 @@ export interface Address {
      * @type {number}
      * @memberof Address
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof Address
      */
-    name?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof Address
      */
-    address?: string;
+    'address'?: string;
     /**
      * 
      * @type {string}
      * @memberof Address
      */
-    locality?: string;
+    'locality'?: string;
     /**
      * 
      * @type {string}
      * @memberof Address
      */
-    city?: string;
+    'city'?: string;
     /**
      * 
      * @type {string}
      * @memberof Address
      */
-    state?: string;
+    'state'?: string;
     /**
      * 
      * @type {string}
      * @memberof Address
      */
-    pinCode?: string;
+    'pinCode'?: string;
     /**
      * 
      * @type {string}
      * @memberof Address
      */
-    mobile?: string;
+    'mobile'?: string;
     /**
      * 
      * @type {User}
      * @memberof Address
      */
-    user?: User;
+    'user'?: User;
     /**
      * 
      * @type {Order}
      * @memberof Address
      */
-    order?: Order;
-}
-
-/**
- * Check if a given object implements the Address interface.
- */
-export function instanceOfAddress(value: object): value is Address {
-    return true;
-}
-
-export function AddressFromJSON(json: any): Address {
-    return AddressFromJSONTyped(json, false);
-}
-
-export function AddressFromJSONTyped(json: any, ignoreDiscriminator: boolean): Address {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'name': json['name'] == null ? undefined : json['name'],
-        'address': json['address'] == null ? undefined : json['address'],
-        'locality': json['locality'] == null ? undefined : json['locality'],
-        'city': json['city'] == null ? undefined : json['city'],
-        'state': json['state'] == null ? undefined : json['state'],
-        'pinCode': json['pinCode'] == null ? undefined : json['pinCode'],
-        'mobile': json['mobile'] == null ? undefined : json['mobile'],
-        'user': json['user'] == null ? undefined : UserFromJSON(json['user']),
-        'order': json['order'] == null ? undefined : OrderFromJSON(json['order']),
-    };
-}
-
-  export function AddressToJSON(json: any): Address {
-      return AddressToJSONTyped(json, false);
-  }
-
-  export function AddressToJSONTyped(value?: Address | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'name': value['name'],
-        'address': value['address'],
-        'locality': value['locality'],
-        'city': value['city'],
-        'state': value['state'],
-        'pinCode': value['pinCode'],
-        'mobile': value['mobile'],
-        'user': UserToJSON(value['user']),
-        'order': OrderToJSON(value['order']),
-    };
+    'order'?: Order;
 }
 

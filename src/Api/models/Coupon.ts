@@ -12,14 +12,10 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
-import type { User } from './User';
-import {
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-    UserToJSONTyped,
-} from './User';
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { User } from './user';
 
 /**
  * 
@@ -32,98 +28,48 @@ export interface Coupon {
      * @type {number}
      * @memberof Coupon
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof Coupon
      */
-    code?: string;
+    'code'?: string;
     /**
      * 
      * @type {number}
      * @memberof Coupon
      */
-    discountPercentage?: number;
+    'discountPercentage'?: number;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof Coupon
      */
-    validityStartDate?: Date;
+    'validityStartDate'?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof Coupon
      */
-    validityEndDate?: Date;
+    'validityEndDate'?: string;
     /**
      * 
      * @type {number}
      * @memberof Coupon
      */
-    minimumOrderValue?: number;
+    'minimumOrderValue'?: number;
     /**
      * 
      * @type {Set<User>}
      * @memberof Coupon
      */
-    usedByUsers?: Set<User>;
+    'usedByUsers'?: Set<User>;
     /**
      * 
      * @type {boolean}
      * @memberof Coupon
      */
-    active?: boolean;
-}
-
-/**
- * Check if a given object implements the Coupon interface.
- */
-export function instanceOfCoupon(value: object): value is Coupon {
-    return true;
-}
-
-export function CouponFromJSON(json: any): Coupon {
-    return CouponFromJSONTyped(json, false);
-}
-
-export function CouponFromJSONTyped(json: any, ignoreDiscriminator: boolean): Coupon {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'code': json['code'] == null ? undefined : json['code'],
-        'discountPercentage': json['discountPercentage'] == null ? undefined : json['discountPercentage'],
-        'validityStartDate': json['validityStartDate'] == null ? undefined : (new Date(json['validityStartDate'])),
-        'validityEndDate': json['validityEndDate'] == null ? undefined : (new Date(json['validityEndDate'])),
-        'minimumOrderValue': json['minimumOrderValue'] == null ? undefined : json['minimumOrderValue'],
-        'usedByUsers': json['usedByUsers'] == null ? undefined : (new Set((json['usedByUsers'] as Array<any>).map(UserFromJSON))),
-        'active': json['active'] == null ? undefined : json['active'],
-    };
-}
-
-  export function CouponToJSON(json: any): Coupon {
-      return CouponToJSONTyped(json, false);
-  }
-
-  export function CouponToJSONTyped(value?: Coupon | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'code': value['code'],
-        'discountPercentage': value['discountPercentage'],
-        'validityStartDate': value['validityStartDate'] == null ? undefined : ((value['validityStartDate']).toISOString().substring(0,10)),
-        'validityEndDate': value['validityEndDate'] == null ? undefined : ((value['validityEndDate']).toISOString().substring(0,10)),
-        'minimumOrderValue': value['minimumOrderValue'],
-        'usedByUsers': value['usedByUsers'] == null ? undefined : (Array.from(value['usedByUsers'] as Set<any>).map(UserToJSON)),
-        'active': value['active'],
-    };
+    'active'?: boolean;
 }
 

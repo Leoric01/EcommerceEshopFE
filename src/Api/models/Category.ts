@@ -12,7 +12,8 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+
+
 /**
  * 
  * @export
@@ -24,76 +25,30 @@ export interface Category {
      * @type {number}
      * @memberof Category
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof Category
      */
-    name?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof Category
      */
-    categoryId: string;
+    'categoryId': string;
     /**
      * 
      * @type {Category}
      * @memberof Category
      */
-    parentCategory?: Category;
+    'parentCategory'?: Category;
     /**
      * 
      * @type {number}
      * @memberof Category
      */
-    level: number;
-}
-
-/**
- * Check if a given object implements the Category interface.
- */
-export function instanceOfCategory(value: object): value is Category {
-    if (!('categoryId' in value) || value['categoryId'] === undefined) return false;
-    if (!('level' in value) || value['level'] === undefined) return false;
-    return true;
-}
-
-export function CategoryFromJSON(json: any): Category {
-    return CategoryFromJSONTyped(json, false);
-}
-
-export function CategoryFromJSONTyped(json: any, ignoreDiscriminator: boolean): Category {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'name': json['name'] == null ? undefined : json['name'],
-        'categoryId': json['categoryId'],
-        'parentCategory': json['parentCategory'] == null ? undefined : CategoryFromJSON(json['parentCategory']),
-        'level': json['level'],
-    };
-}
-
-  export function CategoryToJSON(json: any): Category {
-      return CategoryToJSONTyped(json, false);
-  }
-
-  export function CategoryToJSONTyped(value?: Category | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'name': value['name'],
-        'categoryId': value['categoryId'],
-        'parentCategory': CategoryToJSON(value['parentCategory']),
-        'level': value['level'],
-    };
+    'level': number;
 }
 

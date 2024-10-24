@@ -12,35 +12,19 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
-import type { User } from './User';
-import {
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-    UserToJSONTyped,
-} from './User';
-import type { Address } from './Address';
-import {
-    AddressFromJSON,
-    AddressFromJSONTyped,
-    AddressToJSON,
-    AddressToJSONTyped,
-} from './Address';
-import type { OrderItem } from './OrderItem';
-import {
-    OrderItemFromJSON,
-    OrderItemFromJSONTyped,
-    OrderItemToJSON,
-    OrderItemToJSONTyped,
-} from './OrderItem';
-import type { PaymentDetails } from './PaymentDetails';
-import {
-    PaymentDetailsFromJSON,
-    PaymentDetailsFromJSONTyped,
-    PaymentDetailsToJSON,
-    PaymentDetailsToJSONTyped,
-} from './PaymentDetails';
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Address } from './address';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderItem } from './order-item';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { PaymentDetails } from './payment-details';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { User } from './user';
 
 /**
  * 
@@ -53,97 +37,93 @@ export interface Order {
      * @type {number}
      * @memberof Order
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof Order
      */
-    orderId?: string;
+    'orderId'?: string;
     /**
      * 
      * @type {User}
      * @memberof Order
      */
-    user?: User;
+    'user'?: User;
     /**
      * 
      * @type {number}
      * @memberof Order
      */
-    sellerId?: number;
+    'sellerId'?: number;
     /**
      * 
      * @type {Array<OrderItem>}
      * @memberof Order
      */
-    orderItems?: Array<OrderItem>;
+    'orderItems'?: Array<OrderItem>;
     /**
      * 
      * @type {Address}
      * @memberof Order
      */
-    shippingAddress?: Address;
+    'shippingAddress'?: Address;
     /**
      * 
      * @type {PaymentDetails}
      * @memberof Order
      */
-    paymentDetails?: PaymentDetails;
+    'paymentDetails'?: PaymentDetails;
     /**
      * 
      * @type {number}
      * @memberof Order
      */
-    totalMrpPrice?: number;
+    'totalMrpPrice'?: number;
     /**
      * 
      * @type {number}
      * @memberof Order
      */
-    totalSellingPrice?: number;
+    'totalSellingPrice'?: number;
     /**
      * 
      * @type {number}
      * @memberof Order
      */
-    discount?: number;
+    'discount'?: number;
     /**
      * 
      * @type {string}
      * @memberof Order
      */
-    orderStatus?: OrderOrderStatusEnum;
+    'orderStatus'?: OrderOrderStatusEnum;
     /**
      * 
      * @type {number}
      * @memberof Order
      */
-    totalItem?: number;
+    'totalItem'?: number;
     /**
      * 
      * @type {string}
      * @memberof Order
      */
-    paymentStatus?: OrderPaymentStatusEnum;
+    'paymentStatus'?: OrderPaymentStatusEnum;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof Order
      */
-    orderDate?: Date;
+    'orderDate'?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof Order
      */
-    deliverDate?: Date;
+    'deliverDate'?: string;
 }
 
-
-/**
- * @export
- */
 export const OrderOrderStatusEnum = {
     Pending: 'PENDING',
     Placed: 'PLACED',
@@ -152,81 +132,15 @@ export const OrderOrderStatusEnum = {
     Delivered: 'DELIVERED',
     Cancelled: 'CANCELLED'
 } as const;
-export type OrderOrderStatusEnum = typeof OrderOrderStatusEnum[keyof typeof OrderOrderStatusEnum];
 
-/**
- * @export
- */
+export type OrderOrderStatusEnum = typeof OrderOrderStatusEnum[keyof typeof OrderOrderStatusEnum];
 export const OrderPaymentStatusEnum = {
     Pending: 'PENDING',
     Processing: 'PROCESSING',
     Completed: 'COMPLETED',
     Failed: 'FAILED'
 } as const;
+
 export type OrderPaymentStatusEnum = typeof OrderPaymentStatusEnum[keyof typeof OrderPaymentStatusEnum];
 
-
-/**
- * Check if a given object implements the Order interface.
- */
-export function instanceOfOrder(value: object): value is Order {
-    return true;
-}
-
-export function OrderFromJSON(json: any): Order {
-    return OrderFromJSONTyped(json, false);
-}
-
-export function OrderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Order {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'orderId': json['orderId'] == null ? undefined : json['orderId'],
-        'user': json['user'] == null ? undefined : UserFromJSON(json['user']),
-        'sellerId': json['sellerId'] == null ? undefined : json['sellerId'],
-        'orderItems': json['orderItems'] == null ? undefined : ((json['orderItems'] as Array<any>).map(OrderItemFromJSON)),
-        'shippingAddress': json['shippingAddress'] == null ? undefined : AddressFromJSON(json['shippingAddress']),
-        'paymentDetails': json['paymentDetails'] == null ? undefined : PaymentDetailsFromJSON(json['paymentDetails']),
-        'totalMrpPrice': json['totalMrpPrice'] == null ? undefined : json['totalMrpPrice'],
-        'totalSellingPrice': json['totalSellingPrice'] == null ? undefined : json['totalSellingPrice'],
-        'discount': json['discount'] == null ? undefined : json['discount'],
-        'orderStatus': json['orderStatus'] == null ? undefined : json['orderStatus'],
-        'totalItem': json['totalItem'] == null ? undefined : json['totalItem'],
-        'paymentStatus': json['paymentStatus'] == null ? undefined : json['paymentStatus'],
-        'orderDate': json['orderDate'] == null ? undefined : (new Date(json['orderDate'])),
-        'deliverDate': json['deliverDate'] == null ? undefined : (new Date(json['deliverDate'])),
-    };
-}
-
-  export function OrderToJSON(json: any): Order {
-      return OrderToJSONTyped(json, false);
-  }
-
-  export function OrderToJSONTyped(value?: Order | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'orderId': value['orderId'],
-        'user': UserToJSON(value['user']),
-        'sellerId': value['sellerId'],
-        'orderItems': value['orderItems'] == null ? undefined : ((value['orderItems'] as Array<any>).map(OrderItemToJSON)),
-        'shippingAddress': AddressToJSON(value['shippingAddress']),
-        'paymentDetails': PaymentDetailsToJSON(value['paymentDetails']),
-        'totalMrpPrice': value['totalMrpPrice'],
-        'totalSellingPrice': value['totalSellingPrice'],
-        'discount': value['discount'],
-        'orderStatus': value['orderStatus'],
-        'totalItem': value['totalItem'],
-        'paymentStatus': value['paymentStatus'],
-        'orderDate': value['orderDate'] == null ? undefined : ((value['orderDate']).toISOString()),
-        'deliverDate': value['deliverDate'] == null ? undefined : ((value['deliverDate']).toISOString()),
-    };
-}
 

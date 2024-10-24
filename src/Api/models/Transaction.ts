@@ -12,28 +12,16 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
-import type { Order } from './Order';
-import {
-    OrderFromJSON,
-    OrderFromJSONTyped,
-    OrderToJSON,
-    OrderToJSONTyped,
-} from './Order';
-import type { User } from './User';
-import {
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-    UserToJSONTyped,
-} from './User';
-import type { Seller } from './Seller';
-import {
-    SellerFromJSON,
-    SellerFromJSONTyped,
-    SellerToJSON,
-    SellerToJSONTyped,
-} from './Seller';
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Order } from './order';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Seller } from './seller';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { User } from './user';
 
 /**
  * 
@@ -46,74 +34,30 @@ export interface Transaction {
      * @type {number}
      * @memberof Transaction
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {User}
      * @memberof Transaction
      */
-    customer?: User;
+    'customer'?: User;
     /**
      * 
      * @type {Seller}
      * @memberof Transaction
      */
-    seller?: Seller;
+    'seller'?: Seller;
     /**
      * 
      * @type {Order}
      * @memberof Transaction
      */
-    order?: Order;
+    'order'?: Order;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof Transaction
      */
-    date?: Date;
-}
-
-/**
- * Check if a given object implements the Transaction interface.
- */
-export function instanceOfTransaction(value: object): value is Transaction {
-    return true;
-}
-
-export function TransactionFromJSON(json: any): Transaction {
-    return TransactionFromJSONTyped(json, false);
-}
-
-export function TransactionFromJSONTyped(json: any, ignoreDiscriminator: boolean): Transaction {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'customer': json['customer'] == null ? undefined : UserFromJSON(json['customer']),
-        'seller': json['seller'] == null ? undefined : SellerFromJSON(json['seller']),
-        'order': json['order'] == null ? undefined : OrderFromJSON(json['order']),
-        'date': json['date'] == null ? undefined : (new Date(json['date'])),
-    };
-}
-
-  export function TransactionToJSON(json: any): Transaction {
-      return TransactionToJSONTyped(json, false);
-  }
-
-  export function TransactionToJSONTyped(value?: Transaction | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'customer': UserToJSON(value['customer']),
-        'seller': SellerToJSON(value['seller']),
-        'order': OrderToJSON(value['order']),
-        'date': value['date'] == null ? undefined : ((value['date']).toISOString()),
-    };
+    'date'?: string;
 }
 

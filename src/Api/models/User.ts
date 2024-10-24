@@ -12,63 +12,31 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
-import type { Order } from './Order';
-import {
-    OrderFromJSON,
-    OrderFromJSONTyped,
-    OrderToJSON,
-    OrderToJSONTyped,
-} from './Order';
-import type { VerificationCode } from './VerificationCode';
-import {
-    VerificationCodeFromJSON,
-    VerificationCodeFromJSONTyped,
-    VerificationCodeToJSON,
-    VerificationCodeToJSONTyped,
-} from './VerificationCode';
-import type { Address } from './Address';
-import {
-    AddressFromJSON,
-    AddressFromJSONTyped,
-    AddressToJSON,
-    AddressToJSONTyped,
-} from './Address';
-import type { Transaction } from './Transaction';
-import {
-    TransactionFromJSON,
-    TransactionFromJSONTyped,
-    TransactionToJSON,
-    TransactionToJSONTyped,
-} from './Transaction';
-import type { GrantedAuthority } from './GrantedAuthority';
-import {
-    GrantedAuthorityFromJSON,
-    GrantedAuthorityFromJSONTyped,
-    GrantedAuthorityToJSON,
-    GrantedAuthorityToJSONTyped,
-} from './GrantedAuthority';
-import type { Review } from './Review';
-import {
-    ReviewFromJSON,
-    ReviewFromJSONTyped,
-    ReviewToJSON,
-    ReviewToJSONTyped,
-} from './Review';
-import type { Wishlist } from './Wishlist';
-import {
-    WishlistFromJSON,
-    WishlistFromJSONTyped,
-    WishlistToJSON,
-    WishlistToJSONTyped,
-} from './Wishlist';
-import type { Cart } from './Cart';
-import {
-    CartFromJSON,
-    CartFromJSONTyped,
-    CartToJSON,
-    CartToJSONTyped,
-} from './Cart';
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Address } from './address';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Cart } from './cart';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GrantedAuthority } from './granted-authority';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Order } from './order';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Review } from './review';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Transaction } from './transaction';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { VerificationCode } from './verification-code';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Wishlist } from './wishlist';
 
 /**
  * 
@@ -81,218 +49,138 @@ export interface User {
      * @type {number}
      * @memberof User
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    email?: string;
+    'email'?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    mobile?: string;
+    'mobile'?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    password?: string;
+    'password'?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    firstName?: string;
+    'firstName'?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    lastName?: string;
+    'lastName'?: string;
     /**
      * 
      * @type {VerificationCode}
      * @memberof User
      */
-    verificationCode?: VerificationCode;
+    'verificationCode'?: VerificationCode;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    role?: string;
+    'role'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof User
      */
-    enabled?: boolean;
+    'enabled'?: boolean;
     /**
      * 
      * @type {Set<Address>}
      * @memberof User
      */
-    addresses?: Set<Address>;
+    'addresses'?: Set<Address>;
     /**
      * 
      * @type {Cart}
      * @memberof User
      */
-    cart?: Cart;
+    'cart'?: Cart;
     /**
      * 
      * @type {Array<Order>}
      * @memberof User
      */
-    orders?: Array<Order>;
+    'orders'?: Array<Order>;
     /**
      * 
      * @type {Array<Review>}
      * @memberof User
      */
-    reviews?: Array<Review>;
+    'reviews'?: Array<Review>;
     /**
      * 
      * @type {Array<Transaction>}
      * @memberof User
      */
-    transactions?: Array<Transaction>;
+    'transactions'?: Array<Transaction>;
     /**
      * 
      * @type {Wishlist}
      * @memberof User
      */
-    wishlist?: Wishlist;
-    /**
-     * 
-     * @type {Date}
-     * @memberof User
-     */
-    lastSignOut?: Date;
+    'wishlist'?: Wishlist;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    name?: string;
+    'lastSignOut'?: string;
     /**
      * 
      * @type {string}
      * @memberof User
      */
-    username?: string;
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'username'?: string;
     /**
      * 
      * @type {boolean}
      * @memberof User
      */
-    signedOut?: boolean;
+    'signedOut'?: boolean;
     /**
      * 
      * @type {Array<GrantedAuthority>}
      * @memberof User
      */
-    authorities?: Array<GrantedAuthority>;
+    'authorities'?: Array<GrantedAuthority>;
     /**
      * 
      * @type {boolean}
      * @memberof User
      */
-    accountNonExpired?: boolean;
+    'accountNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof User
      */
-    credentialsNonExpired?: boolean;
+    'credentialsNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof User
      */
-    accountNonLocked?: boolean;
-}
-
-/**
- * Check if a given object implements the User interface.
- */
-export function instanceOfUser(value: object): value is User {
-    return true;
-}
-
-export function UserFromJSON(json: any): User {
-    return UserFromJSONTyped(json, false);
-}
-
-export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'email': json['email'] == null ? undefined : json['email'],
-        'mobile': json['mobile'] == null ? undefined : json['mobile'],
-        'password': json['password'] == null ? undefined : json['password'],
-        'firstName': json['firstName'] == null ? undefined : json['firstName'],
-        'lastName': json['lastName'] == null ? undefined : json['lastName'],
-        'verificationCode': json['verificationCode'] == null ? undefined : VerificationCodeFromJSON(json['verificationCode']),
-        'role': json['role'] == null ? undefined : json['role'],
-        'enabled': json['enabled'] == null ? undefined : json['enabled'],
-        'addresses': json['addresses'] == null ? undefined : (new Set((json['addresses'] as Array<any>).map(AddressFromJSON))),
-        'cart': json['cart'] == null ? undefined : CartFromJSON(json['cart']),
-        'orders': json['orders'] == null ? undefined : ((json['orders'] as Array<any>).map(OrderFromJSON)),
-        'reviews': json['reviews'] == null ? undefined : ((json['reviews'] as Array<any>).map(ReviewFromJSON)),
-        'transactions': json['transactions'] == null ? undefined : ((json['transactions'] as Array<any>).map(TransactionFromJSON)),
-        'wishlist': json['wishlist'] == null ? undefined : WishlistFromJSON(json['wishlist']),
-        'lastSignOut': json['lastSignOut'] == null ? undefined : (new Date(json['lastSignOut'])),
-        'name': json['name'] == null ? undefined : json['name'],
-        'username': json['username'] == null ? undefined : json['username'],
-        'signedOut': json['signedOut'] == null ? undefined : json['signedOut'],
-        'authorities': json['authorities'] == null ? undefined : ((json['authorities'] as Array<any>).map(GrantedAuthorityFromJSON)),
-        'accountNonExpired': json['accountNonExpired'] == null ? undefined : json['accountNonExpired'],
-        'credentialsNonExpired': json['credentialsNonExpired'] == null ? undefined : json['credentialsNonExpired'],
-        'accountNonLocked': json['accountNonLocked'] == null ? undefined : json['accountNonLocked'],
-    };
-}
-
-  export function UserToJSON(json: any): User {
-      return UserToJSONTyped(json, false);
-  }
-
-  export function UserToJSONTyped(value?: User | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'email': value['email'],
-        'mobile': value['mobile'],
-        'password': value['password'],
-        'firstName': value['firstName'],
-        'lastName': value['lastName'],
-        'verificationCode': VerificationCodeToJSON(value['verificationCode']),
-        'role': value['role'],
-        'enabled': value['enabled'],
-        'addresses': value['addresses'] == null ? undefined : (Array.from(value['addresses'] as Set<any>).map(AddressToJSON)),
-        'cart': CartToJSON(value['cart']),
-        'orders': value['orders'] == null ? undefined : ((value['orders'] as Array<any>).map(OrderToJSON)),
-        'reviews': value['reviews'] == null ? undefined : ((value['reviews'] as Array<any>).map(ReviewToJSON)),
-        'transactions': value['transactions'] == null ? undefined : ((value['transactions'] as Array<any>).map(TransactionToJSON)),
-        'wishlist': WishlistToJSON(value['wishlist']),
-        'lastSignOut': value['lastSignOut'] == null ? undefined : ((value['lastSignOut']).toISOString()),
-        'name': value['name'],
-        'username': value['username'],
-        'signedOut': value['signedOut'],
-        'authorities': value['authorities'] == null ? undefined : ((value['authorities'] as Array<any>).map(GrantedAuthorityToJSON)),
-        'accountNonExpired': value['accountNonExpired'],
-        'credentialsNonExpired': value['credentialsNonExpired'],
-        'accountNonLocked': value['accountNonLocked'],
-    };
+    'accountNonLocked'?: boolean;
 }
 

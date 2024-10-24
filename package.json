@@ -23,6 +23,7 @@
     "dayjs": "^1.11.13",
     "formik": "^2.4.6",
     "jwt-decode": "^4.0.0",
+    "openapi-client-axios": "^7.5.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
@@ -36,7 +37,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "openapibuild": "openapi-generator-cli generate -i ./src/OpenApi/openapi.json -g typescript-fetch -o ./src/Api",
+    "openapibuild": "openapi-generator-cli generate -i ./src/OpenApi/openapi.json -g typescript-axios -o ./src/Api --additional-properties=apiPackage=apis,modelPackage=models,withSeparateModelsAndApi=true,supportsES6=true ",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

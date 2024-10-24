@@ -16,27 +16,21 @@ import SellerDashboard from "./Seller/Pages/Seller Dashboard/SellerDashboard";
 import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
 import { useAuthGuard } from "./State/interceptors/AuthGuard";
 import ProtectedRoute from "./State/interceptors/ProtectedRoute";
-import { UserControllerApi, } from "./Api";
-import { TokenService } from "./State/interceptors/TokenService";
-import { api } from "./config/Api";
+import { userApi } from "./State/interceptors/userApi";
 function App() {
-  const userApi = new UserControllerApi();
-  const tokenService = new TokenService();
   useEffect(() => {
-    const fetchUserProfile = async (token: string) => {
+    const fetchUserProfile = async () => {
       try {
-        tokenService.setToken(token); 
-        const userProfile = await userApi.getUserProfile({
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log("user detail fetch success", userProfile);
+        const userProfile = await userApi.getUserProfile();
+        console.log("User profile fetched successfully:", userProfile.data?.data);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }
     };
+
     const token = localStorage.getItem("jwt") || "";
     if (token) {
-      fetchUserProfile(token);
+      fetchUserProfile();
     }
   }, []);
   

@@ -12,14 +12,10 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
-import type { User } from './User';
-import {
-    UserFromJSON,
-    UserFromJSONTyped,
-    UserToJSON,
-    UserToJSONTyped,
-} from './User';
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { User } from './user';
 
 /**
  * 
@@ -32,83 +28,36 @@ export interface Review {
      * @type {number}
      * @memberof Review
      */
-    id?: number;
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof Review
      */
-    reviewText?: string;
+    'reviewText'?: string;
     /**
      * 
      * @type {number}
      * @memberof Review
      */
-    rating?: number;
+    'rating'?: number;
     /**
      * 
      * @type {Array<string>}
      * @memberof Review
      */
-    productImages?: Array<string>;
+    'productImages'?: Array<string>;
     /**
      * 
      * @type {User}
      * @memberof Review
      */
-    user: User;
+    'user': User;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof Review
      */
-    createdAt?: Date;
-}
-
-/**
- * Check if a given object implements the Review interface.
- */
-export function instanceOfReview(value: object): value is Review {
-    if (!('user' in value) || value['user'] === undefined) return false;
-    return true;
-}
-
-export function ReviewFromJSON(json: any): Review {
-    return ReviewFromJSONTyped(json, false);
-}
-
-export function ReviewFromJSONTyped(json: any, ignoreDiscriminator: boolean): Review {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'reviewText': json['reviewText'] == null ? undefined : json['reviewText'],
-        'rating': json['rating'] == null ? undefined : json['rating'],
-        'productImages': json['productImages'] == null ? undefined : json['productImages'],
-        'user': UserFromJSON(json['user']),
-        'createdAt': json['createdAt'] == null ? undefined : (new Date(json['createdAt'])),
-    };
-}
-
-  export function ReviewToJSON(json: any): Review {
-      return ReviewToJSONTyped(json, false);
-  }
-
-  export function ReviewToJSONTyped(value?: Review | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-        'id': value['id'],
-        'reviewText': value['reviewText'],
-        'rating': value['rating'],
-        'productImages': value['productImages'],
-        'user': UserToJSON(value['user']),
-        'createdAt': value['createdAt'] == null ? undefined : ((value['createdAt']).toISOString()),
-    };
+    'createdAt'?: string;
 }
 
