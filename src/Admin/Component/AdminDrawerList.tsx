@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react";
+import DrawerList from "../../Component/DrawerList";
+import { menu, menu2 } from "../../Data/endpoints/AdminNavbar";
 
-const AdminDrawerList = ({ toggleDrawer }: { toggleDrawer: any }) => {
+type menuItem = {
+  name: string;
+  path: string;
+  icon: JSX.Element;
+  activeIcon: JSX.Element;
+};
+
+
+
+const AdminDrawerList = ({toggleDrawer}:any) => {
   return (
-    <div>AdminDrawerList</div>
-  )
-}
+    <div>
+      <DrawerList menu={menu} menu2={menu2} toggleDrawer={toggleDrawer}/>
+    </div>
+  );
+};
 
-export default AdminDrawerList
+export default AdminDrawerList;

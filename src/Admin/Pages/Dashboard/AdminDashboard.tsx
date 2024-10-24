@@ -1,4 +1,3 @@
-import React from "react";
 import AdminRoutes from "../../../Routes/AdminRoutes";
 import AdminDrawerList from "../../Component/AdminDrawerList";
 
