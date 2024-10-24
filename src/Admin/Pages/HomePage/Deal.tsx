@@ -26,7 +26,7 @@ const Deal = () => {
         ) : activeDeal == "Category" ? (
           <DealCategoryTable />
         ) : (
-          <div>
+          <div className="flex flex-col justify-start items-start h-[70vh]">
             <CreateDealForm />
           </div>
         )}
