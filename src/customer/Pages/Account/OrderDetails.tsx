@@ -81,13 +81,13 @@ const OrderDetails = () => {
         </div>
         <div className="p-10">
           <Button
-            color={!isCanceled ? "error": "primary"}
+            color={!isCanceled ? "error" : "primary"}
             sx={{ py: "0.7rem" }}
             className=""
             variant="contained"
             fullWidth
             onClick={() => setCancel(!isCanceled)}
-            >
+          >
             {isCanceled ? "order cancelled" : "Cancel Order"}
           </Button>
         </div>

@@ -1,4 +1,3 @@
-import React from "react";
 import ProfileFieldCard from "../../../Component/ProfileFieldCard";
 import Divider from "@mui/material/Divider";
 
