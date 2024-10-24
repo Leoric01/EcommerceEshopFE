@@ -34,7 +34,7 @@ const SellerAccountForm = () => {
       },
       bankDetails: {
         accountNumber: "",
-        isfcCode: "",
+        iban: "",
         accountHolderName: "",
       },
       sellerName: "",

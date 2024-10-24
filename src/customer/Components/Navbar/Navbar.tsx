@@ -13,7 +13,6 @@ import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import CategorySheet from "./CategorySheet";
 import { mainCategory } from "../../../Data/MainCategory";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../State/Store";
 import { TokenService } from "../../../State/interceptors/TokenService";
 
 const Navbar = () => {

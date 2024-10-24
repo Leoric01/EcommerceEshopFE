@@ -22,7 +22,15 @@ function App() {
     const fetchUserProfile = async () => {
       try {
         const userProfile = await userApi.getUserProfile();
-        console.log("User profile fetched successfully:", userProfile.data?.data);
+        console.log(
+          "User profile fetched successfully:",
+          userProfile.data?.data
+        );
+        const userId = userProfile.data?.data?.id?.toString() || "";
+        localStorage.setItem("id", userId);
+        if (userProfile.data?.data?.id !== undefined) {
+          localStorage.setItem("id", userProfile.data.data.id.toString());
+        }
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }
@@ -33,8 +41,8 @@ function App() {
       fetchUserProfile();
     }
   }, []);
-  
-  useAuthGuard();  
+
+  useAuthGuard();
   return (
     <ThemeProvider theme={customTheme}>
       <div className="">
@@ -43,14 +51,38 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products/:category" element={<Product />} />
           <Route path="/reviews/:productId" element={<Review />} />
-          <Route path="/product-details/:categoryId/:name/:productId" element={<ProductDetails />} />
+          <Route
+            path="/product-details/:categoryId/:name/:productId"
+            element={<ProductDetails />}
+          />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/become-seller" element={<BecomeSeller />} />
-          
-          <Route path="/account/*" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-          <Route path="/seller/*" element={<ProtectedRoute><SellerDashboard /></ProtectedRoute>} />
-          <Route path="/admin/*" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} /> 
+
+          <Route
+            path="/account/*"
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/seller/*"
+            element={
+              <ProtectedRoute>
+                <SellerDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </ThemeProvider>

@@ -8,7 +8,6 @@ import PersonalDetails from "./PersonalDetails";
 import BusinessDetails from "./BusinessDetails";
 import BankDetails from "./BankDetails";
 import PickupAddress from "./PickupAddress";
-import { userApi } from "../../../State/interceptors/userApi";
 import { sellerApi } from "../../../State/confaxios/sellerApi";
 import { TokenService } from "../../../State/interceptors/TokenService";
 import { useNavigate } from "react-router-dom";
@@ -31,22 +30,10 @@ const Profile = () => {
   const [sellerProfile, setSellerProfile] = useState<any>(null);
   const tokenService = new TokenService();
   const role = tokenService.getUserRoles();
+
   const handleOpen = (formName: string) => {
     setOpen(true);
     setSelectedForm(formName);
-  };
-
-  const fetchUserProfile = async () => {
-    try {
-      const userProfileResponse = await userApi.getUserProfile();
-      const fetchedUserProfile = userProfileResponse.data?.data;
-      console.log("User profile fetched successfully:", fetchedUserProfile);
-      if (fetchedUserProfile && fetchedUserProfile.id) {
-        fetchSellerById(fetchedUserProfile.id);
-      }
-    } catch (error) {
-      console.error("Failed to fetch user profile:", error);
-    }
   };
 
   const fetchSellerById = async (id: number) => {
@@ -61,7 +48,16 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    fetchUserProfile();
+    const fetchData = async () => {
+      const sellerId = localStorage.getItem("id");
+      if (sellerId) {
+        const numericSellerId = Number(sellerId);
+        await fetchSellerById(numericSellerId);
+      } else {
+        console.error("Seller ID not found in localStorage.");
+      }
+    };
+    fetchData();
     if (role.includes("ROLE_USER")) {
       navigate("/account/orders");
     }
@@ -116,17 +112,17 @@ const Profile = () => {
           />
           <div className="mt-10">
             <ProfileFieldCard
-              keys="Seller's Name"
+              keys={"Seller's Name"}
               value={sellerProfile?.name || "No Data"}
             />
             <Divider />
             <ProfileFieldCard
-              keys="Email"
+              keys={"Email"}
               value={sellerProfile?.email || "No Data"}
             />
             <Divider />
             <ProfileFieldCard
-              keys="Mobile"
+              keys={"Mobile"}
               value={sellerProfile?.mobile || "No Data"}
             />
           </div>
@@ -149,17 +145,17 @@ const Profile = () => {
         </div>
         <div className="">
           <ProfileFieldCard
-            keys="Business Name/Brand"
-            value={sellerProfile?.businessName || "No Data"}
+            keys={"Business Name/Brand"}
+            value={sellerProfile?.businessDetails?.businessName || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="VAT"
+            keys={"VAT"}
             value={sellerProfile?.vat || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="Account Status"
+            keys={"Account Status"}
             value={sellerProfile?.accountStatus || "No Data"}
           />
         </div>
@@ -181,37 +177,37 @@ const Profile = () => {
         </div>
         <div className="">
           <ProfileFieldCard
-            keys="Name"
+            keys={"Name"}
             value={sellerProfile?.pickupAddress?.name || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="Mobile"
+            keys={"Mobile"}
             value={sellerProfile?.pickupAddress?.mobile || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="Pincode"
-            value={sellerProfile?.pickupAddress?.pincode || "No Data"}
+            keys={"Pincode"}
+            value={sellerProfile?.pickupAddress?.pinCode || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="Address"
+            keys={"Address"}
             value={sellerProfile?.pickupAddress?.address || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="Locality"
+            keys={"Locality"}
             value={sellerProfile?.pickupAddress?.locality || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="City"
+            keys={"City"}
             value={sellerProfile?.pickupAddress?.city || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="State"
+            keys={"State"}
             value={sellerProfile?.pickupAddress?.state || "No Data"}
           />
         </div>
@@ -233,18 +229,18 @@ const Profile = () => {
         </div>
         <div className="">
           <ProfileFieldCard
-            keys="Account Holder Name"
-            value={sellerProfile?.bankDetails?.holderName || "No Data"}
+            keys={"Account Holder Name"}
+            value={sellerProfile?.bankDetails?.accountHolderName || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="Account Number"
+            keys={"Account Number"}
             value={sellerProfile?.bankDetails?.accountNumber || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys="IBAN"
-            value={sellerProfile?.bankDetails?.iban || "No Data"}
+            keys={"IBAN"}
+            value={sellerProfile?.bankDetails?.ifscCode || "No Data"}
           />
         </div>
       </div>
