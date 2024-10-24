@@ -14,7 +14,6 @@ import { Route, Routes } from "react-router-dom";
 import BecomeSeller from "./Customer/Pages/BecomeSeller/BecomeSeller";
 import SellerDashboard from "./Seller/Pages/Seller Dashboard/SellerDashboard";
 import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
-import AdminRoutes from "./Routes/AdminRoutes";
 import { useAppDispatch } from "./State/Store";
 import { fetchSellerProfile } from "./State/seller/sellerSlice";
 import { useAuthGuard } from "./State/interceptors/AuthGuard";
