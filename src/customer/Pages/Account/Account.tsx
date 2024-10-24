@@ -4,6 +4,7 @@ import Orders from "./Orders";
 import OrderDetails from "./OrderDetails";
 import UserDetails from "./UserDetails";
 import Address from "./Address";
+import { TokenService } from "../../../State/interceptors/TokenService";
 
 const menuCustomer = [
   { name: "orders", path: "/account/orders" },
@@ -16,9 +17,17 @@ const menuCustomer = [
 const Account = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const tokenService = new TokenService();
+  const handleLogout = () => {
+    tokenService.clearToken();
+    navigate("/");
+  };
   const handleClick = (item: any) => {
-    navigate(item.path);
+    if (item.name === "Logout") {
+      handleLogout();
+    } else {
+      navigate(item.path);
+    }
   };
   return (
     <div className="px-5 lg:px-32 min-h-screen mt-10">
@@ -43,10 +52,13 @@ const Account = () => {
         </section>
         <section className="right lg:col-span-2 lg:pl-5 py-5">
           <Routes>
-            <Route path="/" element={<UserDetails/>} />
+            <Route path="/" element={<UserDetails />} />
             <Route path="/orders" element={<Orders />} />
-            <Route path="/order/:orderId/:orderItemId" element={<OrderDetails/>} />
-            <Route path="/addresses" element={<Address/>} />
+            <Route
+              path="/order/:orderId/:orderItemId"
+              element={<OrderDetails />}
+            />
+            <Route path="/addresses" element={<Address />} />
           </Routes>
         </section>
       </div>

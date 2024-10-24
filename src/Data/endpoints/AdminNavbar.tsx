@@ -1,4 +1,15 @@
-import { Dashboard, IntegrationInstructions, Add, Home, Inventory, ElectricBolt, Category, LocalOffer, AccountBox, Logout } from "@mui/icons-material";
+import {
+  Dashboard,
+  IntegrationInstructions,
+  Add,
+  Home,
+  Inventory,
+  ElectricBolt,
+  Category,
+  LocalOffer,
+  AccountBox,
+  Logout,
+} from "@mui/icons-material";
 
 export const menu = [
   {

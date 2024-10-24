@@ -20,14 +20,20 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
   const navigate = useNavigate();
   const tokenService = new TokenService();
 
-  const handleNavigate = (path: string) => {
-    navigate(path);
-    toggleDrawer();
+  const handleClick = (item: menuItem) => {
+    console.log("Clicked item:", item); // Debugging log
+    if (item.name === "Logout") {
+      handleLogout();
+    } else {
+      navigate(item.path);
+      toggleDrawer(); // Close the drawer after navigating
+    }
   };
 
   const handleLogout = () => {
-    localStorage.clear();
-    navigate("/");
+    tokenService.clearToken();
+    console.log("Logout successful"); // Debugging log
+    navigate("/"); // Redirect to home or login page
   };
 
   return (
@@ -41,11 +47,11 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
               <div
                 className="pr-9 cursor-pointer"
                 key={index}
-                onClick={() => handleNavigate(item.path)}
+                onClick={() => handleClick(item)} // Pass the entire item here
               >
                 <span
                   className={`${
-                    item.path === location.pathname
+                    isActive
                       ? "bg-primary-custom text-white"
                       : "bg-white text-primary-custom"
                   } flex items-center px-5 py-3 rounded-r-full`}
@@ -70,7 +76,11 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
               <div
                 className="pr-9 cursor-pointer"
                 key={index}
-                onClick={item.name === "Logout" ? handleLogout : () => handleNavigate(item.path)}
+                onClick={
+                  item.name === "Logout"
+                    ? handleLogout
+                    : () => handleClick(item)
+                }
               >
                 <span
                   className={`${

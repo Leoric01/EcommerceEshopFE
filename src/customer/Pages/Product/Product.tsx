@@ -14,6 +14,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { FilterAlt } from "@mui/icons-material";
+import { productApi } from "../../../State/confaxios/productApi";
 
 const Product = () => {
   const theme = useTheme();
@@ -22,6 +23,17 @@ const Product = () => {
   const [page, setPage] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
+  const [productsListAll, setProductsListAll] = useState<any>(null);
+
+  const fetchAllProducts = async () => {
+    try {
+      const response = await productApi.getAllProducts();
+      const actualProducts = response?.data?.data || [];
+      setProductsListAll(actualProducts);
+    } catch (err) {
+      console.error("Failed to fetch user profile:", err);
+    }
+  };
 
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
@@ -34,6 +46,10 @@ const Product = () => {
   const toggleFilter = () => {
     setShowFilter(!showFilter);
   };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {

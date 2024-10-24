@@ -32,7 +32,7 @@ const UserDetails = () => {
           <Divider />
           <ProfileFieldCard
             keys="Mobile"
-            value={userProfile?.mobile || "N/A"}
+            value={userProfile?.addresses?.mobile || "N/A"}
           />
         </div>
       </div>
