@@ -14,17 +14,31 @@ import { Route, Routes } from "react-router-dom";
 import BecomeSeller from "./Customer/Pages/BecomeSeller/BecomeSeller";
 import SellerDashboard from "./Seller/Pages/Seller Dashboard/SellerDashboard";
 import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
-import { useAppDispatch } from "./State/Store";
-import { fetchSellerProfile } from "./State/seller/sellerSlice";
 import { useAuthGuard } from "./State/interceptors/AuthGuard";
 import ProtectedRoute from "./State/interceptors/ProtectedRoute";
-
+import { UserControllerApi, } from "./Api";
+import { TokenService } from "./State/interceptors/TokenService";
+import { api } from "./config/Api";
 function App() {
-  const dispatch=useAppDispatch();
-
-  useEffect(()=>{
-    dispatch(fetchSellerProfile(localStorage.getItem("jwt")||""))
-  },[dispatch])
+  const userApi = new UserControllerApi();
+  const tokenService = new TokenService();
+  useEffect(() => {
+    const fetchUserProfile = async (token: string) => {
+      try {
+        tokenService.setToken(token); 
+        const userProfile = await userApi.getUserProfile({
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("user detail fetch success", userProfile);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+    const token = localStorage.getItem("jwt") || "";
+    if (token) {
+      fetchUserProfile(token);
+    }
+  }, []);
   
   useAuthGuard();  
   return (

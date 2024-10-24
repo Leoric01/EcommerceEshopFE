@@ -1,10 +1,29 @@
 import axios from "axios";
+import { TokenService } from '../State/interceptors/TokenService';
 
-export const API_URL = "http://localhost:8080";
+const tokenService = new TokenService();
 
-export const api = axios.create({
+const API_URL = "http://localhost:8080";
+const api = axios.create({
     baseURL: API_URL,
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
     },
 });
+
+api.interceptors.request.use(
+  (config) => {
+    const token = tokenService.getToken();
+    if (token) {
+      console.log('Adding Authorization header:', token);
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    console.error('Interceptor request error:', error);
+    return Promise.reject(error);
+  }
+);
+
+export { api };
