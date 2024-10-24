@@ -1,7 +1,6 @@
 import { TextField, Box, Button } from "@mui/material";
 import { useFormik } from "formik";
 import Grid from "@mui/material/Grid2";
-import React from "react";
 
 const PersonalDetails = () => {
   const formik = useFormik({

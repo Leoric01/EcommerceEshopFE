@@ -1,5 +1,3 @@
-import React from "react";
-
 const DealCard = () => {
   return (
     <div className="w-[12rem] cursor-pointer m-1">

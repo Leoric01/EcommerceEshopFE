@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import AddIcon from "@mui/icons-material/Add";
 import { teal } from "@mui/material/colors";

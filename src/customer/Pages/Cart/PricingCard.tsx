@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const PricingCard = () => {

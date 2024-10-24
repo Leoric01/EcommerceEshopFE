@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CartItem from "./CartItem";
 import { Close, LocalOffer } from "@mui/icons-material";
 import { teal } from "@mui/material/colors";

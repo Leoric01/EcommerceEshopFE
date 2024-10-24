@@ -2,7 +2,6 @@ import { Delete } from "@mui/icons-material";
 import { Avatar, Box, IconButton, Rating } from "@mui/material";
 import { red } from "@mui/material/colors";
 import Grid from "@mui/material/Grid2/Grid2";
-import React from "react";
 
 const ReviewCard = () => {
   return (

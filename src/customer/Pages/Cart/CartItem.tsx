@@ -2,7 +2,7 @@ import { Close, Remove } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Add from "@mui/icons-material/Add";
 import Divider from "@mui/material/Divider";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IconButton } from "@mui/material";
 
 const CartItem = () => {
