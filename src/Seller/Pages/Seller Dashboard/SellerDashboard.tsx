@@ -1,4 +1,3 @@
-import React from "react";
 import SellerDrawerList from "../../Components/Seller Drawer/SellerDrawerList";
 import SellerRoutes from "../../../Routes/SellerRoutes";
 

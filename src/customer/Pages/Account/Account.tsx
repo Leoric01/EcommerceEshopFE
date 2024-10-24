@@ -1,12 +1,11 @@
 import Divider from "@mui/material/Divider";
-import React from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Orders from "./Orders";
 import OrderDetails from "./OrderDetails";
 import UserDetails from "./UserDetails";
 import Address from "./Address";
 
-const menu = [
+const menuCustomer = [
   { name: "orders", path: "/account/orders" },
   { name: "profile", path: "/account" },
   { name: "Saved Cards", path: "/account/saved-card" },
@@ -29,7 +28,7 @@ const Account = () => {
       <Divider />
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:min-h-[78vh]">
         <section className="col-span-1 lg:border-r lg:pr-5 py-5 h-full">
-          {menu.map((item) => (
+          {menuCustomer.map((item) => (
             <div
               onClick={() => handleClick(item)}
               key={item.name}

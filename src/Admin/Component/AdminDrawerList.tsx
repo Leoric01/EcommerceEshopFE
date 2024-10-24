@@ -1,4 +1,3 @@
-import React from "react";
 import DrawerList from "../../Component/DrawerList";
 import { menu, menu2 } from "../../Data/endpoints/AdminNavbar";
 
@@ -8,8 +7,6 @@ type menuItem = {
   icon: JSX.Element;
   activeIcon: JSX.Element;
 };
-
-
 
 const AdminDrawerList = ({toggleDrawer}:any) => {
   return (

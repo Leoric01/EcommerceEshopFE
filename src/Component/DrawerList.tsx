@@ -1,5 +1,4 @@
 import { Divider, ListItemIcon, ListItemText } from "@mui/material";
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TokenService } from "../State/interceptors/TokenService";
 
@@ -48,7 +47,7 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
                   className={`${
                     item.path === location.pathname
                       ? "bg-primary-custom text-white"
-                      : "text-primary-custom bg-white"
+                      : "bg-white text-primary-custom"
                   } flex items-center px-5 py-3 rounded-r-full`}
                 >
                   <ListItemIcon>

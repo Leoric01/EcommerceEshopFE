@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import ProfileFieldCard from "../../../Component/ProfileFieldCard";
 import { Avatar, Box, Button, Divider, Modal, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
 import PersonalDetails from "./PersonalDetails";
 import BusinessDetails from "./BusinessDetails";
 import BankDetails from "./BankDetails";

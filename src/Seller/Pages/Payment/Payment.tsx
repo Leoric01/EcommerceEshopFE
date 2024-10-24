@@ -1,5 +1,4 @@
 import { Button, Card, Divider } from "@mui/material";
-import React from "react";
 import TransactionTable from "./TransactionTable";
 import { useNavigate } from "react-router-dom";
 
