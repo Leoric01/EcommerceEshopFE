@@ -8,7 +8,6 @@ import {
   Receipt,
   ShoppingBag,
 } from "@mui/icons-material";
-import React from "react";
 import DrawerList from "../../../Component/DrawerList";
 
 const menu = [

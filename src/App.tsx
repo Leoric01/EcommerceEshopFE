@@ -13,6 +13,8 @@ import Account from "./Customer/Pages/Account/Account";
 import { Route, Routes } from "react-router-dom";
 import BecomeSeller from "./Customer/Pages/BecomeSeller/BecomeSeller";
 import SellerDashboard from "./Seller/Pages/Seller Dashboard/SellerDashboard";
+import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
+import AdminRoutes from "./Routes/AdminRoutes";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/become-seller" element={<BecomeSeller />} />
           <Route path="/account/*" element={<Account />} />
           <Route path="/seller/*" element={<SellerDashboard />} />
+          <Route path="/admin/*" element={<AdminDashboard />} /> 
+          
         </Routes>
       </div>
     </ThemeProvider>
