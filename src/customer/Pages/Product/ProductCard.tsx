@@ -37,6 +37,7 @@ const ProductCard = () => {
         >
           {images.map((item, index) => (
             <img
+              key={index}
               className="card-media object-top"
               src={item}
               style={{

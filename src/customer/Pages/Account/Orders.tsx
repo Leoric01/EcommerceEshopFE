@@ -10,8 +10,8 @@ const Orders = () => {
         </div>
         <div className="space-y-2">
             {
-                [1,1,1,1,1,1,1,1,1,1,1].map((item)=>(
-                    <OrderItem/>
+                [1,1,1,1,1,1,1,1,1,1,1].map((item,index)=>(
+                    <OrderItem key={index}/>
                 ))
             }
         </div>

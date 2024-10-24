@@ -18,10 +18,10 @@ import { FilterAlt } from "@mui/icons-material";
 const Product = () => {
   const theme = useTheme();
   const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
-  const [sort, setSort] = useState();
+  const [sort, setSort] = useState("");
   const [page, setPage] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
-  const filterRef = useRef<HTMLDivElement>(null); 
+  const filterRef = useRef<HTMLDivElement>(null);
 
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
@@ -77,7 +77,7 @@ const Product = () => {
 
             {!isLarge && showFilter && (
               <Box
-                ref={filterRef} 
+                ref={filterRef}
                 className="absolute top-12 left-0 w-full bg-white z-50 p-4 flex flex-row flex-wrap justify-start space-x-4"
               >
                 <div className="justify-between">
@@ -99,16 +99,16 @@ const Product = () => {
                 label="Sort"
                 onChange={handleSortChange}
               >
-                <MenuItem value={"price_low"}>Price: Low - High</MenuItem>
-                <MenuItem value={"price_high"}>Price: High - Low</MenuItem>
+                <MenuItem value="price_low">Price: Low - High</MenuItem>
+                <MenuItem value="price_high">Price: High - Low</MenuItem>
               </Select>
             </FormControl>
           </div>
           <Divider />
 
           <section className="product_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
-            {[1, 1, 1, 1, 1, 1, 1].map((item) => (
-              <ProductCard key={item} />
+            {[1, 1, 1, 1, 1, 1, 1].map((item, index) => (
+              <ProductCard key={index} />
             ))}
           </section>
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { MenLevelTwo } from "../../../Data/leveltwo/MenLevelTwo";
 import { WomenLevelTwo } from "../../../Data/leveltwo/WomenLevelTwo";
 import { ElectronicsLevelTwo } from "../../../Data/leveltwo/ElectronicsLevelTwo";
@@ -25,11 +24,13 @@ const categoryThree: { [key: string]: any } = {
 
 const CategorySheet = ({ selectedCategory, setShowSheet }: any) => {
   const navigate = useNavigate();
+  
   const childCategory = (category: any, parentCategoryId: any) => {
     return category.filter(
       (child: any) => child.parentCategoryId === parentCategoryId
     );
   };
+  
   return (
     <Box
       sx={{ zIndex: 1 }}
@@ -38,23 +39,26 @@ const CategorySheet = ({ selectedCategory, setShowSheet }: any) => {
       <div className="flex text-sm flex-wrap justify-start gap-10">
         {categoryTwo[selectedCategory]?.map((item: any, index: number) => (
           <div
+            key={item.categoryId} 
             className={`p-8 lg:w-[20%] ${
               index % 2 === 0 ? "bg-slate-200" : "bg-white"
             }`}
           >
-            <p className="text-primary-custom mb-5 font-semibold  gap-4">
+            <p className="text-primary-custom mb-5 font-semibold gap-4">
               {item.name}
             </p>
             <ul className="space-y-3">
               {childCategory(
                 categoryThree[selectedCategory],
                 item.categoryId
-              ).map((item: any) => (
-                <div>
-                  <li onClick={()=> navigate("/products/"+item.categoryId)} className="hover:text-primary-custom cursor-pointer">
-                    {item.name}
-                  </li>
-                </div>
+              ).map((childItem: any) => (
+                <li
+                  key={childItem.categoryId} 
+                  onClick={() => navigate("/products/" + childItem.categoryId)}
+                  className="hover:text-primary-custom cursor-pointer"
+                >
+                  {childItem.name}
+                </li>
               ))}
             </ul>
           </div>
