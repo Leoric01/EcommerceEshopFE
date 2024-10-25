@@ -17,12 +17,7 @@ import {
 import { FilterAlt } from "@mui/icons-material";
 import { productApi } from "../../../State/confaxios/productApi";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-interface Product {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
+import { Product as ProductInterface } from "../../../Api";
 
 const Product = () => {
   const theme = useTheme();
@@ -99,7 +94,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchAllProducts();
-  }, []);
+  }, [searchParams, sort, page]);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -176,10 +171,8 @@ const Product = () => {
 
           <section className="product_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
             {productsListAll && productsListAll.length > 0 ? (
-              productsListAll.map((product: any) => (
-                <Button onClick={() => handleProductDetail(product.id)}>
-                  <ProductCard key={product.id} product={product} />
-                </Button>
+              productsListAll?.map((item: ProductInterface) => (
+                <ProductCard key={item.id} item={item} />
               ))
             ) : (
               <p className="text-center col-span-full">No products found.</p>
@@ -189,7 +182,7 @@ const Product = () => {
           <div className="flex ml-8 justify-start py-5">
             <Pagination
               onChange={(e, value) => handlePageChange(value)}
-              count={Math.ceil(productsListAll?.length / 10)} // Update count based on actual products
+              count={Math.ceil(productsListAll?.length / 10)}
               variant="outlined"
               color="primary"
             />

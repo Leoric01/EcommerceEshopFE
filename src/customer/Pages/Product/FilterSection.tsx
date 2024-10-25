@@ -61,7 +61,11 @@ const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
   };
 
   return (
-    <div className={`-z-50 bg-white ${isSmallScreen ? 'flex flex-row flex-wrap' : 'space-y-5'}`}>
+    <div
+      className={`-z-50 bg-white ${
+        isSmallScreen ? "flex flex-row flex-wrap" : "space-y-5"
+      }`}
+    >
       <div className="flex items-center justify-between h-[40px] px-9 lg:border-r">
         <p className="text-lg font-semibold">Filters</p>
         <Button
@@ -74,8 +78,12 @@ const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
       </div>
       <Divider />
 
-      <div className={`${isSmallScreen ? 'flex flex-row gap-6' : 'px-9 space-y-6 text-left'}`}>
-        <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
+      <div
+        className={`${
+          isSmallScreen ? "flex flex-row gap-6" : "px-9 space-y-6 text-left"
+        }`}
+      >
+        <section className={`${isSmallScreen ? "flex-1" : ""}`}>
           <FormControl>
             <FormLabel
               sx={{
@@ -129,7 +137,7 @@ const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
 
         <Divider />
 
-        <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
+        <section className={`${isSmallScreen ? "flex-1" : ""}`}>
           <FormControl>
             <FormLabel
               sx={{
@@ -171,7 +179,7 @@ const FilterSection = ({ isSmallScreen }: { isSmallScreen: boolean }) => {
 
         <Divider />
 
-        <section className={`${isSmallScreen ? 'flex-1' : ''}`}>
+        <section className={`${isSmallScreen ? "flex-1" : ""}`}>
           <FormControl>
             <FormLabel
               sx={{
