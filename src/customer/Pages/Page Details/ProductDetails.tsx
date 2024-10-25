@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import AddIcon from "@mui/icons-material/Add";
 import { teal } from "@mui/material/colors";
@@ -14,65 +14,114 @@ import {
 } from "@mui/icons-material";
 import SimilarProduct from "./SimilarProduct";
 import ReviewCard from "../Review/ReviewCard";
+import { useParams } from "react-router-dom";
+import { productApi } from "../../../State/confaxios/productApi";
+import { Product } from "../../../Api";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
+  const { productId } = useParams<{ productId: string }>();
+  const [product, setProduct] = useState<Product | undefined>();
+  const [activeImage, setActiveImage] = useState(0);
+
+  const fetchProductById = async () => {
+    try {
+      const fetchedProduct = await productApi.getProduct(Number(productId));
+      const shavedDataProduct = fetchedProduct?.data?.data;
+
+      if (
+        fetchedProduct &&
+        fetchedProduct.data &&
+        fetchedProduct.data.data &&
+        typeof shavedDataProduct === "object"
+      ) {
+        setProduct(shavedDataProduct);
+        console.log("Product details fetched:", shavedDataProduct);
+      } else {
+        console.warn("Product data is unavailable or malformed");
+      }
+    } catch (err) {
+      console.error("Failed to fetch product data by ID:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (productId) {
+      fetchProductById();
+    }
+  }, [productId]);
+
+  const handleActiveImage = (value: number) => () => {
+    setActiveImage(value);
+  };
 
   return (
     <div className="px-5 lg:px-12 pt-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <section className="flex flex-col lg:flex-row gap-5">
           <div className="w-full lg:w-[15%] flex flex-wrap lg:flex-col gap-3">
-            {[1, 1, 1, 1].map((item) => (
-              <img
-                className="lg:w-full w-[50px] cursor-pointer rounded-md"
-                src="https://images.pexels.com/photos/3766180/pexels-photo-3766180.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-              />
-            ))}
+            {product && product?.image && product?.image?.length > 0 ? (
+              product.image.map((item, index) => (
+                <img
+                  onClick={handleActiveImage(index)}
+                  key={index}
+                  className="lg:w-full w-[50px] cursor-pointer rounded-md"
+                  src={item}
+                  alt={`Product Image ${index + 1}`}
+                />
+              ))
+            ) : (
+              <p>No images available</p>
+            )}
           </div>
           <div className="w-full lg:w-[85%] lg:max-w-[500px] ">
             <img
               className="w-full rounded-md"
-              src="https://images.pexels.com/photos/3766180/pexels-photo-3766180.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="bottle"
+              src={product?.image?.[activeImage]}
+              alt=""
             />
           </div>
         </section>
         <section className="justify-items-start w-full">
           <h1 className="font-bold text-lg text-primary-custom">
-            Seller Property
+            {product?.seller?.businessDetails?.businessName || "Business name"}
           </h1>
-          <p className="text-gray-500 font-semibold">product general name</p>
+          <p className="text-gray-500 font-semibold">{product?.title}</p>
           <div className="flex justify-between items-center py-2 border w-[180px] px-3 mt-5">
             <div className="flex gap-1 items-center">
-              <span>4</span>
-              <StarIcon sx={{ color: teal[500], fontSize: "23px" }} />
+              <span>{"rating"}</span>
+              <StarIcon sx={{ color: "#008080", fontSize: "23px" }} />
             </div>
             <Divider orientation="vertical" flexItem />
-            <span>220 Ratings</span>
+            <span>{"ratingCount"} Ratings</span>
           </div>
           <div className="price flex items-center gap-3 mt-5 text-2xl">
-            <span className="font-semibold text-gray-800">400 €</span>
-            <span className="line-through text-gray-400">999 €</span>
-            <span className="text-primary-custom font-semibold">60%</span>
+            <span className="font-semibold text-gray-800">
+              {product?.sellingPrice} €
+            </span>
+            <span className="line-through text-gray-400">
+              {product?.mrpPrice} €
+            </span>
+            <span className="text-primary-custom font-semibold">
+              {product?.discountPercentage}%
+            </span>
           </div>
           <p>Inclusive of all taxes. Free Shipping above 200</p>
           <div className="mt-7 space-y-3">
             <div className="flex items-center gap-4">
-              <Shield sx={{ color: teal[500] }} />
+              <Shield sx={{ color: "#008080" }} />
               <p>Authentic Quality Assured</p>
             </div>
             <div className="flex items-center gap-4">
-              <WorkspacePremium sx={{ color: teal[500] }} />
+              <WorkspacePremium sx={{ color: "#008080" }} />
               <p>100% money back guarantee</p>
             </div>
             <div className="flex items-center gap-4">
-              <LocalShipping sx={{ color: teal[500] }} />
+              <LocalShipping sx={{ color: "#008080" }} />
               <p>Free Shipping & Returns</p>
             </div>
             <div className="flex items-center gap-4">
-              <Wallet sx={{ color: teal[500] }} />
+              <Wallet sx={{ color: "#008080" }} />
               <p>Pay on delivery might be available</p>
             </div>
           </div>
@@ -110,12 +159,7 @@ const ProductDetails = () => {
             </Button>
           </div>
           <div className="mt-5">
-            <p className="text-sm text-left">
-              Description of product Description of product Description of
-              product Description of product Description of product Description
-              of product Description of product Description of product
-              Description of product Description of product
-            </p>
+            <p className="text-sm text-left">{product?.description}</p>
           </div>
           <div className="mt-6 w-full">
             <ReviewCard />
