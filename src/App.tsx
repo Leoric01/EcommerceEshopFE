@@ -17,6 +17,8 @@ import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
 import { useAuthGuard } from "./State/interceptors/AuthGuard";
 import ProtectedRoute from "./State/interceptors/ProtectedRoute";
 import { userApi } from "./State/interceptors/userApi";
+import LoginForm from "./Customer/Pages/Auth/LoginForm";
+import Auth from "./Customer/Pages/Auth/Auth";
 function App() {
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -49,6 +51,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login/*" element={<Auth />} />
           <Route path="/products/:category" element={<Product />} />
           <Route path="/reviews/:productId" element={<Review />} />
           <Route

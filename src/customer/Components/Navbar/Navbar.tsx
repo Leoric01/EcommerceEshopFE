@@ -71,7 +71,7 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-            {isLoggedIn ? (
+            {false ? (
               <Button
                 onClick={handleAccountClick}
                 className="flex items-center gap-2"
@@ -83,12 +83,8 @@ const Navbar = () => {
                 <h1 className="font-semibold hidden lg:block">Leoric</h1>
               </Button>
             ) : (
-              <Button variant="contained" disabled>
-                <Avatar
-                  sx={{ width: 49, height: 49 }}
-                  // src="https://example.com/guest-avatar.png"
-                />
-                Guest
+              <Button variant="contained" onClick={() => navigate("/login")}>
+                Login
               </Button>
             )}
             <IconButton onClick={() => navigate("/wishlist")}>
