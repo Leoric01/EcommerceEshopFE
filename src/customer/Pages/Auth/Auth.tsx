@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { useState } from "react";
-import LoginForm from "./LoginForm"; // assuming LoginForm is in the same folder
+import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import OtpConfirmForm from "./OtpConfirmForm";
 
@@ -10,10 +10,12 @@ const Auth = () => {
   const navigate = useNavigate();
 
   const handleRegistrationSuccess = () => {
-    // After registration, navigate to confirm OTP route
     navigate("/login/confirm-otp");
   };
 
+  const handleOtpConfirmed = () => {
+    setIsLoginPage(true);
+  };
   return (
     <div className="flex justify-center h-[90vh] items-center">
       <div className="max-w-md h-[85vh] rounded-md border shadow-lg">
@@ -30,7 +32,10 @@ const Auth = () => {
                 )
               }
             />
-            <Route path="confirm-otp" element={<OtpConfirmForm />} />
+            <Route
+              path="confirm-otp"
+              element={<OtpConfirmForm onOtpConfirmed={handleOtpConfirmed} />}
+            />
           </Routes>
 
           <div className="flex items-center gap-1 justify-center mt-5">
@@ -39,7 +44,13 @@ const Auth = () => {
                 ? "Don't have an account?"
                 : "Already have an account?"}
             </p>
-            <Button onClick={() => setIsLoginPage(!isLoginPage)} size="small">
+            <Button
+              onClick={() => {
+                setIsLoginPage(!isLoginPage);
+                if (!isLoginPage) navigate("/login");
+              }}
+              size="small"
+            >
               {isLoginPage ? "Create account" : "Login"}
             </Button>
           </div>

@@ -25,6 +25,12 @@ export interface SignupRequest {
      * @type {string}
      * @memberof SignupRequest
      */
+    'account': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignupRequest
+     */
     'email': string;
     /**
      * 

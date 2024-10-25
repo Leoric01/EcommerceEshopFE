@@ -71,7 +71,7 @@ const Navbar = () => {
             <IconButton>
               <SearchIcon />
             </IconButton>
-            {false ? (
+            {isLoggedIn ? (
               <Button
                 onClick={handleAccountClick}
                 className="flex items-center gap-2"

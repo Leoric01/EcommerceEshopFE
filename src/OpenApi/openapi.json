@@ -444,32 +444,6 @@
         }
       }
     },
-    "/auth/send/login-signup-otp": {
-      "post": {
-        "tags": ["auth-controller"],
-        "operationId": "sentOtpHandler",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": { "$ref": "#/components/schemas/VerificationCodeReq" }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResultVerificationCodeReq"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/admin/home/categories": {
       "get": {
         "tags": ["home-category-controller"],
@@ -1535,11 +1509,11 @@
           "lastSignOut": { "type": "string", "format": "date-time" },
           "name": { "type": "string" },
           "username": { "type": "string" },
-          "signedOut": { "type": "boolean" },
           "authorities": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/GrantedAuthority" }
           },
+          "signedOut": { "type": "boolean" },
           "emailVerified": { "type": "boolean" },
           "vat": { "type": "string" },
           "enabled": { "type": "boolean" },
@@ -1594,11 +1568,11 @@
           "lastSignOut": { "type": "string", "format": "date-time" },
           "name": { "type": "string" },
           "username": { "type": "string" },
-          "signedOut": { "type": "boolean" },
           "authorities": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/GrantedAuthority" }
           },
+          "signedOut": { "type": "boolean" },
           "accountNonExpired": { "type": "boolean" },
           "credentialsNonExpired": { "type": "boolean" },
           "accountNonLocked": { "type": "boolean" }
@@ -1743,9 +1717,10 @@
         }
       },
       "SignupRequest": {
-        "required": ["email", "firstName", "lastName"],
+        "required": ["account", "email", "firstName", "lastName"],
         "type": "object",
         "properties": {
+          "account": { "type": "string" },
           "email": { "type": "string" },
           "otp": { "type": "string" },
           "firstName": { "type": "string" },
@@ -1820,20 +1795,6 @@
           "code": { "type": "integer", "format": "int32" },
           "message": { "type": "string" },
           "data": { "$ref": "#/components/schemas/AccountDetailDto" }
-        }
-      },
-      "VerificationCodeReq": {
-        "required": ["email"],
-        "type": "object",
-        "properties": { "email": { "type": "string" } }
-      },
-      "ResultVerificationCodeReq": {
-        "type": "object",
-        "properties": {
-          "success": { "type": "boolean" },
-          "code": { "type": "integer", "format": "int32" },
-          "message": { "type": "string" },
-          "data": { "$ref": "#/components/schemas/VerificationCodeReq" }
         }
       },
       "HomeCategory": {
@@ -2031,8 +1992,8 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/SortObject" }
           },
-          "paged": { "type": "boolean" },
           "pageSize": { "type": "integer", "format": "int32" },
+          "paged": { "type": "boolean" },
           "pageNumber": { "type": "integer", "format": "int32" },
           "unpaged": { "type": "boolean" }
         }

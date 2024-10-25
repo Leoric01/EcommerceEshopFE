@@ -30,8 +30,6 @@ import type { ResultListAccountDetailDto } from '../models';
 // @ts-ignore
 import type { ResultString } from '../models';
 // @ts-ignore
-import type { ResultVerificationCodeReq } from '../models';
-// @ts-ignore
 import type { ResultVoid } from '../models';
 // @ts-ignore
 import type { SetupPwFromOtpReq } from '../models';
@@ -39,8 +37,6 @@ import type { SetupPwFromOtpReq } from '../models';
 import type { SignInRequest } from '../models';
 // @ts-ignore
 import type { SignupRequest } from '../models';
-// @ts-ignore
-import type { VerificationCodeReq } from '../models';
 /**
  * AuthControllerApi - axios parameter creator
  * @export
@@ -140,41 +136,6 @@ export const AuthControllerApiAxiosParamCreator = function (configuration?: Conf
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(signInRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {VerificationCodeReq} verificationCodeReq 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sentOtpHandler: async (verificationCodeReq: VerificationCodeReq, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'verificationCodeReq' is not null or undefined
-            assertParamExists('sentOtpHandler', 'verificationCodeReq', verificationCodeReq)
-            const localVarPath = `/auth/send/login-signup-otp`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(verificationCodeReq, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -292,18 +253,6 @@ export const AuthControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {VerificationCodeReq} verificationCodeReq 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async sentOtpHandler(verificationCodeReq: VerificationCodeReq, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultVerificationCodeReq>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sentOtpHandler(verificationCodeReq, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthControllerApi.sentOtpHandler']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @param {SetupPwFromOtpReq} setupPwFromOtpReq 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -363,15 +312,6 @@ export const AuthControllerApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
-         * @param {VerificationCodeReq} verificationCodeReq 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        sentOtpHandler(verificationCodeReq: VerificationCodeReq, options?: RawAxiosRequestConfig): AxiosPromise<ResultVerificationCodeReq> {
-            return localVarFp.sentOtpHandler(verificationCodeReq, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {SetupPwFromOtpReq} setupPwFromOtpReq 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -427,17 +367,6 @@ export class AuthControllerApi extends BaseAPI {
      */
     public login(signInRequest: SignInRequest, options?: RawAxiosRequestConfig) {
         return AuthControllerApiFp(this.configuration).login(signInRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {VerificationCodeReq} verificationCodeReq 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthControllerApi
-     */
-    public sentOtpHandler(verificationCodeReq: VerificationCodeReq, options?: RawAxiosRequestConfig) {
-        return AuthControllerApiFp(this.configuration).sentOtpHandler(verificationCodeReq, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

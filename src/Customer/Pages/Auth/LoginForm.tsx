@@ -1,13 +1,13 @@
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { AuthControllerApi, SignInRequest } from "../../../Api";
 import { TokenService } from "../../../State/interceptors/TokenService";
+import { authApi } from "../../../State/confaxios/authApi";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const authApi = new AuthControllerApi();
   const tokenService = new TokenService();
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -23,15 +23,12 @@ const LoginForm = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const signInRequest: SignInRequest = {
-          email: values.email,
-          password: values.password,
-        };
-        const response = await authApi.login(signInRequest);
+        const response = await authApi.login(values);
 
         if (response && response.data.data?.token) {
           console.log("Logged in successfully:", response);
           tokenService.setToken(response.data.data?.token);
+          navigate("/account");
         } else {
           console.error("Login failed: No token found");
         }
@@ -44,7 +41,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <h1 className="text-xl font-bold text-center text-primary-custom pb-5">
-        Login as Seller
+        Login
       </h1>
       <div className="space-y-5">
         <TextField
