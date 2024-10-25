@@ -94,17 +94,15 @@ const RegisterForm = ({
         <Button fullWidth variant="contained" type="submit" sx={{ py: "11px" }}>
           Register
         </Button>
-        <>
-          <Button
-            onClick={() => navigate("/login/confirm-otp")}
-            fullWidth
-            variant="contained"
-            type="submit"
-            sx={{ py: "11px" }}
-          >
-            Verification Code
-          </Button>
-        </>
+        <Button
+          onClick={() => navigate("/login/confirm-otp")}
+          fullWidth
+          variant="contained"
+          type="submit"
+          sx={{ py: "11px" }}
+        >
+          Verification Code
+        </Button>
       </div>
     </form>
   );

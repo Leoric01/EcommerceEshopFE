@@ -78,6 +78,9 @@ const OtpConfirmForm: React.FC<OtpConfirmFormProps> = ({ onOtpConfirmed }) => {
         <Button fullWidth variant="contained" type="submit" sx={{ py: "11px" }}>
           Confirm OTP
         </Button>
+        <Button fullWidth variant="contained" type="submit" sx={{ py: "11px" }}>
+          Back To Register
+        </Button>
       </div>
     </form>
   );
