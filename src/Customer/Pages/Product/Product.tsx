@@ -32,51 +32,17 @@ const Product = () => {
   const filterRef = useRef<HTMLDivElement>(null);
   const [productsListAll, setProductsListAll] = useState<any>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  // const { categoryId } = useParams();
 
   const fetchAllProducts = async () => {
     try {
-      const category = searchParams.get("category") || undefined;
-      const brand = searchParams.get("brand") || undefined;
-      const colors = searchParams.get("color") || undefined;
-      const discount = parseInt(searchParams.get("discount") || "0", 10);
-      const priceParam = searchParams.get("price") || undefined;
-
-      let minPrice: number | undefined = undefined;
-      let maxPrice: number | undefined = undefined;
-
-      if (priceParam) {
-        const priceParts = priceParam.split("-");
-        if (priceParts.length === 2) {
-          minPrice = parseInt(priceParts[0], 10);
-          maxPrice = parseInt(priceParts[1], 10);
-        } else if (priceParts.length === 1) {
-          const priceValue = parseInt(priceParts[0], 10);
-          if (priceValue <= 500) {
-            maxPrice = priceValue;
-          } else if (priceValue >= 10001) {
-            minPrice = priceValue;
-            maxPrice = undefined;
-          }
-        }
-      }
-
-      const response = await productApi.getAllProducts(
-        category,
-        brand,
-        colors,
-        undefined,
-        minPrice,
-        maxPrice,
-        discount,
-        sort || undefined,
-        undefined,
-        page - 1
-      );
-
+      const response = await productApi.getAllProducts();
       const actualProducts = response?.data?.data?.content || [];
+      console.log("Actual products", actualProducts);
+
       setProductsListAll(actualProducts);
     } catch (err) {
-      console.error("Failed to fetch products:", err);
+      console.error("Failed to fetch user profile:", err);
     }
   };
 
@@ -94,7 +60,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchAllProducts();
-  }, [searchParams, sort, page]);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -113,6 +79,31 @@ const Product = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showFilter]);
+
+  useEffect(() => {
+    const priceParam = searchParams.get("price");
+
+    let minPrice: number | null = null;
+    let maxPrice: number | null = null;
+
+    if (priceParam) {
+      const priceParts = priceParam.split("-");
+
+      if (priceParts.length === 2) {
+        minPrice = parseInt(priceParts[0], 10);
+        maxPrice = parseInt(priceParts[1], 10);
+      } else if (priceParts.length === 1) {
+        const priceValue = parseInt(priceParts[0], 10);
+        if (priceValue <= 500) {
+          maxPrice = priceValue;
+        } else if (priceValue >= 10001) {
+          minPrice = priceValue;
+          maxPrice = null;
+        }
+      }
+    }
+    console.log({ minPrice, maxPrice });
+  }, [searchParams]);
 
   return (
     <div className="-z-10 mt-10">
@@ -170,19 +161,15 @@ const Product = () => {
           <Divider />
 
           <section className="product_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
-            {productsListAll && productsListAll.length > 0 ? (
-              productsListAll.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))
-            ) : (
-              <p className="text-center col-span-full">No products found.</p>
-            )}
+            {[1, 1, 1, 1, 1, 1, 1].map((item, index) => (
+              <ProductCard key={index} />
+            ))}
           </section>
 
           <div className="flex ml-8 justify-start py-5">
             <Pagination
               onChange={(e, value) => handlePageChange(value)}
-              count={Math.ceil(productsListAll.length / productsPerPage)} // Update count based on actual products
+              count={10}
               variant="outlined"
               color="primary"
             />
