@@ -4,8 +4,9 @@ import Add from "@mui/icons-material/Add";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
+import { CartItem } from "../../../Api";
 
-const CartItem = () => {
+const CartItemCard = ({ item }: { item: CartItem }) => {
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -14,21 +15,26 @@ const CartItem = () => {
         <div>
           <img
             className="w-[90px] border rounded-md"
-            src="https://www.goodfreephotos.com/cache/vector-images/officer-in-uniform.png"
-            alt="profile face"
+            src={item?.product?.image?.[0] ?? ""}
+            alt={item?.product?.title ?? "Product Image"}
           />
         </div>
         <div className="space-y-2">
-          <h1 className="font-semibold text-lg">Water Bottle</h1>
-          <p className="text-gray-600 font-medium text-sm">Product Category</p>
+          <h1 className="font-semibold text-lg">
+            {item.product?.seller?.name}
+          </h1>
+          <p className="text-gray-600 font-medium text-sm">
+            {item?.product?.category?.categoryId}
+          </p>
           <p className="text-gray-400 text-xs">
-            <strong> Sold by: </strong>Seller Name
+            <strong> Sold by: </strong>
+            {item?.product?.seller?.businessDetails?.businessName}
           </p>
           <p className="text-sm">7 days replacement available</p>
           <p className="text-sm text-gray-500">
-            <strong>quantity : </strong> {quantity}{" "}
+            <strong>quantity : </strong> {quantity}
             <Divider orientation="vertical" variant="middle" flexItem />
-            <strong>Price per piece : 900</strong>
+            <strong>Price per piece : {item?.product?.sellingPrice}</strong>
           </p>
         </div>
       </div>
@@ -49,7 +55,9 @@ const CartItem = () => {
           </div>
         </div>
         <div className="pr-5">
-          <p className="text-gray-700 font-medium">900 €</p>
+          <p className="text-gray-700 font-medium">
+            {item.sellingPrice || "NaN"} €
+          </p>
         </div>
       </div>
       <div className="absolute top-1 right-1">
@@ -61,4 +69,4 @@ const CartItem = () => {
   );
 };
 
-export default CartItem;
+export default CartItemCard;
