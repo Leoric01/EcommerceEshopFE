@@ -21,19 +21,18 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
   const tokenService = new TokenService();
 
   const handleClick = (item: menuItem) => {
-    console.log("Clicked item:", item); // Debugging log
     if (item.name === "Logout") {
       handleLogout();
     } else {
       navigate(item.path);
-      toggleDrawer(); // Close the drawer after navigating
+      toggleDrawer();
     }
   };
 
   const handleLogout = () => {
     tokenService.clearToken();
-    console.log("Logout successful"); // Debugging log
-    navigate("/"); // Redirect to home or login page
+    console.log("Logout successful");
+    navigate("/");
   };
 
   return (
@@ -47,7 +46,7 @@ const DrawerList = ({ menu, menu2, toggleDrawer }: DrawerListProps) => {
               <div
                 className="pr-9 cursor-pointer"
                 key={index}
-                onClick={() => handleClick(item)} // Pass the entire item here
+                onClick={() => handleClick(item)}
               >
                 <span
                   className={`${

@@ -3,6 +3,7 @@ import FilterSection from "./FilterSection";
 import ProductCard from "./ProductCard";
 import {
   Box,
+  Button,
   Divider,
   FormControl,
   IconButton,
@@ -15,7 +16,7 @@ import {
 } from "@mui/material";
 import { FilterAlt } from "@mui/icons-material";
 import { productApi } from "../../../State/confaxios/productApi";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 interface Product {
   id: number;
   name: string;
@@ -32,6 +33,7 @@ const Product = () => {
   const filterRef = useRef<HTMLDivElement>(null);
   const [productsListAll, setProductsListAll] = useState<any>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const fetchAllProducts = async () => {
     try {
@@ -78,6 +80,9 @@ const Product = () => {
     } catch (err) {
       console.error("Failed to fetch products:", err);
     }
+  };
+  const handleProductDetail = (index: number) => {
+    navigate(`/products/${index}`);
   };
 
   const handleSortChange = (event: any) => {
@@ -171,8 +176,10 @@ const Product = () => {
 
           <section className="product_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
             {productsListAll && productsListAll.length > 0 ? (
-              productsListAll.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              productsListAll.map((product: any) => (
+                <Button onClick={() => handleProductDetail(product.id)}>
+                  <ProductCard key={product.id} product={product} />
+                </Button>
               ))
             ) : (
               <p className="text-center col-span-full">No products found.</p>
@@ -182,7 +189,7 @@ const Product = () => {
           <div className="flex ml-8 justify-start py-5">
             <Pagination
               onChange={(e, value) => handlePageChange(value)}
-              count={Math.ceil(productsListAll.length / productsPerPage)} // Update count based on actual products
+              count={Math.ceil(productsListAll?.length / 10)} // Update count based on actual products
               variant="outlined"
               color="primary"
             />
