@@ -17,6 +17,7 @@ import ReviewCard from "../Review/ReviewCard";
 import { useParams } from "react-router-dom";
 import { productApi } from "../../../State/confaxios/productApi";
 import { Product } from "../../../Api";
+import { cartApi } from "../../../State/confaxios/cartApi";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -44,6 +45,10 @@ const ProductDetails = () => {
       console.error("Failed to fetch product data by ID:", err);
     }
   };
+
+  const handleAddingProductToCart(product) =>{
+    cartApi.addItemToCart({quantity:product.quantity, productId:product.id});
+  }
 
   useEffect(() => {
     if (productId) {
@@ -146,6 +151,7 @@ const ProductDetails = () => {
               sx={{ py: "1rem" }}
               startIcon={<AddShoppingCart />}
               variant="contained"
+              onClick={handleAddingProductToCart(product)}
             >
               Add To Bag
             </Button>

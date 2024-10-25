@@ -7,9 +7,7 @@ import { IconButton } from "@mui/material";
 import { CartItem } from "../../../Api";
 
 const CartItemCard = ({ item }: { item: CartItem }) => {
-  const [quantity, setQuantity] = useState(1);
-
-  const handleUpdateQuantity = (quantity: number) => {};
+  const [quantity, setQuantity] = useState(item.quantity || 1);
 
   return (
     <div className="border rounded-md relative">
@@ -18,7 +16,7 @@ const CartItemCard = ({ item }: { item: CartItem }) => {
           <img
             className="w-[90px] border rounded-md"
             src={item?.product?.image?.[0] ?? ""}
-            alt={item?.product?.title ?? "Product Image"}
+            alt={item?.product?.category?.categoryId ?? "Product Image"}
           />
         </div>
         <div className="space-y-2">
@@ -36,7 +34,7 @@ const CartItemCard = ({ item }: { item: CartItem }) => {
           <p className="text-sm text-gray-500">
             <strong>quantity : </strong> {quantity}
             <Divider orientation="vertical" variant="middle" flexItem />
-            <strong>Price per piece : {item?.product?.sellingPrice}</strong>
+            <strong>Price per piece : {item?.product?.sellingPrice} €</strong>
           </p>
         </div>
       </div>
@@ -58,7 +56,7 @@ const CartItemCard = ({ item }: { item: CartItem }) => {
         </div>
         <div className="pr-5">
           <p className="text-gray-700 font-medium">
-            {item.sellingPrice || "NaN"} €
+            {(item?.product?.sellingPrice ?? 0) * quantity} €
           </p>
         </div>
       </div>
