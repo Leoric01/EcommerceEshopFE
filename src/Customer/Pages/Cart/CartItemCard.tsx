@@ -9,6 +9,8 @@ import { CartItem } from "../../../Api";
 const CartItemCard = ({ item }: { item: CartItem }) => {
   const [quantity, setQuantity] = useState(1);
 
+  const handleUpdateQuantity = (quantity: number) => {};
+
   return (
     <div className="border rounded-md relative">
       <div className="p-5 flex gap-3">
