@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 import { productApi } from "../../../State/confaxios/productApi";
 import { Product } from "../../../Api";
 import { cartApi } from "../../../State/confaxios/cartApi";
+import { wishApi } from "../../../State/confaxios/wishApi";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -46,9 +47,26 @@ const ProductDetails = () => {
     }
   };
 
-  const handleAddingProductToCart(product) =>{
-    cartApi.addItemToCart({quantity:product.quantity, productId:product.id});
-  }
+  const handleAddingProductToWishlist = async (productId: number) => {
+    try {
+      const response = await wishApi.addProductToWishList(productId);
+      console.log("Product added to wishlist:", response);
+    } catch (err) {
+      console.error("Failed to add product to wishlist:", err);
+    }
+  };
+
+  const handleAddingProductToCart = async (product: Product) => {
+    try {
+      const response = await cartApi.addItemToCart({
+        quantity,
+        productId: product?.id,
+      });
+      console.log("Product added to cart:", response);
+    } catch (err) {
+      console.error("Failed to add product to cart:", err);
+    }
+  };
 
   useEffect(() => {
     if (productId) {
@@ -151,7 +169,7 @@ const ProductDetails = () => {
               sx={{ py: "1rem" }}
               startIcon={<AddShoppingCart />}
               variant="contained"
-              onClick={handleAddingProductToCart(product)}
+              onClick={() => product && handleAddingProductToCart(product)}
             >
               Add To Bag
             </Button>
@@ -160,6 +178,9 @@ const ProductDetails = () => {
               sx={{ py: "1rem" }}
               startIcon={<FavoriteBorder />}
               variant="outlined"
+              onClick={() =>
+                product?.id && handleAddingProductToWishlist(product.id)
+              }
             >
               Wishlist
             </Button>
