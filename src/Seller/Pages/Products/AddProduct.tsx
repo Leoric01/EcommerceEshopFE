@@ -28,7 +28,7 @@ import { HomeFurnitureLevelTwo } from "../../../Data/leveltwo/HomeFurnitureLevel
 import { HomeFurnitureLevelThree } from "../../../Data/levelthree/HomeFurnitureLevelThree";
 import { ElectronicsLevelTwo } from "../../../Data/leveltwo/ElectronicsLevelTwo";
 import { ElectronicsLevelThree } from "../../../Data/levelthree/ElectronicsLevelThree";
-import { sellerProductApi } from "../../../State/confaxios/sellerProductApi";
+import { sellerProductApi } from "../../../State/configAxios/sellerProductApi";
 
 const AddProduct = () => {
   const validationSchema = Yup.object({

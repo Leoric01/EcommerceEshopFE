@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { Button, TextField } from "@mui/material";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { authApi } from "../../../State/confaxios/authApi";
+import { authApi } from "../../../State/configAxios/authApi";
 
 interface OtpConfirmFormProps {
   onOtpConfirmed: () => void;

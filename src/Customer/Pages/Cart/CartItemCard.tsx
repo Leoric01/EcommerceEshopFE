@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
 import { CartItem } from "../../../Api";
-import { cartApi } from "../../../State/confaxios/cartApi";
+import { cartApi } from "../../../State/configAxios/cartApi";
 
 const CartItemCard = ({
   item,
@@ -53,7 +53,7 @@ const CartItemCard = ({
       updateCartItemQuantity(newQuantity);
     }
   };
-
+  console.log("ITEM--------", item);
   return (
     <div className="border rounded-md relative">
       <div className="p-5 flex gap-3">
@@ -74,6 +74,7 @@ const CartItemCard = ({
           <p className="text-gray-400 text-xs">
             <strong> Sold by: </strong>
             {item?.product?.seller?.businessDetails?.businessName}
+            {/* {item?.product?.seller?.name} */}
           </p>
           <p className="text-sm">7 days replacement available</p>
           <p className="text-sm text-gray-500">

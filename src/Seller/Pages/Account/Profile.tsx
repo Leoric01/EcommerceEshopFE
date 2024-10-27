@@ -6,7 +6,7 @@ import PersonalDetails from "./PersonalDetails";
 import BusinessDetails from "./BusinessDetails";
 import BankDetails from "./BankDetails";
 import PickupAddress from "./PickupAddress";
-import { sellerApi } from "../../../State/confaxios/sellerApi";
+import { sellerApi } from "../../../State/configAxios/sellerApi";
 import { TokenService } from "../../../State/interceptors/TokenService";
 import { useNavigate } from "react-router-dom";
 

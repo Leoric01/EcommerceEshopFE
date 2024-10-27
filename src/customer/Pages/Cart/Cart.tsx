@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import { Button, IconButton } from "@mui/material";
 import PricingCard from "./PricingCard";
 import { useNavigate } from "react-router-dom";
-import { cartApi } from "../../../State/confaxios/cartApi";
+import { cartApi } from "../../../State/configAxios/cartApi";
 import { CartItem as CartItemInt } from "../../../Api";
 
 const Cart = () => {

@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { sellerProductApi } from "../../../State/confaxios/sellerProductApi";
+import { sellerProductApi } from "../../../State/configAxios/sellerProductApi";
 import { useEffect, useState } from "react";
 import { Button, IconButton } from "@mui/material";
 import { Edit } from "@mui/icons-material";

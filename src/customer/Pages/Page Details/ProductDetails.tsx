@@ -15,10 +15,10 @@ import {
 import SimilarProduct from "./SimilarProduct";
 import ReviewCard from "../Review/ReviewCard";
 import { useParams } from "react-router-dom";
-import { productApi } from "../../../State/confaxios/productApi";
+import { productApi } from "../../../State/configAxios/productApi";
 import { Product } from "../../../Api";
-import { cartApi } from "../../../State/confaxios/cartApi";
-import { wishApi } from "../../../State/confaxios/wishApi";
+import { cartApi } from "../../../State/configAxios/cartApi";
+import { wishApi } from "../../../State/configAxios/wishApi";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);

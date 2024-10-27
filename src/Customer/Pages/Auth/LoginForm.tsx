@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { TokenService } from "../../../State/interceptors/TokenService";
-import { authApi } from "../../../State/confaxios/authApi";
+import { authApi } from "../../../State/configAxios/authApi";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {

@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { sellerOrderApi } from "../../../State/confaxios/sellerOrderApi"; // Adjust the path as per your project
+import { sellerOrderApi } from "../../../State/configAxios/sellerOrderApi"; // Adjust the path as per your project
 import { useState, useEffect } from "react";
 
 // Styled components for table cells and rows

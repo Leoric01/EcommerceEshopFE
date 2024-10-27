@@ -8,7 +8,7 @@ import {
   InputLabel,
   FormHelperText,
 } from "@mui/material";
-import { authApi } from "../../../State/confaxios/authApi";
+import { authApi } from "../../../State/configAxios/authApi";
 import { useNavigate } from "react-router-dom";
 const RegisterForm = ({
   onRegisterSuccess,

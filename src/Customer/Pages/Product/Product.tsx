@@ -15,7 +15,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { FilterAlt } from "@mui/icons-material";
-import { productApi } from "../../../State/confaxios/productApi";
+import { productApi } from "../../../State/configAxios/productApi";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Product as ProductInterface } from "../../../Api";
 
