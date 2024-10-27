@@ -15,6 +15,7 @@ const Cart = () => {
   const [isCouponValid, setIsCouponValid] = useState(false);
   const [cart, setCart] = useState<CartInterface | undefined>();
   const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState<CartItemInt[]>([]);
 
   const handleChange = (e: any) => {
     setCouponCode(e.target.value);
@@ -34,6 +35,9 @@ const Cart = () => {
       console.error("Failed to fetch cart data:", err);
     }
   };
+  const handleItemDeleted = (itemId: number) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  };
 
   useEffect(() => {
     fetchCart();
@@ -44,7 +48,11 @@ const Cart = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="cartItemSection lg:col-span-2 space-y-2">
           {Array.from(cart?.cartItems ?? []).map((item: CartItemInt) => (
-            <CartItem item={item} key={item.id} />
+            <CartItem
+              item={item}
+              key={item.id}
+              onItemDeleted={handleItemDeleted}
+            />
           ))}
         </div>
         <div className="col-span-1 text-sm space-y-3">

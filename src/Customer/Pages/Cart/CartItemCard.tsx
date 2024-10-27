@@ -5,9 +5,54 @@ import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
 import { CartItem } from "../../../Api";
+import { cartApi } from "../../../State/confaxios/cartApi";
 
-const CartItemCard = ({ item }: { item: CartItem }) => {
+const CartItemCard = ({
+  item,
+  onItemDeleted,
+}: {
+  item: CartItem;
+  onItemDeleted: (id: number) => void;
+}) => {
   const [quantity, setQuantity] = useState(item.quantity || 1);
+
+  const updateCartItemQuantity = async (newQuantity: number) => {
+    try {
+      if (newQuantity === 0) {
+        if (item.id !== undefined) {
+          await cartApi.deleteCartItem(item.id);
+          onItemDeleted(item.id);
+        } else {
+          console.error("Item ID is undefined");
+        }
+      } else {
+        const response = await cartApi.updateCartItemHandler({
+          cartItemId: item.id,
+          quantity: newQuantity,
+        });
+        console.log("Cart item updated:", response.data);
+        setQuantity(newQuantity);
+      }
+    } catch (err) {
+      console.error("Failed to update cart item quantity:", err);
+    }
+  };
+
+  const handleDeleteItem = async () => {
+    updateCartItemQuantity(0);
+  };
+
+  const handleAddQuantity = () => {
+    const newQuantity = quantity + 1;
+    updateCartItemQuantity(newQuantity);
+  };
+
+  const handleSubtractQuantity = () => {
+    if (quantity > 0) {
+      const newQuantity = quantity - 1;
+      updateCartItemQuantity(newQuantity);
+    }
+  };
 
   return (
     <div className="border rounded-md relative">
@@ -42,14 +87,11 @@ const CartItemCard = ({ item }: { item: CartItem }) => {
       <div className="flex justify-between items-center">
         <div className="px-5 py-2 flex justify-between items-center">
           <div className="flex items-center gap-2 w-[140px] justify-between">
-            <Button
-              disabled={quantity <= 0}
-              onClick={() => setQuantity(quantity - 1)}
-            >
+            <Button disabled={quantity <= 0} onClick={handleSubtractQuantity}>
               <Remove />
             </Button>
             <span>{quantity}</span>
-            <Button onClick={() => setQuantity(quantity + 1)}>
+            <Button onClick={handleAddQuantity}>
               <Add />
             </Button>
           </div>
@@ -61,7 +103,7 @@ const CartItemCard = ({ item }: { item: CartItem }) => {
         </div>
       </div>
       <div className="absolute top-1 right-1">
-        <IconButton>
+        <IconButton onClick={handleDeleteItem}>
           <Close />
         </IconButton>
       </div>
