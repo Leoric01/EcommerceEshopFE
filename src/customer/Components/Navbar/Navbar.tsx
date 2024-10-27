@@ -6,7 +6,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
@@ -38,6 +38,10 @@ const Navbar = () => {
   };
   const isLoggedIn = role.includes("ROLE_USER") || role.includes("ROLE_SELLER");
 
+  useEffect(() => {
+    const username = tokenService.getUsername();
+    console.log("Username after login:", username);
+  }, [isLoggedIn]);
   return (
     <>
       <Box sx={{ zIndex: 2 }} className="sticky top-0 left-0 right-0 bg-white">
@@ -80,7 +84,17 @@ const Navbar = () => {
                   sx={{ width: 49, height: 49 }}
                   src="https://img.freepik.com/premium-photo/logotype-goat-gaming-channel-marvel-style-goat_643382-1192.jpg?w=826"
                 />
-                <h1 className="font-semibold hidden lg:block">Leoric</h1>
+                <div>
+                  <h1 className="font-semibold hidden text-gray-500 lg:block">
+                    {tokenService.getUsername()}
+                  </h1>
+                  <h1 className="font-semibold text-black hidden lg:block">
+                    {tokenService.getEmail()}
+                  </h1>
+                </div>
+                <h1 className="font-semibold text-gray-400 hidden lg:block">
+                  {role.includes("ROLE_SELLER") ? "Seller" : "Customer"}
+                </h1>
               </Button>
             ) : (
               <Button variant="contained" onClick={() => navigate("/login")}>
