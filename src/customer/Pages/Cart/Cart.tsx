@@ -15,7 +15,6 @@ const Cart = () => {
   const [isCouponValid, setIsCouponValid] = useState(false);
   const [cart, setCart] = useState<CartInterface | undefined>();
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState<CartItemInt[]>([]);
 
   const handleChange = (e: any) => {
     setCouponCode(e.target.value);
@@ -36,7 +35,14 @@ const Cart = () => {
     }
   };
   const handleItemDeleted = (itemId: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+    setCart((prevCart) => {
+      return {
+        ...prevCart,
+        cartItems: new Set(
+          Array.from(prevCart?.cartItems!).filter((item) => item.id !== itemId)
+        ),
+      };
+    });
   };
 
   useEffect(() => {

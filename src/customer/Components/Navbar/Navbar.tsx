@@ -24,7 +24,7 @@ const Navbar = () => {
   const tokenService = new TokenService();
   const role = tokenService.getUserRoles();
   const handleAccountClick = () => {
-    if (role.includes("ROLE_USER")) {
+    if (role.includes("ROLE_CUSTOMER")) {
       navigate("/account/orders");
     } else if (role.includes("ROLE_SELLER")) {
       navigate("/seller");
@@ -36,7 +36,8 @@ const Navbar = () => {
     localStorage.clear();
     navigate("/");
   };
-  const isLoggedIn = role.includes("ROLE_USER") || role.includes("ROLE_SELLER");
+  const isLoggedIn =
+    role.includes("ROLE_CUSTOMER") || role.includes("ROLE_SELLER");
 
   useEffect(() => {
     const username = tokenService.getUsername();

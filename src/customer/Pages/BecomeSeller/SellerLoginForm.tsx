@@ -2,10 +2,10 @@ import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AuthControllerApi, SignInRequest } from "../../../Api";
-import { TokenService } from "../../../State/interceptors/TokenService"; 
+import { TokenService } from "../../../State/interceptors/TokenService";
 
 const SellerLoginForm = () => {
-  const authApi = new AuthControllerApi(); 
+  const authApi = new AuthControllerApi();
   const tokenService = new TokenService();
 
   const formik = useFormik({
