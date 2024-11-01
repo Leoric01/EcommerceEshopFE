@@ -82,4 +82,16 @@ export class TokenService {
     }
     return null;
   }
+  getId(): number | null {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        return decodedToken.id || null;
+      } catch (error) {
+        console.error("Failed to decode token", error);
+      }
+    }
+    return null;
+  }
 }
