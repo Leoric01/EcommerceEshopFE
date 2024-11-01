@@ -61,10 +61,24 @@ function App() {
             path="/product-details/:categoryId/:name/:productId"
             element={<ProductDetails />}
           />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
           <Route path="/become-seller" element={<BecomeSeller />} />
 
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_CUSTOMER"]}>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_CUSTOMER"]}>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/account/*"
             element={
