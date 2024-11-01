@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { ThemeProvider } from "@mui/material";
 import customTheme from "./theme/customTheme";
@@ -17,9 +17,13 @@ import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
 import { useAuthGuard } from "./State/interceptors/AuthGuard";
 import ProtectedRoute from "./State/interceptors/ProtectedRoute";
 import { userApi } from "./State/interceptors/userApi";
-import LoginForm from "./Customer/Pages/Auth/LoginForm";
 import Auth from "./Customer/Pages/Auth/Auth";
+import { TokenService } from "./State/interceptors/TokenService";
+
 function App() {
+  const [userId, setUserId] = useState<string | null>(null);
+  const tokenService = new TokenService();
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -28,17 +32,16 @@ function App() {
           "User profile fetched successfully:",
           userProfile.data?.data
         );
+
         const userId = userProfile.data?.data?.id?.toString() || "";
+        setUserId(userId);
         localStorage.setItem("id", userId);
-        if (userProfile.data?.data?.id !== undefined) {
-          localStorage.setItem("id", userProfile.data.data.id.toString());
-        }
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }
     };
 
-    const token = localStorage.getItem("jwt") || "";
+    const token = tokenService.getToken();
     if (token) {
       fetchUserProfile();
     }
@@ -65,7 +68,7 @@ function App() {
           <Route
             path="/account/*"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["ROLE_CUSTOMER"]}>
                 <Account />
               </ProtectedRoute>
             }
@@ -73,7 +76,7 @@ function App() {
           <Route
             path="/seller/*"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["ROLE_SELLER"]}>
                 <SellerDashboard />
               </ProtectedRoute>
             }
@@ -81,7 +84,7 @@ function App() {
           <Route
             path="/admin/*"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
                 <AdminDashboard />
               </ProtectedRoute>
             }

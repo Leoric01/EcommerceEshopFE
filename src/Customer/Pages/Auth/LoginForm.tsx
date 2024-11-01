@@ -1,13 +1,15 @@
-import { Button, TextField } from "@mui/material";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { TokenService } from "../../../State/interceptors/TokenService";
 import { authApi } from "../../../State/configAxios/authApi";
-import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const tokenService = new TokenService();
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,7 +30,11 @@ const LoginForm = () => {
         if (response && response.data.data?.token) {
           console.log("Logged in successfully:", response);
           tokenService.setToken(response.data.data?.token);
-          navigate("/account");
+          localStorage.setItem("jwt", response.data.data?.token); // Store JWT token
+          response.data.data.role === "ROLE_CUSTOMER"
+            ? navigate("/account")
+            : navigate("/seller");
+          window.location.reload(); // Reloads to trigger App's useEffect and fetch profile
         } else {
           console.error("Login failed: No token found");
         }
@@ -76,4 +82,5 @@ const LoginForm = () => {
     </form>
   );
 };
+
 export default LoginForm;
