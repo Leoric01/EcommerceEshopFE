@@ -25,7 +25,7 @@ const Navbar = () => {
   const role = tokenService.getUserRoles();
   const handleAccountClick = () => {
     if (role.includes("ROLE_CUSTOMER")) {
-      navigate("/account/orders");
+      navigate("/account");
     } else if (role.includes("ROLE_SELLER")) {
       navigate("/seller");
     } else {

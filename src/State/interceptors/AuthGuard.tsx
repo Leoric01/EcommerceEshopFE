@@ -7,7 +7,7 @@ export const useAuthGuard = () => {
   const tokenService = new TokenService();
 
   useEffect(() => {
-    if (tokenService.isTokenNotValid()) {
+    if (tokenService.isTokenNotValid() && window.location.pathname !== "/") {
       navigate("/login");
     }
   }, [navigate, tokenService]);

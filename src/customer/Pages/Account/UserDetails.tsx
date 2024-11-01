@@ -10,6 +10,7 @@ const UserDetails = () => {
       const response = await userApi.getUserProfile();
       const profile = response?.data?.data || [];
       setUserProfile(profile);
+      console.log("User profile fetched successfully:", profile);
     } catch (err) {
       console.error("Failed to fetch user profile:", err);
     }

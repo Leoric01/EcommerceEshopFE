@@ -21,9 +21,7 @@ import Auth from "./Customer/Pages/Auth/Auth";
 import { TokenService } from "./State/interceptors/TokenService";
 
 function App() {
-  const [userId, setUserId] = useState<string | null>(null);
   const tokenService = new TokenService();
-
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -32,10 +30,6 @@ function App() {
           "User profile fetched successfully:",
           userProfile.data?.data
         );
-
-        const userId = userProfile.data?.data?.id?.toString() || "";
-        setUserId(userId);
-        localStorage.setItem("id", userId);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }

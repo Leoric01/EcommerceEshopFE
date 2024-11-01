@@ -30,11 +30,11 @@ const LoginForm = () => {
         if (response && response.data.data?.token) {
           console.log("Logged in successfully:", response);
           tokenService.setToken(response.data.data?.token);
-          localStorage.setItem("jwt", response.data.data?.token); // Store JWT token
+          localStorage.setItem("jwt", response.data.data?.token);
           response.data.data.role === "ROLE_CUSTOMER"
-            ? navigate("/account")
-            : navigate("/seller");
-          window.location.reload(); // Reloads to trigger App's useEffect and fetch profile
+            ? navigate("/")
+            : navigate("/");
+          window.location.reload();
         } else {
           console.error("Login failed: No token found");
         }

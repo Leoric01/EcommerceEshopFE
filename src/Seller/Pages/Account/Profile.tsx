@@ -28,6 +28,7 @@ const Profile = () => {
   const [sellerProfile, setSellerProfile] = useState<any>(null);
   const tokenService = new TokenService();
   const role = tokenService.getUserRoles();
+  const sellerId = tokenService.getId();
 
   const handleOpen = (formName: string) => {
     setOpen(true);
@@ -47,18 +48,13 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const sellerId = localStorage.getItem("id");
       if (sellerId) {
         const numericSellerId = Number(sellerId);
         await fetchSellerById(numericSellerId);
       } else {
-        console.error("Seller ID not found in localStorage.");
+        console.error("Seller ID not found in token.");
       }
     };
-    fetchData();
-    if (role.includes("ROLE_USER")) {
-      navigate("/account/orders");
-    }
   }, []);
 
   // const renderSelectedForm = () => {
