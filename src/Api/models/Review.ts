@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { Product } from './product';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { User } from './user';
 
 /**
@@ -47,6 +50,12 @@ export interface Review {
      * @memberof Review
      */
     'productImages'?: Array<string>;
+    /**
+     * 
+     * @type {Product}
+     * @memberof Review
+     */
+    'product': Product;
     /**
      * 
      * @type {User}

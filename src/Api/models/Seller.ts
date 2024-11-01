@@ -106,6 +106,12 @@ export interface Seller {
     'name'?: string;
     /**
      * 
+     * @type {boolean}
+     * @memberof Seller
+     */
+    'emailVerified'?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof Seller
      */
@@ -122,12 +128,6 @@ export interface Seller {
      * @memberof Seller
      */
     'signedOut'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Seller
-     */
-    'emailVerified'?: boolean;
     /**
      * 
      * @type {string}

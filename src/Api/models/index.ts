@@ -1,6 +1,8 @@
 export * from './account-detail-dto';
+export * from './add-address-request-dto';
 export * from './add-item-req';
 export * from './address';
+export * from './address-dto-response';
 export * from './api-response';
 export * from './authentication-response';
 export * from './bank-details';
@@ -24,6 +26,7 @@ export * from './payment-details';
 export * from './payment-link-response';
 export * from './product';
 export * from './result-account-detail-dto';
+export * from './result-address';
 export * from './result-authentication-response';
 export * from './result-cart';
 export * from './result-cart-item';

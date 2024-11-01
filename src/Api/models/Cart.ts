@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { CartItem } from './cart-item';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { User } from './user';
 
 /**
  * 
@@ -29,6 +32,12 @@ export interface Cart {
      * @memberof Cart
      */
     'id'?: number;
+    /**
+     * 
+     * @type {User}
+     * @memberof Cart
+     */
+    'user'?: User;
     /**
      * 
      * @type {Set<CartItem>}

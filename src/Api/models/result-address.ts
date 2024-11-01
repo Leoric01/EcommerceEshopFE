@@ -13,30 +13,39 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Address } from './address';
 
 /**
  * 
  * @export
- * @interface BankDetails
+ * @interface ResultAddress
  */
-export interface BankDetails {
+export interface ResultAddress {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ResultAddress
+     */
+    'success'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof ResultAddress
+     */
+    'code'?: number;
     /**
      * 
      * @type {string}
-     * @memberof BankDetails
+     * @memberof ResultAddress
      */
-    'accountNumber'?: string;
+    'message'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof BankDetails
+     * @type {Address}
+     * @memberof ResultAddress
      */
-    'accountHolderName'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BankDetails
-     */
-    'iban'?: string;
+    'data'?: Address;
 }
 

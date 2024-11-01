@@ -24,7 +24,9 @@ configuration.ts
 git_push.sh
 index.ts
 models/account-detail-dto.ts
+models/add-address-request-dto.ts
 models/add-item-req.ts
+models/address-dto-response.ts
 models/address.ts
 models/api-response.ts
 models/authentication-response.ts
@@ -50,6 +52,7 @@ models/payment-details.ts
 models/payment-link-response.ts
 models/product.ts
 models/result-account-detail-dto.ts
+models/result-address.ts
 models/result-authentication-response.ts
 models/result-cart-item.ts
 models/result-cart.ts
