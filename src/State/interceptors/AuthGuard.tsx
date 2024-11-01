@@ -4,11 +4,21 @@ import { TokenService } from "./TokenService";
 
 export const useAuthGuard = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const tokenService = new TokenService();
+  const isAuthenticated = !tokenService.isTokenNotValid();
+  const isPublicRoute = location.pathname === "/";
+  const isLoginPage = location.pathname === "/login";
 
   useEffect(() => {
-    if (tokenService.isTokenNotValid() && window.location.pathname !== "/") {
+    if (!isLoginPage && !isAuthenticated && !isPublicRoute) {
       navigate("/login");
     }
-  }, [navigate, tokenService]);
+  }, [
+    navigate,
+    isAuthenticated,
+    isLoginPage,
+    isPublicRoute,
+    location.pathname,
+  ]);
 };

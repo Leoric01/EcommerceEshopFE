@@ -31,9 +31,17 @@ const LoginForm = () => {
           console.log("Logged in successfully:", response);
           tokenService.setToken(response.data.data?.token);
           localStorage.setItem("jwt", response.data.data?.token);
-          response.data.data.role === "ROLE_CUSTOMER"
-            ? navigate("/")
-            : navigate("/");
+
+          const role = response.data.data.role;
+
+          role === "ROLE_ADMIN"
+            ? navigate("/admin")
+            : role === "ROLE_SELLER"
+            ? navigate("/seller")
+            : role === "ROLE_CUSTOMER"
+            ? navigate("/account")
+            : console.error("Unknown role:", role);
+
           window.location.reload();
         } else {
           console.error("Login failed: No token found");
