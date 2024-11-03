@@ -1,12 +1,40 @@
-import React from 'react'
-import UserAddressCard from './UserAddressCard'
+import React, { useEffect, useState } from "react";
+import UserAddressCard from "./UserAddressCard";
+import { addressApi } from "../../../State/configAxios/addressApi";
+import { Address as AddressInterface } from "../../../Api";
 
 const Address = () => {
-  return (
-    <div className='space-y-2'>
-        {[1,1,1,1,1].map((item, index) => (<UserAddressCard key={index}/>))}
-    </div>
-  )
-}
+  const [addresses, setAddresses] = useState<AddressInterface[]>([]);
+  const fetchAddresses = async () => {
+    try {
+      const response = await addressApi.getAll();
+      const addressesSet: Set<AddressInterface> = response.data;
+      const addressesArray = Array.from(addressesSet);
+      setAddresses(addressesArray);
+    } catch (error) {
+      console.error("Error fetching addresses:", error);
+    }
+  };
+  useEffect(() => {
+    fetchAddresses();
+  }, []);
 
-export default Address
+  return (
+    <div className="space-y-2">
+      {addresses.map((address) => (
+        <UserAddressCard
+          key={address.id}
+          name={address.name ?? "N/A"}
+          street={address.street ?? "N/A"}
+          locality={address.locality ?? "N/A"}
+          zip={address.zip ?? "N/A"}
+          city={address.city ?? "N/A"}
+          country={address.country ?? "N/A"}
+          mobile={address.mobile ?? "N/A"}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default Address;
