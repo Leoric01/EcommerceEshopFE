@@ -37,7 +37,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "openapibuild": "openapi-generator-cli generate -i ./src/OpenApi/openapi.json -g typescript-axios -o ./src/Api --additional-properties=apiPackage=apis,modelPackage=models,withSeparateModelsAndApi=true,supportsES6=true ",
+    "openapibuild": "openapi-generator-cli generate -i ./src/OpenApi/openapi.json -g typescript-axios -o ./src/Api --additional-properties=apiPackage=apis,modelPackage=models,withSeparateModelsAndApi=true,supportsES6=true,withInterfaces=true,typescriptThreePlus=true",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
