@@ -112,12 +112,6 @@ export interface Seller {
     'emailVerified'?: boolean;
     /**
      * 
-     * @type {string}
-     * @memberof Seller
-     */
-    'username'?: string;
-    /**
-     * 
      * @type {Array<GrantedAuthority>}
      * @memberof Seller
      */
@@ -128,6 +122,12 @@ export interface Seller {
      * @memberof Seller
      */
     'signedOut'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Seller
+     */
+    'username'?: string;
     /**
      * 
      * @type {string}
@@ -145,6 +145,12 @@ export interface Seller {
      * @type {boolean}
      * @memberof Seller
      */
+    'accountNonLocked'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Seller
+     */
     'accountNonExpired'?: boolean;
     /**
      * 
@@ -152,12 +158,6 @@ export interface Seller {
      * @memberof Seller
      */
     'credentialsNonExpired'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Seller
-     */
-    'accountNonLocked'?: boolean;
 }
 
 export const SellerAccountStatusEnum = {

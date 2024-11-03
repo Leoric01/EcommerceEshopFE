@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { Category } from './category';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Seller } from './seller';
 
 /**
  * 
@@ -89,6 +92,12 @@ export interface Product {
      * @memberof Product
      */
     'category'?: Category;
+    /**
+     * 
+     * @type {Seller}
+     * @memberof Product
+     */
+    'seller'?: Seller;
     /**
      * 
      * @type {string}

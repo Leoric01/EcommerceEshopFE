@@ -1629,105 +1629,6 @@
   },
   "components": {
     "schemas": {
-      "Category": {
-        "required": ["categoryId", "level"],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "categoryId": {
-            "type": "string"
-          },
-          "parentCategory": {
-            "$ref": "#/components/schemas/Category"
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Product": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "mrpPrice": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "sellingPrice": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "discountPercentage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "color": {
-            "type": "string"
-          },
-          "image": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "numRatings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "category": {
-            "$ref": "#/components/schemas/Category"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "sizes": {
-            "type": "string"
-          }
-        }
-      },
-      "ResultProduct": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/Product"
-          }
-        }
-      },
       "Address": {
         "type": "object",
         "properties": {
@@ -1877,6 +1778,29 @@
           }
         }
       },
+      "Category": {
+        "required": ["categoryId", "level"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "parentCategory": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "GrantedAuthority": {
         "type": "object",
         "properties": {
@@ -2010,21 +1934,64 @@
           }
         }
       },
-      "ResultOrder": {
+      "Product": {
         "type": "object",
         "properties": {
-          "success": {
-            "type": "boolean"
+          "id": {
+            "type": "integer",
+            "format": "int64"
           },
-          "code": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "mrpPrice": {
             "type": "integer",
             "format": "int32"
           },
-          "message": {
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sellingPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "discountPercentage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "color": {
             "type": "string"
           },
-          "data": {
-            "$ref": "#/components/schemas/Order"
+          "image": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "numRatings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "seller": {
+            "$ref": "#/components/schemas/Seller"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sizes": {
+            "type": "string"
           }
         }
       },
@@ -2113,9 +2080,6 @@
           "emailVerified": {
             "type": "boolean"
           },
-          "username": {
-            "type": "string"
-          },
           "authorities": {
             "type": "array",
             "items": {
@@ -2125,19 +2089,22 @@
           "signedOut": {
             "type": "boolean"
           },
+          "username": {
+            "type": "string"
+          },
           "vat": {
             "type": "string"
           },
           "enabled": {
             "type": "boolean"
           },
+          "accountNonLocked": {
+            "type": "boolean"
+          },
           "accountNonExpired": {
             "type": "boolean"
           },
           "credentialsNonExpired": {
-            "type": "boolean"
-          },
-          "accountNonLocked": {
             "type": "boolean"
           }
         }
@@ -2233,9 +2200,6 @@
           "name": {
             "type": "string"
           },
-          "username": {
-            "type": "string"
-          },
           "authorities": {
             "type": "array",
             "items": {
@@ -2245,13 +2209,16 @@
           "signedOut": {
             "type": "boolean"
           },
+          "username": {
+            "type": "string"
+          },
+          "accountNonLocked": {
+            "type": "boolean"
+          },
           "accountNonExpired": {
             "type": "boolean"
           },
           "credentialsNonExpired": {
-            "type": "boolean"
-          },
-          "accountNonLocked": {
             "type": "boolean"
           }
         }
@@ -2293,6 +2260,42 @@
             "items": {
               "$ref": "#/components/schemas/Product"
             }
+          }
+        }
+      },
+      "ResultProduct": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Product"
+          }
+        }
+      },
+      "ResultOrder": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Order"
           }
         }
       },
@@ -3016,13 +3019,13 @@
       "PageProduct": {
         "type": "object",
         "properties": {
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
           "totalElements": {
             "type": "integer",
             "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
           },
           "size": {
             "type": "integer",
@@ -3075,6 +3078,9 @@
               "$ref": "#/components/schemas/SortObject"
             }
           },
+          "paged": {
+            "type": "boolean"
+          },
           "pageSize": {
             "type": "integer",
             "format": "int32"
@@ -3082,9 +3088,6 @@
           "pageNumber": {
             "type": "integer",
             "format": "int32"
-          },
-          "paged": {
-            "type": "boolean"
           },
           "unpaged": {
             "type": "boolean"
