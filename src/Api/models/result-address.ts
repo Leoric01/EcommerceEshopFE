@@ -15,49 +15,37 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SortObject } from './sort-object';
+import type { Address } from './address';
 
 /**
  * 
  * @export
- * @interface PageableObject
+ * @interface ResultAddress
  */
-export interface PageableObject {
-    /**
-     * 
-     * @type {number}
-     * @memberof PageableObject
-     */
-    'offset'?: number;
-    /**
-     * 
-     * @type {Array<SortObject>}
-     * @memberof PageableObject
-     */
-    'sort'?: Array<SortObject>;
+export interface ResultAddress {
     /**
      * 
      * @type {boolean}
-     * @memberof PageableObject
+     * @memberof ResultAddress
      */
-    'paged'?: boolean;
+    'success'?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof PageableObject
+     * @memberof ResultAddress
      */
-    'pageSize'?: number;
+    'code'?: number;
     /**
      * 
-     * @type {number}
-     * @memberof PageableObject
+     * @type {string}
+     * @memberof ResultAddress
      */
-    'pageNumber'?: number;
+    'message'?: string;
     /**
      * 
-     * @type {boolean}
-     * @memberof PageableObject
+     * @type {Address}
+     * @memberof ResultAddress
      */
-    'unpaged'?: boolean;
+    'data'?: Address;
 }
 

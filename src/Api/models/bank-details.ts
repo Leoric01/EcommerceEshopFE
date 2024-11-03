@@ -37,6 +37,6 @@ export interface BankDetails {
      * @type {string}
      * @memberof BankDetails
      */
-    'ifscCode'?: string;
+    'iban'?: string;
 }
 

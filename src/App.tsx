@@ -16,31 +16,9 @@ import SellerDashboard from "./Seller/Pages/Seller Dashboard/SellerDashboard";
 import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
 import { useAuthGuard } from "./State/interceptors/AuthGuard";
 import ProtectedRoute from "./State/interceptors/ProtectedRoute";
-import { userApi } from "./State/interceptors/userApi";
 import Auth from "./Customer/Pages/Auth/Auth";
-import { TokenService } from "./State/interceptors/TokenService";
 
 function App() {
-  const tokenService = new TokenService();
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const userProfile = await userApi.getUserProfile();
-        console.log(
-          "User profile fetched successfully:",
-          userProfile.data?.data
-        );
-      } catch (error) {
-        console.error("Failed to fetch user profile:", error);
-      }
-    };
-
-    const token = tokenService.getToken();
-    if (token) {
-      fetchUserProfile();
-    }
-  }, []);
-
   useAuthGuard();
   return (
     <ThemeProvider theme={customTheme}>

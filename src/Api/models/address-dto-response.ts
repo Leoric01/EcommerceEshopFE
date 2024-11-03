@@ -13,87 +13,78 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { Order } from './order';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { Seller } from './seller';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { User } from './user';
 
 /**
  * 
  * @export
- * @interface Address
+ * @interface AddressDtoResponse
  */
-export interface Address {
+export interface AddressDtoResponse {
     /**
      * 
      * @type {number}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'street'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'locality'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'zip'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'city'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'country'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Address
+     * @memberof AddressDtoResponse
      */
     'mobile'?: string;
     /**
      * 
-     * @type {User}
-     * @memberof Address
+     * @type {number}
+     * @memberof AddressDtoResponse
      */
-    'user'?: User;
+    'order_id'?: number;
     /**
      * 
-     * @type {Order}
-     * @memberof Address
+     * @type {number}
+     * @memberof AddressDtoResponse
      */
-    'order'?: Order;
+    'seller_id'?: number;
     /**
      * 
-     * @type {Seller}
-     * @memberof Address
+     * @type {number}
+     * @memberof AddressDtoResponse
      */
-    'seller'?: Seller;
+    'user_id'?: number;
 }
 
