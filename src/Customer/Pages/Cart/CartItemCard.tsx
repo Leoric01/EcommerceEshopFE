@@ -66,14 +66,14 @@ const CartItemCard = ({
         </div>
         <div className="space-y-2">
           <h1 className="font-semibold text-lg">
-            {/* {item.product?.seller?.name} */}
+            {item.product?.seller?.name}
           </h1>
           <p className="text-gray-600 font-medium text-sm">
             {item?.product?.category?.categoryId}
           </p>
           <p className="text-gray-400 text-xs">
             <strong> Sold by: </strong>
-            {/* {item?.product?.seller?.businessDetails?.businessName} */}
+            {item?.product?.seller?.businessDetails?.businessName}
             {/* {item?.product?.seller?.name} */}
           </p>
           <p className="text-sm">7 days replacement available</p>
