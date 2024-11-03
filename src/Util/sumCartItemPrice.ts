@@ -5,8 +5,8 @@ export const sumCartItemSellingPrice = (cartItems: CartItem[]): number => {
   }, 0);
 };
 
-export const sumCartItemMrpPrice = (items: CartItem[]): number => {
+export const sumCartItemmaxPrice = (items: CartItem[]): number => {
   return items.reduce((acc, item) => {
-    return (item?.mrpPrice ?? 0) * (item?.quantity ?? 1) + acc;
+    return (item?.maxPrice ?? 0) * (item?.quantity ?? 1) + acc;
   }, 0);
 };

@@ -82,7 +82,7 @@ export default function ProductsTable() {
           <TableRow>
             <StyledTableCell>Images</StyledTableCell>
             <StyledTableCell align="left">Title</StyledTableCell>
-            <StyledTableCell align="left">MRP</StyledTableCell>
+            <StyledTableCell align="left">max</StyledTableCell>
             <StyledTableCell align="left">Selling Price</StyledTableCell>
             <StyledTableCell align="left">Color</StyledTableCell>
             <StyledTableCell align="left">Update Stock</StyledTableCell>
@@ -109,7 +109,7 @@ export default function ProductsTable() {
               </StyledTableCell>
               <StyledTableCell align="left">{product.title}</StyledTableCell>
               <StyledTableCell align="left">
-                ${product.mrpPrice}
+                ${product.maxPrice}
               </StyledTableCell>
               <StyledTableCell align="left">
                 ${product.sellingPrice}

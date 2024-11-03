@@ -38,7 +38,7 @@ const AddProduct = () => {
     description: Yup.string()
       .min(10, "Description should be at least 10 characters long")
       .required("Description is required"),
-    mrpPrice: Yup.number()
+    maxPrice: Yup.number()
       .positive("Price should be greater than zero")
       .required("Price is required"),
     sellingPrice: Yup.number()
@@ -52,7 +52,7 @@ const AddProduct = () => {
     initialValues: {
       title: "",
       description: "",
-      mrpPrice: 0,
+      maxPrice: 0,
       sellingPrice: 0,
       color: "",
       images: [],
@@ -186,15 +186,15 @@ const AddProduct = () => {
           <Grid size={{ xs: 6, md: 3, lg: 3 }}>
             <TextField
               fullWidth
-              id="mrp_price"
-              label="MRP Price"
-              name="mrpPrice"
+              id="max_price"
+              label="max Price"
+              name="maxPrice"
               type="number"
-              value={formik.values.mrpPrice}
+              value={formik.values.maxPrice}
               onChange={formik.handleChange}
-              error={formik.touched.mrpPrice && Boolean(formik.errors.mrpPrice)}
+              error={formik.touched.maxPrice && Boolean(formik.errors.maxPrice)}
               helperText={
-                formik.touched.mrpPrice && Boolean(formik.errors.mrpPrice)
+                formik.touched.maxPrice && Boolean(formik.errors.maxPrice)
               }
               required
             />

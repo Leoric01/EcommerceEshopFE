@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import AddIcon from "@mui/icons-material/Add";
-import { teal } from "@mui/material/colors";
 import { Button, Divider } from "@mui/material";
 import {
   AddShoppingCart,
@@ -123,7 +122,7 @@ const ProductDetails = () => {
               {product?.sellingPrice} €
             </span>
             <span className="line-through text-gray-400">
-              {product?.mrpPrice} €
+              {product?.maxPrice} €
             </span>
             <span className="text-primary-custom font-semibold">
               {product?.discountPercentage}%

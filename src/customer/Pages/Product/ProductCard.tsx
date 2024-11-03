@@ -82,7 +82,7 @@ const ProductCard = ({ item }: { item: Product }) => {
               {item.sellingPrice} €
             </span>
             <span className="thin-line-through text-gray-400">
-              {item.mrpPrice} €
+              {item.maxPrice} €
             </span>
             <span className="text-primary-custom font-semibold">
               {item.discountPercentage}%

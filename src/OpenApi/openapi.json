@@ -1734,7 +1734,7 @@
             "type": "number",
             "format": "double"
           },
-          "totalMrpPrice": {
+          "totalmaxPrice": {
             "type": "number",
             "format": "double"
           },
@@ -1761,7 +1761,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "mrpPrice": {
+          "maxPrice": {
             "type": "integer",
             "format": "int32"
           },
@@ -1838,7 +1838,7 @@
           "paymentDetails": {
             "$ref": "#/components/schemas/PaymentDetails"
           },
-          "totalMrpPrice": {
+          "totalmaxPrice": {
             "type": "number",
             "format": "double"
           },
@@ -1896,7 +1896,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "mrpPrice": {
+          "maxPrice": {
             "type": "integer",
             "format": "int32"
           },
@@ -1947,7 +1947,7 @@
           "description": {
             "type": "string"
           },
-          "mrpPrice": {
+          "maxPrice": {
             "type": "integer",
             "format": "int32"
           },
@@ -2373,7 +2373,7 @@
           "description": {
             "type": "string"
           },
-          "mrpPrice": {
+          "maxPrice": {
             "type": "integer",
             "format": "int32"
           },
