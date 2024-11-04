@@ -7,6 +7,7 @@ apis/admin-controller-api.ts
 apis/admin-coupon-controller-api.ts
 apis/auth-controller-api.ts
 apis/cart-controller-api.ts
+apis/customer-controller-api.ts
 apis/deal-controller-api.ts
 apis/home-category-controller-api.ts
 apis/order-controller-api.ts

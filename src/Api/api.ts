@@ -19,6 +19,7 @@ export * from './apis/admin-controller-api';
 export * from './apis/admin-coupon-controller-api';
 export * from './apis/auth-controller-api';
 export * from './apis/cart-controller-api';
+export * from './apis/customer-controller-api';
 export * from './apis/deal-controller-api';
 export * from './apis/home-category-controller-api';
 export * from './apis/order-controller-api';

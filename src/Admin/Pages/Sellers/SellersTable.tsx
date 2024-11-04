@@ -134,9 +134,9 @@ export default function SellersTable() {
                   </Button>
                   <Menu
                     id={"basic-menus" + seller.id}
-                    anchorEl={anchorEl[seller.id || 1]}
-                    open={Boolean(anchorEl[seller.id || 1])}
-                    onClose={() => handleClose(seller.id || 1)}
+                    anchorEl={anchorEl[seller.id || 0]}
+                    open={Boolean(anchorEl[seller.id || 0])}
+                    onClose={() => handleClose(seller.id || 0)}
                   >
                     {accountStatuses.map((status) => (
                       <MenuItem

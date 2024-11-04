@@ -360,6 +360,37 @@
         }
       }
     },
+    "/home/categories": {
+      "post": {
+        "tags": ["customer-controller"],
+        "operationId": "createHomeCategories",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/HomeCategory"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Home"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/coupon/apply": {
       "post": {
         "tags": ["admin-coupon-controller"],
@@ -554,7 +585,7 @@
       },
       "post": {
         "tags": ["home-category-controller"],
-        "operationId": "createHomeCategories",
+        "operationId": "createHomeCategories_1",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1428,6 +1459,24 @@
         }
       }
     },
+    "/home-page": {
+      "get": {
+        "tags": ["customer-controller"],
+        "operationId": "getHomePageData",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Home"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/coupon/admin/all": {
       "get": {
         "tags": ["admin-coupon-controller"],
@@ -2127,10 +2176,10 @@
           "enabled": {
             "type": "boolean"
           },
-          "credentialsNonExpired": {
+          "accountNonExpired": {
             "type": "boolean"
           },
-          "accountNonExpired": {
+          "credentialsNonExpired": {
             "type": "boolean"
           },
           "accountNonLocked": {
@@ -2241,10 +2290,10 @@
           "signedOut": {
             "type": "boolean"
           },
-          "credentialsNonExpired": {
+          "accountNonExpired": {
             "type": "boolean"
           },
-          "accountNonExpired": {
+          "credentialsNonExpired": {
             "type": "boolean"
           },
           "accountNonLocked": {
@@ -2459,6 +2508,79 @@
           },
           "payment_link_id": {
             "type": "string"
+          }
+        }
+      },
+      "HomeCategory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "section": {
+            "type": "string",
+            "enum": ["ELECTRIC_CATEGORIES", "GRID", "SHOP_BY_CATEGORIES", "DEALS"]
+          }
+        }
+      },
+      "Deal": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "discount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "category": {
+            "$ref": "#/components/schemas/HomeCategory"
+          }
+        }
+      },
+      "Home": {
+        "type": "object",
+        "properties": {
+          "grid": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HomeCategory"
+            }
+          },
+          "shopByCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HomeCategory"
+            }
+          },
+          "electricCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HomeCategory"
+            }
+          },
+          "dealCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HomeCategory"
+            }
+          },
+          "deals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Deal"
+            }
           }
         }
       },
@@ -2687,79 +2809,6 @@
           },
           "data": {
             "$ref": "#/components/schemas/AccountDetailDto"
-          }
-        }
-      },
-      "HomeCategory": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "image": {
-            "type": "string"
-          },
-          "categoryId": {
-            "type": "string"
-          },
-          "section": {
-            "type": "string",
-            "enum": ["ELECTRIC_CATEGORIES", "GRID", "SHOP_BY_CATEGORIES", "DEALS"]
-          }
-        }
-      },
-      "Deal": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "discount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "category": {
-            "$ref": "#/components/schemas/HomeCategory"
-          }
-        }
-      },
-      "Home": {
-        "type": "object",
-        "properties": {
-          "grid": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HomeCategory"
-            }
-          },
-          "shopByCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HomeCategory"
-            }
-          },
-          "electricCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HomeCategory"
-            }
-          },
-          "dealCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/HomeCategory"
-            }
-          },
-          "deals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Deal"
-            }
           }
         }
       },
@@ -3043,13 +3092,13 @@
       "PageProduct": {
         "type": "object",
         "properties": {
-          "totalElements": {
-            "type": "integer",
-            "format": "int64"
-          },
           "totalPages": {
             "type": "integer",
             "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
           },
           "size": {
             "type": "integer",
@@ -3106,12 +3155,12 @@
             "type": "integer",
             "format": "int32"
           },
+          "paged": {
+            "type": "boolean"
+          },
           "pageNumber": {
             "type": "integer",
             "format": "int32"
-          },
-          "paged": {
-            "type": "boolean"
           },
           "unpaged": {
             "type": "boolean"

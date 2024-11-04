@@ -145,13 +145,13 @@ export interface Seller {
      * @type {boolean}
      * @memberof Seller
      */
-    'credentialsNonExpired'?: boolean;
+    'accountNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Seller
      */
-    'accountNonExpired'?: boolean;
+    'credentialsNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}

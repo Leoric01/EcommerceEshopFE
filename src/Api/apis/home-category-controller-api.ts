@@ -41,9 +41,9 @@ export const HomeCategoryControllerApiAxiosParamCreator = function (configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createHomeCategories: async (homeCategory: Array<HomeCategory>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createHomeCategories1: async (homeCategory: Array<HomeCategory>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'homeCategory' is not null or undefined
-            assertParamExists('createHomeCategories', 'homeCategory', homeCategory)
+            assertParamExists('createHomeCategories1', 'homeCategory', homeCategory)
             const localVarPath = `/admin/home/categories`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -154,10 +154,10 @@ export const HomeCategoryControllerApiFp = function(configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createHomeCategories(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultHome>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createHomeCategories(homeCategory, options);
+        async createHomeCategories1(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultHome>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createHomeCategories1(homeCategory, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['HomeCategoryControllerApi.createHomeCategories']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['HomeCategoryControllerApi.createHomeCategories1']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -200,8 +200,8 @@ export const HomeCategoryControllerApiFactory = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createHomeCategories(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig): AxiosPromise<ResultHome> {
-            return localVarFp.createHomeCategories(homeCategory, options).then((request) => request(axios, basePath));
+        createHomeCategories1(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig): AxiosPromise<ResultHome> {
+            return localVarFp.createHomeCategories1(homeCategory, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -237,7 +237,7 @@ export interface HomeCategoryControllerApiInterface {
      * @throws {RequiredError}
      * @memberof HomeCategoryControllerApiInterface
      */
-    createHomeCategories(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig): AxiosPromise<ResultHome>;
+    createHomeCategories1(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig): AxiosPromise<ResultHome>;
 
     /**
      * 
@@ -273,8 +273,8 @@ export class HomeCategoryControllerApi extends BaseAPI implements HomeCategoryCo
      * @throws {RequiredError}
      * @memberof HomeCategoryControllerApi
      */
-    public createHomeCategories(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig) {
-        return HomeCategoryControllerApiFp(this.configuration).createHomeCategories(homeCategory, options).then((request) => request(this.axios, this.basePath));
+    public createHomeCategories1(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig) {
+        return HomeCategoryControllerApiFp(this.configuration).createHomeCategories1(homeCategory, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
