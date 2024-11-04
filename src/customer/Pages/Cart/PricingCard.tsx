@@ -1,13 +1,33 @@
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const PricingCard = () => {
+import { orderApi } from "../../../State/configAxios/orderApi";
+interface PricingCardProps {
+  selectedAddressId?: number;
+}
+const PricingCard: React.FC<PricingCardProps> = ({ selectedAddressId }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const handleCreateOrder = async () => {
+    console.log("Selected Address ID: ", selectedAddressId);
+    if (selectedAddressId === -1) {
+      console.error("No address found");
+      return;
+    }
+    try {
+      const response = await orderApi.createOrder(selectedAddressId!, "STRIPE");
+      console.log("API Response On Order Creation: ", response);
+      const paymentLinkUrl = response.data.payment_link_url;
+      if (paymentLinkUrl) {
+        window.location.href = paymentLinkUrl;
+      }
+    } catch (error) {
+      console.error("Failed to create order:", error);
+    }
+  };
   const handleNavigate = () => {
     if (location.pathname === "/checkout") {
-      navigate("/cart");
+      handleCreateOrder();
     } else if (location.pathname === "/cart") {
       navigate("/checkout");
     }

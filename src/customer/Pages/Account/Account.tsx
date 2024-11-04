@@ -5,6 +5,8 @@ import OrderDetails from "./OrderDetails";
 import UserDetails from "./UserDetails";
 import Address from "./Address";
 import { TokenService } from "../../../State/interceptors/TokenService";
+import { Address as AddressInterface } from "../../../Api";
+import UserAddressCard from "./UserAddressCard";
 
 const menuCustomer = [
   { name: "orders", path: "/account/orders" },
@@ -58,7 +60,27 @@ const Account = () => {
               path="/order/:orderId/:orderItemId"
               element={<OrderDetails />}
             />
-            <Route path="/addresses" element={<Address />} />
+            <Route
+              path="/addresses"
+              element={
+                <Address
+                  renderAddress={(address: AddressInterface) => (
+                    <UserAddressCard
+                      key={address.id}
+                      addressId={address.id ?? -1}
+                      name={address.name ?? "N/A"}
+                      street={address.street ?? "N/A"}
+                      locality={address.locality ?? "N/A"}
+                      zip={address.zip ?? "N/A"}
+                      city={address.city ?? "N/A"}
+                      country={address.country ?? "N/A"}
+                      mobile={address.mobile ?? "N/A"}
+                      onDelete={() => {}}
+                    />
+                  )}
+                />
+              }
+            />{" "}
           </Routes>
         </section>
       </div>

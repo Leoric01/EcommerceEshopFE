@@ -5,6 +5,8 @@ import AddressForm from "./AddressForm";
 import PricingCard from "../Cart/PricingCard";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
+import Address from "../Account/Address";
+import SelectableAddress from "./SelectableAddress";
 
 const style = {
   position: "absolute" as "absolute",
@@ -35,13 +37,17 @@ const paymentGateWayList = [
 const Checkout = () => {
   const [open, setOpen] = useState(false);
   const [paymentGateWay, setPaymentGateWay] = useState("STRIPE");
+  const [selectedAddressId, setSelectedAddressId] = useState<number | null>(
+    null
+  );
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handlePaymentChange = (event:any) => {
-    setPaymentGateWay(event.target.value)
-  }
-  
+  const handlePaymentChange = (event: any) => {
+    setPaymentGateWay(event.target.value);
+  };
+
   return (
     <div className="pt-10 px-5 sm:px-10 md:px-44 lg:px-55 min-h-screen">
       <div className="space-y-5 lg:space-y-0 lg:grid grid-cols-3 lg:gap-9">
@@ -53,9 +59,7 @@ const Checkout = () => {
           <div className="text-xs font-medium space-y-4">
             <p>Saved Addresses</p>
             <div className="">
-              {[1, 1, 1].map((item) => (
-                <AddressCard key={item} />
-              ))}
+              <SelectableAddress setSelectedAddressId={setSelectedAddressId} />
             </div>
           </div>
           <div className="py-4 px-5 rounded-md border">
@@ -99,7 +103,7 @@ const Checkout = () => {
             </RadioGroup>
           </div>
           <div className="border rounded-md mt-5 gap-5">
-            <PricingCard />
+            <PricingCard selectedAddressId={selectedAddressId ?? -1} />
           </div>
         </div>
       </div>

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import UserAddressCard from "./UserAddressCard";
 import { addressApi } from "../../../State/configAxios/addressApi";
 import { Address as AddressInterface } from "../../../Api";
 
-const Address = () => {
+interface AddressProps {
+  renderAddress: (address: AddressInterface) => React.ReactNode;
+}
+
+const Address: React.FC<AddressProps> = ({ renderAddress }) => {
   const [addresses, setAddresses] = useState<AddressInterface[]>([]);
+
   const fetchAddresses = async () => {
     try {
       const response = await addressApi.getAll();
@@ -15,31 +19,14 @@ const Address = () => {
       console.error("Error fetching addresses:", error);
     }
   };
-  const handleAddressDeleted = (deletedAddressId: number) => {
-    setAddresses((prevAddresses) =>
-      prevAddresses.filter((address) => address.id !== deletedAddressId)
-    );
-  };
+
   useEffect(() => {
     fetchAddresses();
   }, []);
 
   return (
     <div className="space-y-2">
-      {addresses.map((address) => (
-        <UserAddressCard
-          key={address.id}
-          addressId={address.id ?? -1}
-          name={address.name ?? "N/A"}
-          street={address.street ?? "N/A"}
-          locality={address.locality ?? "N/A"}
-          zip={address.zip ?? "N/A"}
-          city={address.city ?? "N/A"}
-          country={address.country ?? "N/A"}
-          mobile={address.mobile ?? "N/A"}
-          onDelete={handleAddressDeleted}
-        />
-      ))}
+      {addresses.map((address) => renderAddress(address))}
     </div>
   );
 };
