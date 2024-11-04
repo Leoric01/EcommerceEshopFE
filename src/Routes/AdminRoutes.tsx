@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import AdminDashboard from "../Admin/Pages/Dashboard/AdminDashboard";
 import SellersTable from "../Admin/Pages/Sellers/SellersTable";
 import Coupon from "../Admin/Pages/Coupon/Coupon";
 import AddNewCouponForm from "../Admin/Pages/Coupon/AddNewCouponForm";
