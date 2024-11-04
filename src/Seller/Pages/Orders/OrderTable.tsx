@@ -52,7 +52,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function OrderTable() {
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<OrderInterface[]>([]);
 
   const fetchOrdersOfConnectedSeller = async () => {
     try {

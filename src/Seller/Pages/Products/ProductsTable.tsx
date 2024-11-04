@@ -10,6 +10,7 @@ import { sellerProductApi } from "../../../State/configAxios/sellerProductApi";
 import { useEffect, useState } from "react";
 import { Button, IconButton } from "@mui/material";
 import { Edit } from "@mui/icons-material";
+import { Product as ProductInterface } from "../../../Api/models";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function ProductsTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<ProductInterface[]>([]);
   const [hoveredProductId, setHoveredProductId] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -55,10 +56,10 @@ export default function ProductsTable() {
     let imageInterval: any;
     if (hoveredProductId !== null) {
       const product = products.find((p) => p.id === hoveredProductId);
-      if (product && product.image.length > 1) {
+      if (product && product.image && product.image.length > 1) {
         imageInterval = setInterval(() => {
           setCurrentImageIndex((prevIndex) =>
-            prevIndex === product.image.length - 1 ? 0 : prevIndex + 1
+            prevIndex === (product.image?.length ?? 0) - 1 ? 0 : prevIndex + 1
           );
         }, 1000);
       }
@@ -94,7 +95,9 @@ export default function ProductsTable() {
           {products.map((product) => (
             <StyledTableRow
               key={product.id}
-              onMouseEnter={() => handleMouseEnter(product.id)}
+              onMouseEnter={() =>
+                product.id !== undefined && handleMouseEnter(product.id)
+              }
               onMouseLeave={handleMouseLeave}
             >
               <StyledTableCell component="th" scope="row">
