@@ -47,28 +47,12 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (sellerId) {
-        const numericSellerId = Number(sellerId);
-        await fetchSellerById(numericSellerId);
-      } else {
-        console.error("Seller ID not found in token.");
-      }
-    };
-  }, []);
-
-  // const renderSelectedForm = () => {
-  //   switch (selectedForm) {
-  //     case "businessDetails":
-  //       return <BusinessDetails userProfile={userProfile} />; // Pass the user profile to the form
-  //     case "accountDetails":
-  //       return <BankDetails userProfile={userProfile} />;
-  //     case "pickupAddress":
-  //       return <PickupAddress userProfile={userProfile} />;
-  //     default:
-  //       return <PersonalDetails userProfile={userProfile} />;
-  //   }
-  // };
+    if (sellerId && sellerId !== undefined) {
+      fetchSellerById(sellerId);
+    } else {
+      navigate("/login");
+    }
+  }, [sellerId]);
 
   const renderSelectedForm = () => {
     switch (selectedForm) {
@@ -181,13 +165,13 @@ const Profile = () => {
           />
           <Divider />
           <ProfileFieldCard
-            keys={"Pincode"}
-            value={sellerProfile?.pickupAddress?.pinCode || "No Data"}
+            keys={"Zip Code"}
+            value={sellerProfile?.pickupAddress?.zip || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
-            keys={"Address"}
-            value={sellerProfile?.pickupAddress?.address || "No Data"}
+            keys={"Street"}
+            value={sellerProfile?.pickupAddress?.street || "No Data"}
           />
           <Divider />
           <ProfileFieldCard
@@ -201,8 +185,8 @@ const Profile = () => {
           />
           <Divider />
           <ProfileFieldCard
-            keys={"State"}
-            value={sellerProfile?.pickupAddress?.state || "No Data"}
+            keys={"Country"}
+            value={sellerProfile?.pickupAddress?.country || "No Data"}
           />
         </div>
       </div>
@@ -234,7 +218,7 @@ const Profile = () => {
           <Divider />
           <ProfileFieldCard
             keys={"IBAN"}
-            value={sellerProfile?.bankDetails?.ifscCode || "No Data"}
+            value={sellerProfile?.bankDetails?.iban || "No Data"}
           />
         </div>
       </div>

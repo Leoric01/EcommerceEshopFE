@@ -25,18 +25,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
 
 export default function ProductsTable() {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [products, setProducts] = useState<any[]>([]);
   const [hoveredProductId, setHoveredProductId] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const fetchProductsOfConnectedUser = async () => {
+  const fetchProductsOfConnectedSeller = async () => {
     try {
       const response = await sellerProductApi.getProductsOfCurrentSeller();
       const sellersProducts = response.data?.data || [];
@@ -47,7 +48,7 @@ export default function ProductsTable() {
   };
 
   useEffect(() => {
-    fetchProductsOfConnectedUser();
+    fetchProductsOfConnectedSeller();
   }, []);
 
   useEffect(() => {
@@ -82,7 +83,7 @@ export default function ProductsTable() {
           <TableRow>
             <StyledTableCell>Images</StyledTableCell>
             <StyledTableCell align="left">Title</StyledTableCell>
-            <StyledTableCell align="left">max</StyledTableCell>
+            <StyledTableCell align="left">Max Price</StyledTableCell>
             <StyledTableCell align="left">Selling Price</StyledTableCell>
             <StyledTableCell align="left">Color</StyledTableCell>
             <StyledTableCell align="left">Update Stock</StyledTableCell>
