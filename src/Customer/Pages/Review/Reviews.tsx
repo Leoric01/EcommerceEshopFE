@@ -1,7 +1,7 @@
 import ReviewCard from "./ReviewCard";
 import Divider from "@mui/material/Divider";
 
-const Review = () => {
+const Reviews = () => {
   return (
     <div className="p-5 lg:px-20 flex flex-col lg:flex-row gap-20">
       <section className="w-full md:w-1/2 lg:w-[30%] space-y-2">
@@ -35,4 +35,4 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default Reviews;

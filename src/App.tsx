@@ -6,7 +6,7 @@ import Navbar from "./Customer/Components/Navbar/Navbar";
 import Home from "./Customer/Pages/Home/Home";
 import Product from "./Customer/Pages/Product/Product";
 import ProductDetails from "./Customer/Pages/Page Details/ProductDetails";
-import Review from "./Customer/Pages/Review/Review";
+import Reviews from "./Customer/Pages/Review/Reviews";
 import Cart from "./Customer/Pages/Cart/Cart";
 import Checkout from "./Customer/Pages/Checkout/Checkout";
 import Account from "./Customer/Pages/Account/Account";
@@ -30,7 +30,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login/*" element={<Auth />} />
           <Route path="/products/:category" element={<Product />} />
-          <Route path="/reviews/:productId" element={<Review />} />
+          <Route path="/reviews/:productId" element={<Reviews />} />
           <Route
             path="/product-details/:categoryId/:name/:productId"
             element={<ProductDetails />}

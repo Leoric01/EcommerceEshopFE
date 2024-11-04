@@ -3,11 +3,11 @@ import "./ProductCard.css";
 import { Button } from "@mui/material";
 import { Favorite, ModeComment } from "@mui/icons-material";
 import { teal } from "@mui/material/colors";
-import { Product } from "../../../Api";
+import { Product as ProductInterface } from "../../../Api";
 import { useNavigate } from "react-router-dom";
 import { wishApi } from "../../../State/configAxios/wishApi";
 
-const ProductCard = ({ item }: { item: Product }) => {
+const ProductCard = ({ item }: { item: ProductInterface }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const images = item?.image || [];

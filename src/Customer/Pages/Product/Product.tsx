@@ -3,7 +3,6 @@ import FilterSection from "./FilterSection";
 import ProductCard from "./ProductCard";
 import {
   Box,
-  Button,
   Divider,
   FormControl,
   IconButton,
@@ -16,7 +15,7 @@ import {
 } from "@mui/material";
 import { FilterAlt } from "@mui/icons-material";
 import { productApi } from "../../../State/configAxios/productApi";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Product as ProductInterface } from "../../../Api";
 
 const Product = () => {
