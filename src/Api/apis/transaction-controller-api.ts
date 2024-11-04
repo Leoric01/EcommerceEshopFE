@@ -34,7 +34,7 @@ export const TransactionControllerApiAxiosParamCreator = function (configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllTransaction: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllTransactions: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/transaction`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -63,7 +63,7 @@ export const TransactionControllerApiAxiosParamCreator = function (configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTransactionBySeller: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getTransactionsBySeller: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/transaction/seller`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -102,10 +102,10 @@ export const TransactionControllerApiFp = function(configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllTransaction(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Transaction>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllTransaction(options);
+        async getAllTransactions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Transaction>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllTransactions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TransactionControllerApi.getAllTransaction']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['TransactionControllerApi.getAllTransactions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -113,10 +113,10 @@ export const TransactionControllerApiFp = function(configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getTransactionBySeller(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Transaction>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getTransactionBySeller(options);
+        async getTransactionsBySeller(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Transaction>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTransactionsBySeller(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TransactionControllerApi.getTransactionBySeller']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['TransactionControllerApi.getTransactionsBySeller']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -134,16 +134,16 @@ export const TransactionControllerApiFactory = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllTransaction(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>> {
-            return localVarFp.getAllTransaction(options).then((request) => request(axios, basePath));
+        getAllTransactions(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>> {
+            return localVarFp.getAllTransactions(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getTransactionBySeller(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>> {
-            return localVarFp.getTransactionBySeller(options).then((request) => request(axios, basePath));
+        getTransactionsBySeller(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>> {
+            return localVarFp.getTransactionsBySeller(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -160,7 +160,7 @@ export interface TransactionControllerApiInterface {
      * @throws {RequiredError}
      * @memberof TransactionControllerApiInterface
      */
-    getAllTransaction(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>>;
+    getAllTransactions(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>>;
 
     /**
      * 
@@ -168,7 +168,7 @@ export interface TransactionControllerApiInterface {
      * @throws {RequiredError}
      * @memberof TransactionControllerApiInterface
      */
-    getTransactionBySeller(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>>;
+    getTransactionsBySeller(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>>;
 
 }
 
@@ -185,8 +185,8 @@ export class TransactionControllerApi extends BaseAPI implements TransactionCont
      * @throws {RequiredError}
      * @memberof TransactionControllerApi
      */
-    public getAllTransaction(options?: RawAxiosRequestConfig) {
-        return TransactionControllerApiFp(this.configuration).getAllTransaction(options).then((request) => request(this.axios, this.basePath));
+    public getAllTransactions(options?: RawAxiosRequestConfig) {
+        return TransactionControllerApiFp(this.configuration).getAllTransactions(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -195,8 +195,8 @@ export class TransactionControllerApi extends BaseAPI implements TransactionCont
      * @throws {RequiredError}
      * @memberof TransactionControllerApi
      */
-    public getTransactionBySeller(options?: RawAxiosRequestConfig) {
-        return TransactionControllerApiFp(this.configuration).getTransactionBySeller(options).then((request) => request(this.axios, this.basePath));
+    public getTransactionsBySeller(options?: RawAxiosRequestConfig) {
+        return TransactionControllerApiFp(this.configuration).getTransactionsBySeller(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

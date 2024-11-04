@@ -77,6 +77,7 @@ export default function OrderTable() {
     try {
       const response = await sellerOrderApi.updateOrderStatus(orderId, orderStatus);
       console.log("Successfully updated order status:", response);
+      fetchOrdersOfConnectedSeller();
     } catch (err) {
       console.error("Failed to update order status:", err);
     }
@@ -96,7 +97,7 @@ export default function OrderTable() {
           <TableRow>
             <StyledTableCell>Order ID</StyledTableCell>
             <StyledTableCell>Products</StyledTableCell>
-            <StyledTableCell align="right">Shipping Address</StyledTableCell>
+            <StyledTableCell align="left">Shipping Address</StyledTableCell>
             <StyledTableCell align="right">Order Status</StyledTableCell>
             <StyledTableCell align="right">Update Status</StyledTableCell>
           </TableRow>

@@ -13,9 +13,7 @@ const Home = () => {
         <ElectricCategory />
         <CategoryGrid />
         <div className="pt-5 lg:pt-10">
-          <h1 className="text-lg lg:text-4xl font-bold text-primary-custom pb-5 lg:pb-20 text-center">
-            TODAY'S DEALS
-          </h1>
+          <h1 className="text-lg lg:text-4xl font-bold text-primary-custom pb-5 lg:pb-20 text-center">TODAY'S DEALS</h1>
           <Deal />
         </div>
         <section className="pt-5 lg:pt-10">
@@ -24,10 +22,10 @@ const Home = () => {
           </h1>
           <ShopByCategory />
         </section>
-        <section className="mt-20 lg:px-20 relative h-[270px] lg:h-[550px] object-cover">
+        <section className="mt-20 lg:px-20 relative h-[270px] lg:h-[550px] object-cover pb-6">
           <img
-            className="w-full h-full"
-            src="https://zosh-bazzar-zosh.vercel.app/seller_banner_image.jpg"
+            className="w-full h-full object-contain"
+            src="https://appworks.tw/wp-content/uploads/2014/12/woman-working-in-the-office.jpg"
             alt=""
           />
           <div className="absolute top-1/2 left-4 lg:left-[15rem] transform-translate-y-1/2 font-semibold lg:text-4xl space-y-3 text-start">
@@ -35,12 +33,7 @@ const Home = () => {
             <span className="text-lg md:text-2xl">With </span>
             <span className="logo ">ShopAlley</span>
             <div className="pt-6 flex justify-start ">
-              <Button
-                className=""
-                startIcon={<Storefront />}
-                variant="contained"
-                size="large"
-              >
+              <Button className="" startIcon={<Storefront />} variant="contained" size="large">
                 Become Seller
               </Button>
             </div>

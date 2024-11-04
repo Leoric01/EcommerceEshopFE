@@ -148,10 +148,10 @@ export interface User {
     'name'?: string;
     /**
      * 
-     * @type {boolean}
+     * @type {string}
      * @memberof User
      */
-    'signedOut'?: boolean;
+    'username'?: string;
     /**
      * 
      * @type {Array<GrantedAuthority>}
@@ -160,10 +160,10 @@ export interface User {
     'authorities'?: Array<GrantedAuthority>;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof User
      */
-    'username'?: string;
+    'signedOut'?: boolean;
     /**
      * 
      * @type {boolean}

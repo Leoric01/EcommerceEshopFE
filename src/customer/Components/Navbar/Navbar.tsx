@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Box, Button, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -28,6 +21,8 @@ const Navbar = () => {
       navigate("/account");
     } else if (role.includes("ROLE_SELLER")) {
       navigate("/seller");
+    } else if (role.includes("ROLE_ADMIN")) {
+      navigate("/admin");
     } else {
       console.log("No valid role assigned");
     }
@@ -36,8 +31,7 @@ const Navbar = () => {
     localStorage.clear();
     navigate("/");
   };
-  const isLoggedIn =
-    role.includes("ROLE_CUSTOMER") || role.includes("ROLE_SELLER");
+  const isLoggedIn = role.includes("ROLE_CUSTOMER") || role.includes("ROLE_SELLER") || role.includes("ROLE_ADMIN");
 
   useEffect(() => {
     const username = tokenService.getUsername();
@@ -51,9 +45,7 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               <IconButton onClick={() => navigate("/")}>
                 {!isLarge && <MenuIcon />}
-                <h1 className="logo cursor-pointer text-lg md:text-2xl">
-                  ShopAlley
-                </h1>
+                <h1 className="logo cursor-pointer text-lg md:text-2xl">ShopAlley</h1>
               </IconButton>
             </div>
             <ul className="flex items-center font-medium text-gray-800 gap-2">
@@ -77,24 +69,23 @@ const Navbar = () => {
               <SearchIcon />
             </IconButton>
             {isLoggedIn ? (
-              <Button
-                onClick={handleAccountClick}
-                className="flex items-center gap-2"
-              >
+              <Button onClick={handleAccountClick} className="flex items-center gap-2">
                 <Avatar
                   sx={{ width: 49, height: 49 }}
                   src="https://img.freepik.com/premium-photo/logotype-goat-gaming-channel-marvel-style-goat_643382-1192.jpg?w=826"
                 />
                 <div>
-                  <h1 className="font-semibold hidden text-gray-500 lg:block">
-                    {tokenService.getUsername()}
-                  </h1>
-                  <h1 className="font-semibold text-black hidden lg:block">
-                    {tokenService.getEmail()}
-                  </h1>
+                  <h1 className="font-semibold hidden text-gray-500 lg:block">{tokenService.getUsername()}</h1>
+                  <h1 className="font-semibold text-black hidden lg:block">{tokenService.getEmail()}</h1>
                 </div>
                 <h1 className="font-semibold text-gray-400 hidden lg:block">
-                  {role.includes("ROLE_SELLER") ? "Seller" : "Customer"}
+                  {role.includes("ROLE_SELLER")
+                    ? "Seller"
+                    : role.includes("ROLE_CUSTOMER")
+                    ? "Customer"
+                    : role.includes("ROLE_ADMIN")
+                    ? "Admin"
+                    : "No Role"}
                 </h1>
               </Button>
             ) : (
@@ -106,16 +97,10 @@ const Navbar = () => {
               <FavoriteBorder sx={{ fontSize: 29 }} />
             </IconButton>
             <IconButton onClick={() => navigate("/cart")}>
-              <AddShoppingCart
-                sx={{ fontSize: 29 }}
-                className="text-gray-700"
-              />
+              <AddShoppingCart sx={{ fontSize: 29 }} className="text-gray-700" />
             </IconButton>
             {isLarge && (
-              <Button
-                onClick={() => navigate("/become-seller")}
-                variant="outlined"
-              >
+              <Button onClick={() => navigate("/become-seller")} variant="outlined">
                 Become Seller
               </Button>
             )}

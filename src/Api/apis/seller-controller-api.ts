@@ -142,7 +142,7 @@ export const SellerControllerApiAxiosParamCreator = function (configuration?: Co
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSellerByReport: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getSellerReportBySeller: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/seller/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -291,10 +291,10 @@ export const SellerControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSellerByReport(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultSellerReport>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSellerByReport(options);
+        async getSellerReportBySeller(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultSellerReport>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSellerReportBySeller(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['SellerControllerApi.getSellerByReport']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['SellerControllerApi.getSellerReportBySeller']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -364,8 +364,8 @@ export const SellerControllerApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSellerByReport(options?: RawAxiosRequestConfig): AxiosPromise<ResultSellerReport> {
-            return localVarFp.getSellerByReport(options).then((request) => request(axios, basePath));
+        getSellerReportBySeller(options?: RawAxiosRequestConfig): AxiosPromise<ResultSellerReport> {
+            return localVarFp.getSellerReportBySeller(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -428,7 +428,7 @@ export interface SellerControllerApiInterface {
      * @throws {RequiredError}
      * @memberof SellerControllerApiInterface
      */
-    getSellerByReport(options?: RawAxiosRequestConfig): AxiosPromise<ResultSellerReport>;
+    getSellerReportBySeller(options?: RawAxiosRequestConfig): AxiosPromise<ResultSellerReport>;
 
     /**
      * 
@@ -497,8 +497,8 @@ export class SellerControllerApi extends BaseAPI implements SellerControllerApiI
      * @throws {RequiredError}
      * @memberof SellerControllerApi
      */
-    public getSellerByReport(options?: RawAxiosRequestConfig) {
-        return SellerControllerApiFp(this.configuration).getSellerByReport(options).then((request) => request(this.axios, this.basePath));
+    public getSellerReportBySeller(options?: RawAxiosRequestConfig) {
+        return SellerControllerApiFp(this.configuration).getSellerReportBySeller(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

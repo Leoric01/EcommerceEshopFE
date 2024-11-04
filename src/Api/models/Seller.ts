@@ -112,10 +112,10 @@ export interface Seller {
     'emailVerified'?: boolean;
     /**
      * 
-     * @type {boolean}
+     * @type {string}
      * @memberof Seller
      */
-    'signedOut'?: boolean;
+    'username'?: string;
     /**
      * 
      * @type {Array<GrantedAuthority>}
@@ -124,10 +124,10 @@ export interface Seller {
     'authorities'?: Array<GrantedAuthority>;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof Seller
      */
-    'username'?: string;
+    'signedOut'?: boolean;
     /**
      * 
      * @type {string}
