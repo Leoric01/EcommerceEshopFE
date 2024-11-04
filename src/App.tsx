@@ -31,10 +31,7 @@ function App() {
           <Route path="/login/*" element={<Auth />} />
           <Route path="/products/:category" element={<Product />} />
           <Route path="/reviews/:productId" element={<Reviews />} />
-          <Route
-            path="/product-details/:categoryId/:name/:productId"
-            element={<ProductDetails />}
-          />
+          <Route path="/product-details/:categoryId/:name/:productId" element={<ProductDetails />} />
           <Route path="/become-seller" element={<BecomeSeller />} />
           <Route
             path="/payment-success/:orderId"

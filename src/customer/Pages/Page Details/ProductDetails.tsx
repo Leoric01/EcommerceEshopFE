@@ -30,12 +30,7 @@ const ProductDetails = () => {
       const fetchedProduct = await productApi.getProduct(Number(productId));
       const shavedDataProduct = fetchedProduct?.data?.data;
 
-      if (
-        fetchedProduct &&
-        fetchedProduct.data &&
-        fetchedProduct.data.data &&
-        typeof shavedDataProduct === "object"
-      ) {
+      if (fetchedProduct && fetchedProduct.data && fetchedProduct.data.data && typeof shavedDataProduct === "object") {
         setProduct(shavedDataProduct);
         console.log("Product details fetched:", shavedDataProduct);
       } else {
@@ -97,11 +92,7 @@ const ProductDetails = () => {
             )}
           </div>
           <div className="w-full lg:w-[85%] lg:max-w-[500px] ">
-            <img
-              className="w-full rounded-md"
-              src={product?.image?.[activeImage]}
-              alt=""
-            />
+            <img className="w-full rounded-md" src={product?.image?.[activeImage]} alt="" />
           </div>
         </section>
         <section className="justify-items-start w-full">
@@ -118,15 +109,9 @@ const ProductDetails = () => {
             <span>{"ratingCount"} Ratings</span>
           </div>
           <div className="price flex items-center gap-3 mt-5 text-2xl">
-            <span className="font-semibold text-gray-800">
-              {product?.sellingPrice} €
-            </span>
-            <span className="line-through text-gray-400">
-              {product?.maxPrice} €
-            </span>
-            <span className="text-primary-custom font-semibold">
-              {product?.discountPercentage}%
-            </span>
+            <span className="font-semibold text-gray-800">{product?.sellingPrice} €</span>
+            <span className="line-through text-gray-400">{product?.maxPrice} €</span>
+            <span className="text-primary-custom font-semibold">{product?.discountPercentage}%</span>
           </div>
           <p>Inclusive of all taxes. Free Shipping above 200</p>
           <div className="mt-7 space-y-3">
@@ -150,10 +135,7 @@ const ProductDetails = () => {
           <div className="mt-7 space-y-2">
             <h1>QUANTITY</h1>
             <div className="flex items-center gap-2 w-[140px] justify-between">
-              <Button
-                disabled={quantity <= 1}
-                onClick={() => setQuantity(quantity - 1)}
-              >
+              <Button disabled={quantity <= 1} onClick={() => setQuantity(quantity - 1)}>
                 <Remove />
               </Button>
               <span>{quantity}</span>
@@ -177,9 +159,7 @@ const ProductDetails = () => {
               sx={{ py: "1rem" }}
               startIcon={<FavoriteBorder />}
               variant="outlined"
-              onClick={() =>
-                product?.id && handleAddingProductToWishlist(product.id)
-              }
+              onClick={() => product?.id && handleAddingProductToWishlist(product.id)}
             >
               Wishlist
             </Button>

@@ -48,18 +48,10 @@ const ProductCard = ({ item }: { item: ProductInterface }) => {
   return (
     <div>
       <div
-        onClick={() =>
-          navigate(
-            `/product-details/${item.category?.categoryId}/${item.title}/${item.id}`
-          )
-        }
+        onClick={() => navigate(`/product-details/${item.category?.categoryId}/${item.title}/${item.id}`)}
         className="group px-4 relative"
       >
-        <div
-          className="card"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="card" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
           {images.length > 0 ? (
             images.map((item, index) => (
               <img
@@ -78,18 +70,10 @@ const ProductCard = ({ item }: { item: ProductInterface }) => {
           {isHovered && images.length > 0 && (
             <div className="indicator flex flex-col items-center space-y-2">
               <div className="flex gap-3">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleAddToWishlist}
-                >
+                <Button variant="contained" color="secondary" onClick={handleAddToWishlist}>
                   <Favorite sx={{ color: teal[500] }} />
                 </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleSeeReviews}
-                >
+                <Button variant="contained" color="secondary" onClick={handleSeeReviews}>
                   <ModeComment sx={{ color: teal[500] }} />
                 </Button>
               </div>
@@ -102,15 +86,9 @@ const ProductCard = ({ item }: { item: ProductInterface }) => {
             <p>{item.title || "no title"}</p>
           </div>
           <div className="price flex items-center gap-3">
-            <span className="font-semibold text-gray-800">
-              {item.sellingPrice} €
-            </span>
-            <span className="thin-line-through text-gray-400">
-              {item.maxPrice} €
-            </span>
-            <span className="text-primary-custom font-semibold">
-              {item.discountPercentage}%
-            </span>
+            <span className="font-semibold text-gray-800">{item.sellingPrice} €</span>
+            <span className="thin-line-through text-gray-400">{item.maxPrice} €</span>
+            <span className="text-primary-custom font-semibold">{item.discountPercentage}%</span>
           </div>
         </div>
       </div>

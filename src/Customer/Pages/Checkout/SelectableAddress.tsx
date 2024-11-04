@@ -7,12 +7,8 @@ interface SelectableAddressProps {
   setSelectedAddressId: (addressId: number) => void;
 }
 
-const SelectableAddress: React.FC<SelectableAddressProps> = ({
-  setSelectedAddressId,
-}) => {
-  const [selectedAddressId, setSelectedAddressIdState] = useState<
-    number | null
-  >(null);
+const SelectableAddress: React.FC<SelectableAddressProps> = ({ setSelectedAddressId }) => {
+  const [selectedAddressId, setSelectedAddressIdState] = useState<number | null>(null);
 
   const handleAddressSelect = (addressId?: number) => {
     setSelectedAddressIdState(addressId || -1);

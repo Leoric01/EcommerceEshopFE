@@ -89,20 +89,11 @@ const Profile = () => {
             src="https://img.freepik.com/premium-photo/logotype-goat-gaming-channel-marvel-style-goat_643382-1192.jpg?w=826"
           />
           <div className="mt-10">
-            <ProfileFieldCard
-              keys={"Seller's Name"}
-              value={sellerProfile?.name || "No Data"}
-            />
+            <ProfileFieldCard keys={"Seller's Name"} value={sellerProfile?.name || "No Data"} />
             <Divider />
-            <ProfileFieldCard
-              keys={"Email"}
-              value={sellerProfile?.email || "No Data"}
-            />
+            <ProfileFieldCard keys={"Email"} value={sellerProfile?.email || "No Data"} />
             <Divider />
-            <ProfileFieldCard
-              keys={"Mobile"}
-              value={sellerProfile?.mobile || "No Data"}
-            />
+            <ProfileFieldCard keys={"Mobile"} value={sellerProfile?.mobile || "No Data"} />
           </div>
         </div>
       </div>
@@ -127,15 +118,9 @@ const Profile = () => {
             value={sellerProfile?.businessDetails?.businessName || "No Data"}
           />
           <Divider />
-          <ProfileFieldCard
-            keys={"VAT"}
-            value={sellerProfile?.vat || "No Data"}
-          />
+          <ProfileFieldCard keys={"VAT"} value={sellerProfile?.vat || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"Account Status"}
-            value={sellerProfile?.accountStatus || "No Data"}
-          />
+          <ProfileFieldCard keys={"Account Status"} value={sellerProfile?.accountStatus || "No Data"} />
         </div>
       </div>
       <div className="w-full lg:w-[70%]">
@@ -154,40 +139,19 @@ const Profile = () => {
           </div>
         </div>
         <div className="">
-          <ProfileFieldCard
-            keys={"Name"}
-            value={sellerProfile?.pickupAddress?.name || "No Data"}
-          />
+          <ProfileFieldCard keys={"Name"} value={sellerProfile?.pickupAddress?.name || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"Mobile"}
-            value={sellerProfile?.pickupAddress?.mobile || "No Data"}
-          />
+          <ProfileFieldCard keys={"Mobile"} value={sellerProfile?.pickupAddress?.mobile || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"Zip Code"}
-            value={sellerProfile?.pickupAddress?.zip || "No Data"}
-          />
+          <ProfileFieldCard keys={"Zip Code"} value={sellerProfile?.pickupAddress?.zip || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"Street"}
-            value={sellerProfile?.pickupAddress?.street || "No Data"}
-          />
+          <ProfileFieldCard keys={"Street"} value={sellerProfile?.pickupAddress?.street || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"Locality"}
-            value={sellerProfile?.pickupAddress?.locality || "No Data"}
-          />
+          <ProfileFieldCard keys={"Locality"} value={sellerProfile?.pickupAddress?.locality || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"City"}
-            value={sellerProfile?.pickupAddress?.city || "No Data"}
-          />
+          <ProfileFieldCard keys={"City"} value={sellerProfile?.pickupAddress?.city || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"Country"}
-            value={sellerProfile?.pickupAddress?.country || "No Data"}
-          />
+          <ProfileFieldCard keys={"Country"} value={sellerProfile?.pickupAddress?.country || "No Data"} />
         </div>
       </div>
       <div className="w-full lg:w-[70%]">
@@ -211,15 +175,9 @@ const Profile = () => {
             value={sellerProfile?.bankDetails?.accountHolderName || "No Data"}
           />
           <Divider />
-          <ProfileFieldCard
-            keys={"Account Number"}
-            value={sellerProfile?.bankDetails?.accountNumber || "No Data"}
-          />
+          <ProfileFieldCard keys={"Account Number"} value={sellerProfile?.bankDetails?.accountNumber || "No Data"} />
           <Divider />
-          <ProfileFieldCard
-            keys={"IBAN"}
-            value={sellerProfile?.bankDetails?.iban || "No Data"}
-          />
+          <ProfileFieldCard keys={"IBAN"} value={sellerProfile?.bankDetails?.iban || "No Data"} />
         </div>
       </div>
       <Modal

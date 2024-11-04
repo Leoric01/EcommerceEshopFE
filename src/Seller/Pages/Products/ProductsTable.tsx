@@ -58,9 +58,7 @@ export default function ProductsTable() {
       const product = products.find((p) => p.id === hoveredProductId);
       if (product && product.image && product.image.length > 1) {
         imageInterval = setInterval(() => {
-          setCurrentImageIndex((prevIndex) =>
-            prevIndex === (product.image?.length ?? 0) - 1 ? 0 : prevIndex + 1
-          );
+          setCurrentImageIndex((prevIndex) => (prevIndex === (product.image?.length ?? 0) - 1 ? 0 : prevIndex + 1));
         }, 1000);
       }
     }
@@ -95,36 +93,22 @@ export default function ProductsTable() {
           {products.map((product) => (
             <StyledTableRow
               key={product.id}
-              onMouseEnter={() =>
-                product.id !== undefined && handleMouseEnter(product.id)
-              }
+              onMouseEnter={() => product.id !== undefined && handleMouseEnter(product.id)}
               onMouseLeave={handleMouseLeave}
             >
               <StyledTableCell component="th" scope="row">
                 {product.image && product.image.length > 0 ? (
-                  <img
-                    src={product.image[currentImageIndex]}
-                    alt={product.title}
-                    style={{ width: 100, height: 100 }}
-                  />
+                  <img src={product.image[currentImageIndex]} alt={product.title} style={{ width: 100, height: 100 }} />
                 ) : (
                   "No Image"
                 )}
               </StyledTableCell>
               <StyledTableCell align="left">{product.title}</StyledTableCell>
-              <StyledTableCell align="left">
-                ${product.maxPrice}
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                ${product.sellingPrice}
-              </StyledTableCell>
+              <StyledTableCell align="left">${product.maxPrice}</StyledTableCell>
+              <StyledTableCell align="left">${product.sellingPrice}</StyledTableCell>
               <StyledTableCell align="left">{product.color}</StyledTableCell>
               <StyledTableCell align="left">
-                {product.quantity === 0 ? (
-                  <Button size="small">in_stock</Button>
-                ) : (
-                  product.quantity
-                )}
+                {product.quantity === 0 ? <Button size="small">in_stock</Button> : product.quantity}
               </StyledTableCell>
               <StyledTableCell align="left">
                 {

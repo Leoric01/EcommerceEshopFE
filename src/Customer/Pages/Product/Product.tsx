@@ -25,7 +25,7 @@ const Product = () => {
   const [page, setPage] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
   const filterRef = useRef<HTMLDivElement>(null);
-  const [productsListAll, setProductsListAll] = useState<any>(null);
+  const [productsListAll, setProductsListAll] = useState<ProductInterface[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -117,9 +117,7 @@ const Product = () => {
     <div className="-z-10 mt-10">
       <div className="">
         <h1 className="text-3xl text-center font-bold text-gray-700 pb-5 px-9 uppercase space-x-2">
-          {productsListAll && productsListAll.length > 0
-            ? productsListAll[0].category?.categoryId
-            : "Uncategorized"}
+          {productsListAll && productsListAll.length > 0 ? productsListAll[0].category?.categoryId : "Uncategorized"}
         </h1>
       </div>
       <div className="lg:flex text-primary-custom">
@@ -148,11 +146,7 @@ const Product = () => {
               </Box>
             )}
 
-            <FormControl
-              size="small"
-              sx={{ width: "200px" }}
-              className="text-primary-custom"
-            >
+            <FormControl size="small" sx={{ width: "200px" }} className="text-primary-custom">
               <InputLabel id="sort-select-input">Sort</InputLabel>
               <Select
                 labelId="sort-select-input"
@@ -170,9 +164,7 @@ const Product = () => {
 
           <section className="product_section grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
             {productsListAll && productsListAll.length > 0 ? (
-              productsListAll?.map((item: ProductInterface) => (
-                <ProductCard key={item.id} item={item} />
-              ))
+              productsListAll?.map((item: ProductInterface) => <ProductCard key={item.id} item={item} />)
             ) : (
               <p className="text-center col-span-full">No products found.</p>
             )}

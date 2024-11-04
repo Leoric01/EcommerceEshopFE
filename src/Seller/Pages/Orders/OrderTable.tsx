@@ -8,10 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { sellerOrderApi } from "../../../State/configAxios/sellerOrderApi";
 import { useState, useEffect, MouseEvent } from "react";
-import {
-  Order as OrderInterface,
-  OrderItem as OrderItemInterface,
-} from "../../../Api/models";
+import { Order as OrderInterface, OrderItem as OrderItemInterface } from "../../../Api/models";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Menu, MenuItem } from "@mui/material";
@@ -69,7 +66,7 @@ export default function OrderTable() {
     [key: number]: HTMLElement | null;
   }>({});
 
-  const handleClick = (event: MouseEvent<HTMLElement>, orderId: number) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>, orderId: number) => {
     setAnchorEl((prev) => ({
       ...prev,
       [orderId]: event.currentTarget,
@@ -78,10 +75,7 @@ export default function OrderTable() {
 
   const handleUpdateOrder = async (orderId: number, orderStatus: any) => {
     try {
-      const response = await sellerOrderApi.updateOrderStatus(
-        orderId,
-        orderStatus
-      );
+      const response = await sellerOrderApi.updateOrderStatus(orderId, orderStatus);
       console.log("Successfully updated order status:", response);
     } catch (err) {
       console.error("Failed to update order status:", err);
@@ -115,16 +109,12 @@ export default function OrderTable() {
                 <div className="flex gap-1 flex-wrap">
                   {item?.orderItems?.map((orderItem: OrderItemInterface) => (
                     <div key={orderItem.id} className="flex gap-5">
-                      <img
-                        className="w-20 rounded-md"
-                        src={orderItem?.product?.image?.[0]}
-                        alt=""
-                      />
+                      <img className="w-20 rounded-md" src={orderItem?.product?.image?.[0]} alt="" />
                       <div className="flex flex-col justify-between py-2">
                         <h1>Title: {orderItem?.product?.title}</h1>
                         <h1>Price: € {orderItem?.sellingPrice}</h1>
                         <h1>Color: {orderItem?.product?.color}</h1>
-                        <h1>Size: {orderItem?.size}</h1>
+                        {orderItem?.size ? <h1>Size: {orderItem.size}</h1> : null}{" "}
                       </div>
                     </div>
                   ))}
@@ -134,11 +124,10 @@ export default function OrderTable() {
                 <div className="flex flex-col gap-y-2">
                   <h1>{item?.shippingAddress?.name}</h1>
                   <h1>
-                    {item?.shippingAddress?.name}, {item?.shippingAddress?.city}
+                    {item?.shippingAddress?.street}, {item?.shippingAddress?.city}
                   </h1>
                   <h1>
-                    {item?.shippingAddress?.country} -{" "}
-                    {item?.shippingAddress?.zip}
+                    {item?.shippingAddress?.country} - {item?.shippingAddress?.zip}
                   </h1>
                   <h1>
                     <strong>Mobile:</strong> {item?.shippingAddress?.mobile}
@@ -147,18 +136,14 @@ export default function OrderTable() {
               </StyledTableCell>
               <StyledTableCell
                 sx={{
-                  color: item.orderStatus
-                    ? orderStatusColor[item.orderStatus].color
-                    : "inherit",
+                  color: item.orderStatus ? orderStatusColor[item.orderStatus].color : "inherit",
                 }}
                 align="center"
               >
                 {" "}
                 <Box
                   sx={{
-                    borderColor: item.orderStatus
-                      ? orderStatusColor[item.orderStatus].color
-                      : "inherit",
+                    borderColor: item.orderStatus ? orderStatusColor[item.orderStatus].color : "inherit",
                   }}
                   className={`border px-2 py-1 rounded-full text-xs`}
                 >
@@ -168,9 +153,7 @@ export default function OrderTable() {
               <StyledTableCell align="right">
                 <Button
                   size="small"
-                  onClick={(e) =>
-                    item.id !== undefined && handleClick(e, item.id)
-                  }
+                  onClick={(e) => item.id !== undefined && handleClick(e, item.id)}
                   color="primary"
                   className="bg-primary-color"
                 >
@@ -188,10 +171,7 @@ export default function OrderTable() {
                   {orderStatus.map((status) => (
                     <MenuItem
                       key={status.label}
-                      onClick={() =>
-                        item.id !== undefined &&
-                        handleUpdateOrder(item.id, status.label)
-                      }
+                      onClick={() => item.id !== undefined && handleUpdateOrder(item.id, status.label)}
                     >
                       {status.label}
                     </MenuItem>

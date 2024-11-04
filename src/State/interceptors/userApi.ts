@@ -1,8 +1,8 @@
 import { Configuration, UserControllerApi } from "../../Api";
-import { TokenService } from "./TokenService"; 
+import { TokenService } from "./TokenService";
 
 const tokenService = new TokenService();
-const token = tokenService.getToken(); 
+const token = tokenService.getToken();
 
 const configuration = new Configuration({
   baseOptions: {

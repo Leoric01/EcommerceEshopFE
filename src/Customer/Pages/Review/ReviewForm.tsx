@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-  TextField,
-  Button,
-  Box,
-  Rating,
-  InputLabel,
-  Typography,
-  IconButton,
-  CircularProgress,
-} from "@mui/material";
+import { TextField, Button, Box, Rating, InputLabel, Typography, IconButton, CircularProgress } from "@mui/material";
 import Close from "@mui/icons-material/Close";
 import { uploadToCloudinary } from "../../../Util/UploadToCloudinary";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
@@ -59,10 +50,7 @@ const ReviewForm: React.FC = () => {
     const file = event.target.files[0];
     setUploadingImage(true);
     const image = await uploadToCloudinary(file);
-    formik.setFieldValue("productImages", [
-      ...formik.values.productImages,
-      image,
-    ]);
+    formik.setFieldValue("productImages", [...formik.values.productImages, image]);
     setUploadingImage(false);
   };
   const handleRemoveImage = (index: number) => {
@@ -71,13 +59,7 @@ const ReviewForm: React.FC = () => {
     formik.setFieldValue("images", updatedImages);
   };
   return (
-    <Box
-      component="form"
-      onSubmit={formik.handleSubmit}
-      noValidate
-      sx={{ mt: 3 }}
-      className="space-y-5"
-    >
+    <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 3 }} className="space-y-5">
       <TextField
         fullWidth
         id="reviewText"
@@ -99,9 +81,7 @@ const ReviewForm: React.FC = () => {
           id="reviewRating"
           name="reviewRating"
           value={formik.values.reviewRating}
-          onChange={(event, newValue) =>
-            formik.setFieldValue("reviewRating", newValue)
-          }
+          onChange={(event, newValue) => formik.setFieldValue("reviewRating", newValue)}
           onBlur={formik.handleBlur}
           precision={0.5}
         />
@@ -113,13 +93,7 @@ const ReviewForm: React.FC = () => {
       )}
 
       <div className="flex flex-wrap gap-5 py-3">
-        <input
-          type="file"
-          accept="image/*"
-          id="fileInput"
-          style={{ display: "none" }}
-          onChange={handleImageChange}
-        />
+        <input type="file" accept="image/*" id="fileInput" style={{ display: "none" }} onChange={handleImageChange} />
 
         <label className="relative" htmlFor="fileInput">
           <span className="w-24 h-24 cursor-pointer flex items-center justify-center p-3 border rounded-md border-gray-400">
@@ -135,12 +109,7 @@ const ReviewForm: React.FC = () => {
         <div className="flex flex-wrap gap-2">
           {formik.values.productImages.map((image, index) => (
             <div className="relative">
-              <img
-                className="w-24 h-24 object-cover"
-                key={index}
-                src={image}
-                alt={`ProductImage ${index + 1}`}
-              />
+              <img className="w-24 h-24 object-cover" key={index} src={image} alt={`ProductImage ${index + 1}`} />
               <IconButton
                 onClick={() => handleRemoveImage(index)}
                 className=""

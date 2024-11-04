@@ -44,25 +44,16 @@ const WishlistProductCard: React.FC<{
           <p>{product.title || "Unnamed Product"}</p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="font-semibold text-gray-800">
-            €{product.sellingPrice || "N/A"}
-          </span>
-          <span className="text thin-line-through text-gray-400">
-            €{product.maxPrice || "N/A"}
-          </span>
+          <span className="font-semibold text-gray-800">€{product.sellingPrice || "N/A"}</span>
+          <span className="text thin-line-through text-gray-400">€{product.maxPrice || "N/A"}</span>
           <span className="text-[#00927c] font-semibold">
-            {product.discountPercentage
-              ? `${product.discountPercentage}% off`
-              : ""}
+            {product.discountPercentage ? `${product.discountPercentage}% off` : ""}
           </span>
         </div>
       </div>
       <div className="absolute top-1 right-1">
         <button onClick={handleIconClick}>
-          <Close
-            className="cursor-pointer bg-white rounded-full p-1"
-            sx={{ color: teal[500], fontSize: "2rem" }}
-          />
+          <Close className="cursor-pointer bg-white rounded-full p-1" sx={{ color: teal[500], fontSize: "2rem" }} />
         </button>
       </div>
     </div>
