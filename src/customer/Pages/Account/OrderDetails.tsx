@@ -13,8 +13,8 @@ import {
 const OrderDetails = () => {
   const navigate = useNavigate();
   const [isCanceled, setCancel] = useState(false);
-  const { orderId, orderItemId } = useParams<{
-    orderId: string;
+  const { id, orderItemId } = useParams<{
+    id: string;
     orderItemId: string;
   }>();
   const [order, setOrder] = useState<OrderInterface>({});
@@ -22,7 +22,7 @@ const OrderDetails = () => {
 
   const fetchOrder = async () => {
     try {
-      const response = await orderApi.getOrderById(Number(orderId));
+      const response = await orderApi.getOrderById(Number(id));
       console.log("Order Details: ", response.data.data);
       setOrder(response.data?.data || {});
     } catch (error) {
@@ -41,58 +41,61 @@ const OrderDetails = () => {
   };
 
   const handleCancelOrder = async () => {
-    const response = await orderApi.cancelOrder(Number(orderId));
+    const response = await orderApi.cancelOrder(Number(id));
     console.log("Cancel Order Response: ", response.data);
   };
 
   useEffect(() => {
     fetchOrder();
     fetchOrderItem();
-  }, [orderId, orderItemId]);
+  }, [id, orderItemId]);
 
   return (
     <Box className="space-y-5">
       <section className="flex flex-col gap-5 justify-center items-center">
         <img
           className="w-[100px]"
-          src={
-            "https://www.pngall.com/wp-content/uploads/5/Computer-Processor-PNG-Photo.png"
-          }
-          alt=""
+          src={orderItem?.product?.image?.[0] || "default-image.jpg"}
+          alt={orderItem?.product?.title || "Product Image"}
         />
         <div className="text-sm space-y-1 text-center">
-          <h1 className="font-bold">{"some seller busines details info"}</h1>
+          <h1 className="font-bold">
+            {orderItem?.product?.seller?.businessDetails?.businessName ||
+              "business name N/A"}
+          </h1>
+          <p>{orderItem?.product?.description || "Description N/A"}</p>
           <p>
-            description description description description description
-            description description description description description
-            description{" "}
-          </p>
-          <p>
-            <strong>Size:</strong> M
+            <strong>Size:</strong> {orderItem?.size || "Size N/A"}
           </p>
         </div>
         <div className="">
-          <Button onClick={() => navigate(`/reviews/${2}/create`)}></Button>
+          <Button
+            onClick={() =>
+              navigate(`/reviews/${orderItem?.product?.id || 0}/create`)
+            }
+          >
+            Write Review
+          </Button>
         </div>
       </section>
       <section className="border p-5">
-        <OrderStepper orderStatus={"DELIVERED"} />
+        <OrderStepper orderStatus={order?.orderStatus ?? "PENDING"} />
       </section>
 
       <div className="border p-5">
         <h1 className="font-bold pb-3"> Delivery Address</h1>
         <div className="text-sm space-y-2">
           <div className="flex gap-5 font-medium">
-            <p> {"NICK"} </p>
+            <p> {order?.shippingAddress?.name || "ADDRESS NAME N/A"} </p>
             <Divider flexItem orientation="vertical" />
-            <p>{12098125095821}</p>
+            <p>{order?.shippingAddress?.mobile || "MOBILE NUMBER N/A"}</p>
           </div>
           <p>
-            Country City Street House nmbr ZipCode
-            {/* {orders.currentOrder?.shippingAddress.address},{" "}
-            {orders.currentOrder?.shippingAddress.city} ,{" "}
-            {orders.currentOrder?.shippingAddress.state},{" "}
-            {orders.currentOrder?.shippingAddress.pinCode} */}
+            {order?.shippingAddress?.country || "Country N/A"}{" "}
+            {order?.shippingAddress?.city || "City N/A"}{" "}
+            {order?.shippingAddress?.street || "Street N/A"}{" "}
+            {order?.shippingAddress?.locality || "Locality N/A"}{" "}
+            {order?.shippingAddress?.zip || "ZipCode N/A"}
           </p>
         </div>
       </div>
@@ -102,11 +105,15 @@ const OrderDetails = () => {
             <p className="font-bold">Total Item Price</p>
             <p>
               You saved{" "}
-              <span className="text-green-500 font-medium text-xs">{500}</span>{" "}
+              <span className="text-green-500 font-medium text-xs">
+                {(orderItem?.maxPrice ?? 1) - (orderItem?.sellingPrice ?? 1)}.00
+              </span>{" "}
               on this item
             </p>
           </div>
-          <p className="font-medium">824.00</p>
+          <p className="font-medium">
+            {orderItem?.sellingPrice || "TOTAL PRICE N/A"}
+          </p>
         </div>
         <div className="px-5">
           <div className="bg-teal-50 px-5 py-2 text-xs font-medium flex item-center gap-3">
@@ -117,7 +124,9 @@ const OrderDetails = () => {
         <Divider />
         <div className="px-5 pb-5">
           <p className="text-xs">
-            <strong>Sold by : </strong> {"Seller's Shop"}{" "}
+            <strong>Sold by : </strong>{" "}
+            {orderItem?.product?.seller?.businessDetails?.businessName ??
+              "BUSINESS NAME N/A"}{" "}
           </p>
         </div>
         <div className="p-10">
