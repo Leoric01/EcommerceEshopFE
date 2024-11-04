@@ -1,14 +1,55 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import OrderStepper from "./OrderStepper";
 import Divider from "@mui/material/Divider";
 import PaymentsIcon from "@mui/icons-material/Payments";
-
+import { orderApi } from "../../../State/configAxios/orderApi";
+import {
+  Order as OrderInterface,
+  OrderItem as OrderItemInterface,
+} from "../../../Api/models";
 const OrderDetails = () => {
   const navigate = useNavigate();
   const [isCanceled, setCancel] = useState(false);
+  const { orderId, orderItemId } = useParams<{
+    orderId: string;
+    orderItemId: string;
+  }>();
+  const [order, setOrder] = useState<OrderInterface>({});
+  const [orderItem, setOrderItem] = useState<OrderItemInterface>({});
+
+  const fetchOrder = async () => {
+    try {
+      const response = await orderApi.getOrderById(Number(orderId));
+      console.log("Order Details: ", response.data.data);
+      setOrder(response.data?.data || {});
+    } catch (error) {
+      console.error("Error fetching order details:", error);
+    }
+  };
+
+  const fetchOrderItem = async () => {
+    try {
+      const response = await orderApi.getOrderItemById(Number(orderItemId));
+      setOrderItem(response.data?.data || {});
+      console.log("OrderItem Details: ", response.data.data);
+    } catch (error) {
+      console.error("Error fetching order details:", error);
+    }
+  };
+
+  const handleCancelOrder = async () => {
+    const response = await orderApi.cancelOrder(Number(orderId));
+    console.log("Cancel Order Response: ", response.data);
+  };
+
+  useEffect(() => {
+    fetchOrder();
+    fetchOrderItem();
+  }, [orderId, orderItemId]);
+
   return (
     <Box className="space-y-5">
       <section className="flex flex-col gap-5 justify-center items-center">
