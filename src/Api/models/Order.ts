@@ -79,7 +79,7 @@ export interface Order {
      * @type {number}
      * @memberof Order
      */
-    'totalmaxPrice'?: number;
+    'totalMaxPrice'?: number;
     /**
      * 
      * @type {number}

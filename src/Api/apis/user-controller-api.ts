@@ -161,12 +161,37 @@ export const UserControllerApiFactory = function (configuration?: Configuration,
 };
 
 /**
+ * UserControllerApi - interface
+ * @export
+ * @interface UserControllerApi
+ */
+export interface UserControllerApiInterface {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserControllerApiInterface
+     */
+    getUserProfile(options?: RawAxiosRequestConfig): AxiosPromise<ResultAccountDetailDto>;
+
+    /**
+     * 
+     * @param {UserUpdateReqDto} userUpdateReqDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserControllerApiInterface
+     */
+    updateSeller(userUpdateReqDto: UserUpdateReqDto, options?: RawAxiosRequestConfig): AxiosPromise<ResultUser>;
+
+}
+
+/**
  * UserControllerApi - object-oriented interface
  * @export
  * @class UserControllerApi
  * @extends {BaseAPI}
  */
-export class UserControllerApi extends BaseAPI {
+export class UserControllerApi extends BaseAPI implements UserControllerApiInterface {
     /**
      * 
      * @param {*} [options] Override http request option.

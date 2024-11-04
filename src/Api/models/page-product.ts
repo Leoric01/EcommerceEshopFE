@@ -34,13 +34,31 @@ export interface PageProduct {
      * @type {number}
      * @memberof PageProduct
      */
-    'totalElements'?: number;
+    'totalPages'?: number;
     /**
      * 
      * @type {number}
      * @memberof PageProduct
      */
-    'totalPages'?: number;
+    'totalElements'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PageProduct
+     */
+    'first'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PageProduct
+     */
+    'last'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof PageProduct
+     */
+    'numberOfElements'?: number;
     /**
      * 
      * @type {number}
@@ -65,24 +83,6 @@ export interface PageProduct {
      * @memberof PageProduct
      */
     'sort'?: Array<SortObject>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PageProduct
-     */
-    'first'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PageProduct
-     */
-    'last'?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof PageProduct
-     */
-    'numberOfElements'?: number;
     /**
      * 
      * @type {PageableObject}

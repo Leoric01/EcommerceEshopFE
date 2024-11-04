@@ -275,12 +275,55 @@ export const CartControllerApiFactory = function (configuration?: Configuration,
 };
 
 /**
+ * CartControllerApi - interface
+ * @export
+ * @interface CartControllerApi
+ */
+export interface CartControllerApiInterface {
+    /**
+     * 
+     * @param {AddItemReq} addItemReq 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CartControllerApiInterface
+     */
+    addItemToCart(addItemReq: AddItemReq, options?: RawAxiosRequestConfig): AxiosPromise<ResultCartItem>;
+
+    /**
+     * 
+     * @param {number} cartItemId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CartControllerApiInterface
+     */
+    deleteCartItem(cartItemId: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CartControllerApiInterface
+     */
+    findUserCartHandler(options?: RawAxiosRequestConfig): AxiosPromise<ResultCart>;
+
+    /**
+     * 
+     * @param {CartItemQuantityUpdateReq} cartItemQuantityUpdateReq 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CartControllerApiInterface
+     */
+    updateCartItemHandler(cartItemQuantityUpdateReq: CartItemQuantityUpdateReq, options?: RawAxiosRequestConfig): AxiosPromise<ResultCartItem>;
+
+}
+
+/**
  * CartControllerApi - object-oriented interface
  * @export
  * @class CartControllerApi
  * @extends {BaseAPI}
  */
-export class CartControllerApi extends BaseAPI {
+export class CartControllerApi extends BaseAPI implements CartControllerApiInterface {
     /**
      * 
      * @param {AddItemReq} addItemReq 

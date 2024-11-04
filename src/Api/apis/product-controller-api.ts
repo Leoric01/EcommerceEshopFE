@@ -284,12 +284,56 @@ export const ProductControllerApiFactory = function (configuration?: Configurati
 };
 
 /**
+ * ProductControllerApi - interface
+ * @export
+ * @interface ProductControllerApi
+ */
+export interface ProductControllerApiInterface {
+    /**
+     * 
+     * @param {string} [category] 
+     * @param {string} [brand] 
+     * @param {string} [colors] 
+     * @param {string} [sizes] 
+     * @param {number} [minPrice] 
+     * @param {number} [maxPrice] 
+     * @param {number} [minDiscount] 
+     * @param {string} [sort] 
+     * @param {string} [stock] 
+     * @param {number} [pageNumber] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductControllerApiInterface
+     */
+    getAllProducts(category?: string, brand?: string, colors?: string, sizes?: string, minPrice?: number, maxPrice?: number, minDiscount?: number, sort?: string, stock?: string, pageNumber?: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultPageProduct>;
+
+    /**
+     * 
+     * @param {number} productId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductControllerApiInterface
+     */
+    getProduct(productId: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultProduct>;
+
+    /**
+     * 
+     * @param {string} [query] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProductControllerApiInterface
+     */
+    searchProduct(query?: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultListProduct>;
+
+}
+
+/**
  * ProductControllerApi - object-oriented interface
  * @export
  * @class ProductControllerApi
  * @extends {BaseAPI}
  */
-export class ProductControllerApi extends BaseAPI {
+export class ProductControllerApi extends BaseAPI implements ProductControllerApiInterface {
     /**
      * 
      * @param {string} [category] 

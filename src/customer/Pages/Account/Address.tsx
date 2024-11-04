@@ -15,6 +15,11 @@ const Address = () => {
       console.error("Error fetching addresses:", error);
     }
   };
+  const handleAddressDeleted = (deletedAddressId: number) => {
+    setAddresses((prevAddresses) =>
+      prevAddresses.filter((address) => address.id !== deletedAddressId)
+    );
+  };
   useEffect(() => {
     fetchAddresses();
   }, []);
@@ -24,6 +29,7 @@ const Address = () => {
       {addresses.map((address) => (
         <UserAddressCard
           key={address.id}
+          addressId={address.id ?? -1}
           name={address.name ?? "N/A"}
           street={address.street ?? "N/A"}
           locality={address.locality ?? "N/A"}
@@ -31,6 +37,7 @@ const Address = () => {
           city={address.city ?? "N/A"}
           country={address.country ?? "N/A"}
           mobile={address.mobile ?? "N/A"}
+          onDelete={handleAddressDeleted}
         />
       ))}
     </div>

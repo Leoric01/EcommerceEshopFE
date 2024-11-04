@@ -27,6 +27,8 @@ import type { AddAddressRequestDTO } from '../models';
 import type { AddressDtoResponse } from '../models';
 // @ts-ignore
 import type { ResultAddress } from '../models';
+// @ts-ignore
+import type { ResultVoid } from '../models';
 /**
  * AddressControllerApi - axios parameter creator
  * @export
@@ -105,6 +107,39 @@ export const AddressControllerApiAxiosParamCreator = function (configuration?: C
         },
         /**
          * 
+         * @param {number} addressId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAddress: async (addressId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'addressId' is not null or undefined
+            assertParamExists('deleteAddress', 'addressId', addressId)
+            const localVarPath = `/address/{addressId}`
+                .replace(`{${"addressId"}}`, encodeURIComponent(String(addressId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -168,6 +203,18 @@ export const AddressControllerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} addressId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteAddress(addressId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultVoid>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAddress(addressId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AddressControllerApi.deleteAddress']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -207,6 +254,15 @@ export const AddressControllerApiFactory = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {number} addressId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteAddress(addressId: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid> {
+            return localVarFp.deleteAddress(addressId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -217,12 +273,55 @@ export const AddressControllerApiFactory = function (configuration?: Configurati
 };
 
 /**
+ * AddressControllerApi - interface
+ * @export
+ * @interface AddressControllerApi
+ */
+export interface AddressControllerApiInterface {
+    /**
+     * 
+     * @param {AddAddressRequestDTO} addAddressRequestDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressControllerApiInterface
+     */
+    addSellerAddress(addAddressRequestDTO: AddAddressRequestDTO, options?: RawAxiosRequestConfig): AxiosPromise<ResultAddress>;
+
+    /**
+     * 
+     * @param {AddAddressRequestDTO} addAddressRequestDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressControllerApiInterface
+     */
+    addUserAddress(addAddressRequestDTO: AddAddressRequestDTO, options?: RawAxiosRequestConfig): AxiosPromise<ResultAddress>;
+
+    /**
+     * 
+     * @param {number} addressId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressControllerApiInterface
+     */
+    deleteAddress(addressId: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressControllerApiInterface
+     */
+    getAll(options?: RawAxiosRequestConfig): AxiosPromise<Set<AddressDtoResponse>>;
+
+}
+
+/**
  * AddressControllerApi - object-oriented interface
  * @export
  * @class AddressControllerApi
  * @extends {BaseAPI}
  */
-export class AddressControllerApi extends BaseAPI {
+export class AddressControllerApi extends BaseAPI implements AddressControllerApiInterface {
     /**
      * 
      * @param {AddAddressRequestDTO} addAddressRequestDTO 
@@ -243,6 +342,17 @@ export class AddressControllerApi extends BaseAPI {
      */
     public addUserAddress(addAddressRequestDTO: AddAddressRequestDTO, options?: RawAxiosRequestConfig) {
         return AddressControllerApiFp(this.configuration).addUserAddress(addAddressRequestDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} addressId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AddressControllerApi
+     */
+    public deleteAddress(addressId: number, options?: RawAxiosRequestConfig) {
+        return AddressControllerApiFp(this.configuration).deleteAddress(addressId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

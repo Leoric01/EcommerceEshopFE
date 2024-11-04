@@ -390,12 +390,74 @@ export const SellerControllerApiFactory = function (configuration?: Configuratio
 };
 
 /**
+ * SellerControllerApi - interface
+ * @export
+ * @interface SellerControllerApi
+ */
+export interface SellerControllerApiInterface {
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerControllerApiInterface
+     */
+    deleteSeller(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultString>;
+
+    /**
+     * 
+     * @param {GetAllSellersStatusEnum} [status] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerControllerApiInterface
+     */
+    getAllSellers(status?: GetAllSellersStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<ResultListSeller>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerControllerApiInterface
+     */
+    getSellerById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultSeller>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerControllerApiInterface
+     */
+    getSellerByReport(options?: RawAxiosRequestConfig): AxiosPromise<ResultSellerReport>;
+
+    /**
+     * 
+     * @param {Seller} seller 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerControllerApiInterface
+     */
+    updateSeller1(seller: Seller, options?: RawAxiosRequestConfig): AxiosPromise<ResultSeller>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {Seller} seller 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerControllerApiInterface
+     */
+    updateSellerById(id: number, seller: Seller, options?: RawAxiosRequestConfig): AxiosPromise<ResultSeller>;
+
+}
+
+/**
  * SellerControllerApi - object-oriented interface
  * @export
  * @class SellerControllerApi
  * @extends {BaseAPI}
  */
-export class SellerControllerApi extends BaseAPI {
+export class SellerControllerApi extends BaseAPI implements SellerControllerApiInterface {
     /**
      * 
      * @param {number} id 

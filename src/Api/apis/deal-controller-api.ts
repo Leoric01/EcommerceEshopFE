@@ -229,12 +229,48 @@ export const DealControllerApiFactory = function (configuration?: Configuration,
 };
 
 /**
+ * DealControllerApi - interface
+ * @export
+ * @interface DealControllerApi
+ */
+export interface DealControllerApiInterface {
+    /**
+     * 
+     * @param {Deal} deal 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DealControllerApiInterface
+     */
+    createDeal(deal: Deal, options?: RawAxiosRequestConfig): AxiosPromise<ResultDeal>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {Deal} deal 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DealControllerApiInterface
+     */
+    createDeal1(id: number, deal: Deal, options?: RawAxiosRequestConfig): AxiosPromise<ResultDeal>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DealControllerApiInterface
+     */
+    deleteDeal(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid>;
+
+}
+
+/**
  * DealControllerApi - object-oriented interface
  * @export
  * @class DealControllerApi
  * @extends {BaseAPI}
  */
-export class DealControllerApi extends BaseAPI {
+export class DealControllerApi extends BaseAPI implements DealControllerApiInterface {
     /**
      * 
      * @param {Deal} deal 

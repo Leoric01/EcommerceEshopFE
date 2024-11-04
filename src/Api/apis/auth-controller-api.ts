@@ -331,12 +331,63 @@ export const AuthControllerApiFactory = function (configuration?: Configuration,
 };
 
 /**
+ * AuthControllerApi - interface
+ * @export
+ * @interface AuthControllerApi
+ */
+export interface AuthControllerApiInterface {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApiInterface
+     */
+    allUsers(options?: RawAxiosRequestConfig): AxiosPromise<ResultListAccountDetailDto>;
+
+    /**
+     * 
+     * @param {SignupRequest} signupRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApiInterface
+     */
+    createUserHandler(signupRequest: SignupRequest, options?: RawAxiosRequestConfig): AxiosPromise<ResultString>;
+
+    /**
+     * 
+     * @param {SignInRequest} signInRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApiInterface
+     */
+    login(signInRequest: SignInRequest, options?: RawAxiosRequestConfig): AxiosPromise<ResultAuthenticationResponse>;
+
+    /**
+     * 
+     * @param {SetupPwFromOtpReq} setupPwFromOtpReq 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApiInterface
+     */
+    setUpPassword(setupPwFromOtpReq: SetupPwFromOtpReq, options?: RawAxiosRequestConfig): AxiosPromise<ResultAccountDetailDto>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthControllerApiInterface
+     */
+    signOut(options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid>;
+
+}
+
+/**
  * AuthControllerApi - object-oriented interface
  * @export
  * @class AuthControllerApi
  * @extends {BaseAPI}
  */
-export class AuthControllerApi extends BaseAPI {
+export class AuthControllerApi extends BaseAPI implements AuthControllerApiInterface {
     /**
      * 
      * @param {*} [options] Override http request option.

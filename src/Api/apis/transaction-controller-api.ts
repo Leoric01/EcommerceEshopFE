@@ -149,12 +149,36 @@ export const TransactionControllerApiFactory = function (configuration?: Configu
 };
 
 /**
+ * TransactionControllerApi - interface
+ * @export
+ * @interface TransactionControllerApi
+ */
+export interface TransactionControllerApiInterface {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionControllerApiInterface
+     */
+    getAllTransaction(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TransactionControllerApiInterface
+     */
+    getTransactionBySeller(options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>>;
+
+}
+
+/**
  * TransactionControllerApi - object-oriented interface
  * @export
  * @class TransactionControllerApi
  * @extends {BaseAPI}
  */
-export class TransactionControllerApi extends BaseAPI {
+export class TransactionControllerApi extends BaseAPI implements TransactionControllerApiInterface {
     /**
      * 
      * @param {*} [options] Override http request option.

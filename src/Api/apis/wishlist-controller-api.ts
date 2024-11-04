@@ -203,12 +203,45 @@ export const WishlistControllerApiFactory = function (configuration?: Configurat
 };
 
 /**
+ * WishlistControllerApi - interface
+ * @export
+ * @interface WishlistControllerApi
+ */
+export interface WishlistControllerApiInterface {
+    /**
+     * 
+     * @param {number} productId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WishlistControllerApiInterface
+     */
+    addProductToWishList(productId: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultWishlist>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WishlistControllerApiInterface
+     */
+    createWishlist(options?: RawAxiosRequestConfig): AxiosPromise<ResultWishlist>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof WishlistControllerApiInterface
+     */
+    getWishlistByUserId(options?: RawAxiosRequestConfig): AxiosPromise<ResultWishlist>;
+
+}
+
+/**
  * WishlistControllerApi - object-oriented interface
  * @export
  * @class WishlistControllerApi
  * @extends {BaseAPI}
  */
-export class WishlistControllerApi extends BaseAPI {
+export class WishlistControllerApi extends BaseAPI implements WishlistControllerApiInterface {
     /**
      * 
      * @param {number} productId 

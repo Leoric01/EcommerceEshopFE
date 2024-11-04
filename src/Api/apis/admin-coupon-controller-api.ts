@@ -294,12 +294,57 @@ export const AdminCouponControllerApiFactory = function (configuration?: Configu
 };
 
 /**
+ * AdminCouponControllerApi - interface
+ * @export
+ * @interface AdminCouponControllerApi
+ */
+export interface AdminCouponControllerApiInterface {
+    /**
+     * 
+     * @param {string} apply 
+     * @param {string} code 
+     * @param {number} orderValue 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminCouponControllerApiInterface
+     */
+    applyCoupon(apply: string, code: string, orderValue: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultCart>;
+
+    /**
+     * 
+     * @param {Coupon} coupon 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminCouponControllerApiInterface
+     */
+    createCoupon(coupon: Coupon, options?: RawAxiosRequestConfig): AxiosPromise<ResultCoupon>;
+
+    /**
+     * 
+     * @param {number} couponId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminCouponControllerApiInterface
+     */
+    deleteCoupon(couponId: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminCouponControllerApiInterface
+     */
+    getAllCoupons(options?: RawAxiosRequestConfig): AxiosPromise<ResultListCoupon>;
+
+}
+
+/**
  * AdminCouponControllerApi - object-oriented interface
  * @export
  * @class AdminCouponControllerApi
  * @extends {BaseAPI}
  */
-export class AdminCouponControllerApi extends BaseAPI {
+export class AdminCouponControllerApi extends BaseAPI implements AdminCouponControllerApiInterface {
     /**
      * 
      * @param {string} apply 

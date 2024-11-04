@@ -85,15 +85,15 @@ export interface Address {
     'user'?: User;
     /**
      * 
-     * @type {Order}
-     * @memberof Address
-     */
-    'order'?: Order;
-    /**
-     * 
      * @type {Seller}
      * @memberof Address
      */
     'seller'?: Seller;
+    /**
+     * 
+     * @type {Order}
+     * @memberof Address
+     */
+    'order'?: Order;
 }
 

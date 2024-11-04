@@ -225,12 +225,47 @@ export const HomeCategoryControllerApiFactory = function (configuration?: Config
 };
 
 /**
+ * HomeCategoryControllerApi - interface
+ * @export
+ * @interface HomeCategoryControllerApi
+ */
+export interface HomeCategoryControllerApiInterface {
+    /**
+     * 
+     * @param {Array<HomeCategory>} homeCategory 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HomeCategoryControllerApiInterface
+     */
+    createHomeCategories(homeCategory: Array<HomeCategory>, options?: RawAxiosRequestConfig): AxiosPromise<ResultHome>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HomeCategoryControllerApiInterface
+     */
+    getHomeCategory(options?: RawAxiosRequestConfig): AxiosPromise<ResultListHomeCategory>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {HomeCategory} homeCategory 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HomeCategoryControllerApiInterface
+     */
+    updateHomeCategory(id: number, homeCategory: HomeCategory, options?: RawAxiosRequestConfig): AxiosPromise<ResultHomeCategory>;
+
+}
+
+/**
  * HomeCategoryControllerApi - object-oriented interface
  * @export
  * @class HomeCategoryControllerApi
  * @extends {BaseAPI}
  */
-export class HomeCategoryControllerApi extends BaseAPI {
+export class HomeCategoryControllerApi extends BaseAPI implements HomeCategoryControllerApiInterface {
     /**
      * 
      * @param {Array<HomeCategory>} homeCategory 

@@ -335,12 +335,65 @@ export const SellerProductControllerApiFactory = function (configuration?: Confi
 };
 
 /**
+ * SellerProductControllerApi - interface
+ * @export
+ * @interface SellerProductControllerApi
+ */
+export interface SellerProductControllerApiInterface {
+    /**
+     * 
+     * @param {CreateProductReq} createProductReq 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerProductControllerApiInterface
+     */
+    createProduct(createProductReq: CreateProductReq, options?: RawAxiosRequestConfig): AxiosPromise<ResultProduct>;
+
+    /**
+     * 
+     * @param {number} productId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerProductControllerApiInterface
+     */
+    deleteProduct(productId: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerProductControllerApiInterface
+     */
+    getProductsBySellerId(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultListProduct>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerProductControllerApiInterface
+     */
+    getProductsOfCurrentSeller(options?: RawAxiosRequestConfig): AxiosPromise<ResultListProduct>;
+
+    /**
+     * 
+     * @param {number} productId 
+     * @param {Product} product 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerProductControllerApiInterface
+     */
+    updateProduct(productId: number, product: Product, options?: RawAxiosRequestConfig): AxiosPromise<ResultProduct>;
+
+}
+
+/**
  * SellerProductControllerApi - object-oriented interface
  * @export
  * @class SellerProductControllerApi
  * @extends {BaseAPI}
  */
-export class SellerProductControllerApi extends BaseAPI {
+export class SellerProductControllerApi extends BaseAPI implements SellerProductControllerApiInterface {
     /**
      * 
      * @param {CreateProductReq} createProductReq 

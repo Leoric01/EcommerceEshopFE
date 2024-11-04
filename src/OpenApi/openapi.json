@@ -322,11 +322,20 @@
         }
       }
     },
-    "/orders": {
+    "/orders/{addressId}": {
       "post": {
         "tags": ["order-controller"],
         "operationId": "createOrder",
         "parameters": [
+          {
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
           {
             "name": "paymentMethod",
             "in": "query",
@@ -337,16 +346,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Address"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -1625,6 +1624,35 @@
           }
         }
       }
+    },
+    "/address/{addressId}": {
+      "delete": {
+        "tags": ["address-controller"],
+        "operationId": "deleteAddress",
+        "parameters": [
+          {
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1660,11 +1688,11 @@
           "user": {
             "$ref": "#/components/schemas/User"
           },
-          "order": {
-            "$ref": "#/components/schemas/Order"
-          },
           "seller": {
             "$ref": "#/components/schemas/Seller"
+          },
+          "order": {
+            "$ref": "#/components/schemas/Order"
           }
         }
       },
@@ -1734,7 +1762,7 @@
             "type": "number",
             "format": "double"
           },
-          "totalmaxPrice": {
+          "totalMaxPrice": {
             "type": "number",
             "format": "double"
           },
@@ -1838,7 +1866,7 @@
           "paymentDetails": {
             "$ref": "#/components/schemas/PaymentDetails"
           },
-          "totalmaxPrice": {
+          "totalMaxPrice": {
             "type": "number",
             "format": "double"
           },
@@ -2074,11 +2102,14 @@
             "type": "string",
             "format": "date-time"
           },
+          "emailVerified": {
+            "type": "boolean"
+          },
           "name": {
             "type": "string"
           },
-          "emailVerified": {
-            "type": "boolean"
+          "username": {
+            "type": "string"
           },
           "authorities": {
             "type": "array",
@@ -2089,22 +2120,19 @@
           "signedOut": {
             "type": "boolean"
           },
-          "username": {
-            "type": "string"
-          },
           "vat": {
             "type": "string"
           },
           "enabled": {
             "type": "boolean"
           },
-          "accountNonLocked": {
-            "type": "boolean"
-          },
           "accountNonExpired": {
             "type": "boolean"
           },
           "credentialsNonExpired": {
+            "type": "boolean"
+          },
+          "accountNonLocked": {
             "type": "boolean"
           }
         }
@@ -2200,6 +2228,9 @@
           "name": {
             "type": "string"
           },
+          "username": {
+            "type": "string"
+          },
           "authorities": {
             "type": "array",
             "items": {
@@ -2209,16 +2240,13 @@
           "signedOut": {
             "type": "boolean"
           },
-          "username": {
-            "type": "string"
-          },
-          "accountNonLocked": {
-            "type": "boolean"
-          },
           "accountNonExpired": {
             "type": "boolean"
           },
           "credentialsNonExpired": {
+            "type": "boolean"
+          },
+          "accountNonLocked": {
             "type": "boolean"
           }
         }
@@ -3019,11 +3047,21 @@
       "PageProduct": {
         "type": "object",
         "properties": {
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
           "totalElements": {
             "type": "integer",
             "format": "int64"
           },
-          "totalPages": {
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "numberOfElements": {
             "type": "integer",
             "format": "int32"
           },
@@ -3046,16 +3084,6 @@
             "items": {
               "$ref": "#/components/schemas/SortObject"
             }
-          },
-          "first": {
-            "type": "boolean"
-          },
-          "last": {
-            "type": "boolean"
-          },
-          "numberOfElements": {
-            "type": "integer",
-            "format": "int32"
           },
           "pageable": {
             "$ref": "#/components/schemas/PageableObject"

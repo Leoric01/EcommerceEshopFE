@@ -67,7 +67,7 @@ export interface Cart {
      * @type {number}
      * @memberof Cart
      */
-    'totalmaxPrice'?: number;
+    'totalMaxPrice'?: number;
     /**
      * 
      * @type {number}

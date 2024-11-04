@@ -289,12 +289,58 @@ export const ReviewControllerApiFactory = function (configuration?: Configuratio
 };
 
 /**
+ * ReviewControllerApi - interface
+ * @export
+ * @interface ReviewControllerApi
+ */
+export interface ReviewControllerApiInterface {
+    /**
+     * 
+     * @param {number} reviewId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReviewControllerApiInterface
+     */
+    deleteReview(reviewId: number, options?: RawAxiosRequestConfig): AxiosPromise<ApiResponse>;
+
+    /**
+     * 
+     * @param {number} productId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReviewControllerApiInterface
+     */
+    getReviewsByProductId(productId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Review>>;
+
+    /**
+     * 
+     * @param {number} reviewId 
+     * @param {CreateReviewRequest} createReviewRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReviewControllerApiInterface
+     */
+    updateReview(reviewId: number, createReviewRequest: CreateReviewRequest, options?: RawAxiosRequestConfig): AxiosPromise<Review>;
+
+    /**
+     * 
+     * @param {number} productId 
+     * @param {CreateReviewRequest} createReviewRequest 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReviewControllerApiInterface
+     */
+    writeReview(productId: number, createReviewRequest: CreateReviewRequest, options?: RawAxiosRequestConfig): AxiosPromise<Review>;
+
+}
+
+/**
  * ReviewControllerApi - object-oriented interface
  * @export
  * @class ReviewControllerApi
  * @extends {BaseAPI}
  */
-export class ReviewControllerApi extends BaseAPI {
+export class ReviewControllerApi extends BaseAPI implements ReviewControllerApiInterface {
     /**
      * 
      * @param {number} reviewId 

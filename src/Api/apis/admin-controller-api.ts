@@ -113,12 +113,30 @@ export const AdminControllerApiFactory = function (configuration?: Configuration
 };
 
 /**
+ * AdminControllerApi - interface
+ * @export
+ * @interface AdminControllerApi
+ */
+export interface AdminControllerApiInterface {
+    /**
+     * 
+     * @param {number} id 
+     * @param {UpdateStatusStatusEnum} status 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminControllerApiInterface
+     */
+    updateStatus(id: number, status: UpdateStatusStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<ResultSeller>;
+
+}
+
+/**
  * AdminControllerApi - object-oriented interface
  * @export
  * @class AdminControllerApi
  * @extends {BaseAPI}
  */
-export class AdminControllerApi extends BaseAPI {
+export class AdminControllerApi extends BaseAPI implements AdminControllerApiInterface {
     /**
      * 
      * @param {number} id 

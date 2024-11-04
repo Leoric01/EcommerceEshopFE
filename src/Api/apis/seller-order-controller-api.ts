@@ -163,12 +163,38 @@ export const SellerOrderControllerApiFactory = function (configuration?: Configu
 };
 
 /**
+ * SellerOrderControllerApi - interface
+ * @export
+ * @interface SellerOrderControllerApi
+ */
+export interface SellerOrderControllerApiInterface {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerOrderControllerApiInterface
+     */
+    getAllSellersOrders(options?: RawAxiosRequestConfig): AxiosPromise<ResultListOrder>;
+
+    /**
+     * 
+     * @param {number} orderId 
+     * @param {UpdateOrderStatusOrderStatusEnum} orderStatus 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SellerOrderControllerApiInterface
+     */
+    updateOrderStatus(orderId: number, orderStatus: UpdateOrderStatusOrderStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<ResultOrder>;
+
+}
+
+/**
  * SellerOrderControllerApi - object-oriented interface
  * @export
  * @class SellerOrderControllerApi
  * @extends {BaseAPI}
  */
-export class SellerOrderControllerApi extends BaseAPI {
+export class SellerOrderControllerApi extends BaseAPI implements SellerOrderControllerApiInterface {
     /**
      * 
      * @param {*} [options] Override http request option.
