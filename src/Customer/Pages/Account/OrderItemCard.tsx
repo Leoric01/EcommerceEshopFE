@@ -1,12 +1,12 @@
 import { ElectricBolt } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import teal from "@mui/material/colors/teal";
 import {
   OrderItem as OrderItemInterface,
   Order as OrderInterface,
 } from "../../../Api/models";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../utils/formatDate";
+import { red, teal } from "@mui/material/colors";
 
 interface OrderItemCardProps {
   item: OrderItemInterface;
@@ -14,6 +14,8 @@ interface OrderItemCardProps {
 }
 const OrderItemCard: React.FC<OrderItemCardProps> = ({ item, order }) => {
   const navigate = useNavigate();
+  const isCancelled = order.orderStatus === "CANCELLED";
+
   return (
     <div
       onClick={() => navigate(`/account/order/${order.id}/${item.id}`)}
@@ -21,12 +23,21 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({ item, order }) => {
     >
       <div className="flex items-center gap-3">
         <div>
-          <Avatar sizes="small" sx={{ bgcolor: teal[500] }}>
+          <Avatar
+            sizes="small"
+            sx={{ bgcolor: isCancelled ? red[500] : teal[500] }}
+          >
             <ElectricBolt />
           </Avatar>
         </div>
         <div>
-          <h1 className="font-bold text-teal-600">{order.orderStatus}</h1>
+          <h1
+            className={`font-bold ${
+              isCancelled ? "text-red-500" : "text-teal-600"
+            }`}
+          >
+            {order.orderStatus}
+          </h1>
           <p>Arriving by {formatDate(order.deliverDate)}</p>
         </div>
       </div>

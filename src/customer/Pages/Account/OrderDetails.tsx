@@ -136,7 +136,7 @@ const OrderDetails = () => {
             className=""
             variant="contained"
             fullWidth
-            onClick={() => setCancel(!isCanceled)}
+            onClick={handleCancelOrder}
           >
             {isCanceled ? "order cancelled" : "Cancel Order"}
           </Button>
