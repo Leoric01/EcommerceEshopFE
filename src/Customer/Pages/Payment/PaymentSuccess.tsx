@@ -1,7 +1,6 @@
 import Button from "@mui/material/Button";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { orderApi } from "../../../State/configAxios/orderApi";
 import { sellerOrderApi } from "../../../State/configAxios/sellerOrderApi";
 import { paymentApi } from "../../../State/configAxios/paymentApi";
 

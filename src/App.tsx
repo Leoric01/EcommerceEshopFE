@@ -18,6 +18,7 @@ import { useAuthGuard } from "./State/interceptors/AuthGuard";
 import ProtectedRoute from "./State/interceptors/ProtectedRoute";
 import Auth from "./Customer/Pages/Auth/Auth";
 import PaymentSuccess from "./Customer/Pages/Payment/PaymentSuccess";
+import Wishlist from "./Customer/Pages/Wishlist/Wishlist";
 
 function App() {
   useAuthGuard();
@@ -48,6 +49,14 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={["ROLE_CUSTOMER"]}>
                 <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_CUSTOMER"]}>
+                <Wishlist />
               </ProtectedRoute>
             }
           />

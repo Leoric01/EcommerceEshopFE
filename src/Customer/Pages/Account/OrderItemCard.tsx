@@ -56,7 +56,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({ item, order }) => {
           </h1>
           <p>{item.product?.title}</p>
           <p>
-            <strong>size : </strong>
+            <strong>size : {item?.size ?? "SIZE N/A"} </strong>
             FREE
           </p>
         </div>
