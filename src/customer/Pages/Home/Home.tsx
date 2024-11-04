@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { ElectricCategory } from "./ElectricCategory/ElectricCategory";
 import CategoryGrid from "./CategoryGrid/CategoryGrid";
 import Deal from "./Deal/Deal";
 import ShopByCategory from "./ShopByCategory/ShopByCategory";
 import { Button } from "@mui/material";
 import { Storefront } from "@mui/icons-material";
+import { customerApi } from "../../../State/configAxios/customerApi";
+import { homeCategories } from "../../../Data/HomeCategories";
 
 const Home = () => {
+  const [homeCategories2, setHomeCategories] = useState([]);
+
+  const fetchHomeCategories = async () => {
+    try {
+      const response = await customerApi.createHomeCategories(homeCategories);
+      const categories = response.data?.data || [];
+      setHomeCategories(categories);
+      console.log("Successfully fetched home categories:", categories);
+    } catch (err) {
+      console.error("Failed to fetch home categories:", err);
+    }
+  };
+
   return (
     <>
       <div className="space-y-5 lg:space-y-10 relative">
