@@ -13,7 +13,7 @@ import {
 } from "@mui/icons-material";
 import SimilarProduct from "./SimilarProduct";
 import ReviewCard from "../Review/ReviewCard";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { productApi } from "../../../State/configAxios/productApi";
 import { Product } from "../../../Api";
 import { cartApi } from "../../../State/configAxios/cartApi";
@@ -24,7 +24,7 @@ const ProductDetails = () => {
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product | undefined>();
   const [activeImage, setActiveImage] = useState(0);
-
+  const navigate = useNavigate();
   const fetchProductById = async () => {
     try {
       const fetchedProduct = await productApi.getProduct(Number(productId));
@@ -190,6 +190,16 @@ const ProductDetails = () => {
           <div className="mt-6 w-full">
             <ReviewCard />
             <Divider />
+          </div>
+          <div className="mt-6 w-full">
+            <Button
+              fullWidth
+              sx={{ py: "1rem", backgroundColor: "#ff5722", color: "#fff" }}
+              variant="contained"
+              onClick={() => navigate(`/reviews/${productId}`)}
+            >
+              See All Reviews
+            </Button>
           </div>
         </section>
       </div>

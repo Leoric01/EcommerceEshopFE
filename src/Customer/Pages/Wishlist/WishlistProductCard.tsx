@@ -3,13 +3,16 @@ import { teal } from "@mui/material/colors";
 import Close from "@mui/icons-material/Close";
 import { Product as ProductInterface } from "../../../Api/models";
 import { wishApi } from "../../../State/configAxios/wishApi";
+import { useNavigate } from "react-router-dom";
 
 const WishlistProductCard: React.FC<{
   product: ProductInterface;
   refreshWishList: () => Promise<void>;
 }> = ({ product, refreshWishList }) => {
   const productId = product.id;
-  const handleIconClick = async () => {
+  const navigate = useNavigate();
+  const handleIconClick = async (event: MouseEvent) => {
+    event.stopPropagation();
     if (productId !== undefined) {
       try {
         await wishApi.addProductToWishList(productId);
@@ -21,9 +24,13 @@ const WishlistProductCard: React.FC<{
       console.error("Product ID is undefined");
     }
   };
-
+  const handleCardClick = () => {
+    const category = product.category?.categoryId || "unknown-category";
+    const title = product.title || "unknown-title";
+    navigate(`/product-details/${category}/${title}/${productId}`);
+  };
   return (
-    <div className="w-60 relative">
+    <div className="w-60 relative" onClick={handleCardClick}>
       <div className="w-full">
         <img
           className="object-top w-full"
