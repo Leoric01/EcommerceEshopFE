@@ -1,13 +1,6 @@
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-  Button,
-} from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, Button, Menu } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { accountStatuses } from "../../../Data/AccountStatuses";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,6 +9,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Seller as SellerInterface } from "../../../Api/models";
+import { sellerApi } from "../../../State/configAxios/sellerApi";
+import { SellerAccountStatusEnum } from "../../../Api/models";
+import { adminApi } from "../../../State/configAxios/adminApi";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,142 +34,127 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(
-  name: string,
-  email: string,
-  mobile: string,
-  vat: string,
-  businessName: string,
-  accountStatus: string
-) {
-  return { name, email, mobile, vat, businessName, accountStatus };
-}
+export default function SellersTable() {
+  const [page, setPage] = useState(0);
+  const [accountStatus, setAccountStatus] = useState<SellerAccountStatusEnum | "">("");
+  const [sellers, setSellers] = useState<SellerInterface[]>([]);
 
-const rows = [
-  createData(
-    "John Doe",
-    "john@example.com",
-    "123-456-7890",
-    "123456789",
-    "John's Bakery",
-    "ACTIVE"
-  ),
-  createData(
-    "Jane Smith",
-    "jane@example.com",
-    "234-567-8901",
-    "987654321",
-    "Jane's Crafts",
-    "SUSPENDED"
-  ),
-  createData(
-    "Bob Johnson",
-    "bob@example.com",
-    "345-678-9012",
-    "456789123",
-    "Bob's Tools",
-    "DEACTIVATED"
-  ),
-  createData(
-    "Alice Davis",
-    "alice@example.com",
-    "456-789-0123",
-    "654321987",
-    "Alice's Fashion",
-    "BANNED"
-  ),
-  createData(
-    "Charlie Brown",
-    "charlie@example.com",
-    "567-890-1234",
-    "789123456",
-    "Charlie's Pets",
-    "CLOSED"
-  ),
-];
-
-const SellersTable = () => {
-  const [accountStatus, setAccountStatus] = useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAccountStatus(event.target.value);
+  const fetchSellers = async (status: SellerAccountStatusEnum) => {
+    try {
+      const response = await sellerApi.getAllSellers(status || "");
+      const sellers = response.data?.data || [];
+      setSellers(sellers);
+      console.log("Successfully fetched sellers:", sellers);
+    } catch (err) {
+      console.error("Failed to fetch sellers:", err);
+    }
   };
+
+  useEffect(() => {
+    fetchSellers(accountStatus as SellerAccountStatusEnum);
+  }, [accountStatus]);
+
+  const handleAccountStatusChange = (event: any) => {
+    setAccountStatus(event.target.value as SellerAccountStatusEnum);
+  };
+
+  const handleUpdateSellerAccountStatus = async (id: number, status: SellerAccountStatusEnum) => {
+    try {
+      const response = await adminApi.updateStatus(id, status);
+      console.log("Successfully updated seller status:", response);
+      fetchSellers(accountStatus as SellerAccountStatusEnum);
+    } catch (err) {
+      console.error("Failed to update seller status:", err);
+    }
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState<{ [key: number]: HTMLElement | null }>({});
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, sellerId: any) => {
+    setAnchorEl((prev) => ({ ...prev, [sellerId]: event.currentTarget }));
+  };
+  const handleClose = (sellerId: number) => {
+    setAnchorEl((prev) => ({ ...prev, [sellerId]: null }));
+  };
+
   return (
-    <div className="">
+    <>
       <div className="pb-5 w-60">
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Account Status</InputLabel>
+        <FormControl color="primary" fullWidth>
           <Select
-            labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={accountStatus}
-            label="Account Status"
-            onChange={handleChange}
+            onChange={handleAccountStatusChange}
+            color="primary"
+            className="text-primary-color"
+            displayEmpty
+            renderValue={(selected) => {
+              if (selected === undefined) {
+                return <em>Select Account Status</em>;
+              }
+              return accountStatuses.find((status) => status.status === selected)?.title || selected;
+            }}
           >
-            {accountStatuses.map((item) => (
-              <MenuItem key={item.status} value={item.status}>
-                {item.title}
-              </MenuItem>
+            <MenuItem value={undefined}>
+              <em>All</em>
+            </MenuItem>
+            {accountStatuses.map((status) => (
+              <MenuItem value={status.status}>{status.title}</MenuItem>
             ))}
           </Select>
         </FormControl>
       </div>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Seller Name</StyledTableCell>
               <StyledTableCell>Email</StyledTableCell>
-              <StyledTableCell align="right">Mobile</StyledTableCell>
-              <StyledTableCell align="right">VAT</StyledTableCell>
-              <StyledTableCell align="right">Business Name</StyledTableCell>
+              <StyledTableCell>Mobile</StyledTableCell>
+              <StyledTableCell>VAT</StyledTableCell>
+              <StyledTableCell>Bussiness Name</StyledTableCell>
               <StyledTableCell align="right">Account Status</StyledTableCell>
-              <StyledTableCell align="right">Change Staus</StyledTableCell>
+              <StyledTableCell align="right">Change Status</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
+            {sellers.map((seller) => (
+              <StyledTableRow key={seller.id}>
                 <StyledTableCell component="th" scope="row">
-                  {row.name}
+                  {seller.name}
                 </StyledTableCell>
-                <StyledTableCell>{row.email}</StyledTableCell>
-                <StyledTableCell align="right">{row.mobile}</StyledTableCell>
-                <StyledTableCell align="right">{row.vat}</StyledTableCell>
+                <StyledTableCell>{seller.email}</StyledTableCell>
+                <StyledTableCell>{seller.mobile}</StyledTableCell>
+                <StyledTableCell>{seller.vat}</StyledTableCell>
+                <StyledTableCell>{seller.businessDetails?.businessName}</StyledTableCell>
+                <StyledTableCell align="right">{seller.accountStatus}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.businessName}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  {row.accountStatus}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Button>
-                    Change
+                  <Button id={"basic-button" + seller.id} onClick={(e) => handleClick(e, seller.id)}>
+                    Change Status
                   </Button>
-                  {/* <Select
-                    value={row.accountStatus}
-                    onChange={(e) =>
-                      console.log(
-                        "Change status for:",
-                        row.name,
-                        e.target.value
-                      )
-                    }
+                  <Menu
+                    id={"basic-menus" + seller.id}
+                    anchorEl={anchorEl[seller.id || 1]}
+                    open={Boolean(anchorEl[seller.id || 1])}
+                    onClose={() => handleClose(seller.id || 1)}
                   >
                     {accountStatuses.map((status) => (
-                      <MenuItem key={status.status} value={status.status}>
+                      <MenuItem
+                        onClick={() =>
+                          handleUpdateSellerAccountStatus(seller.id || 0, status.status as SellerAccountStatusEnum)
+                        }
+                        value={status.status}
+                      >
                         {status.title}
                       </MenuItem>
                     ))}
-                  </Select> */}
+                  </Menu>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </>
   );
-};
-
-export default SellersTable;
+}
