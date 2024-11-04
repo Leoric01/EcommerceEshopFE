@@ -22,6 +22,7 @@ export * from './apis/cart-controller-api';
 export * from './apis/deal-controller-api';
 export * from './apis/home-category-controller-api';
 export * from './apis/order-controller-api';
+export * from './apis/payment-controller-api';
 export * from './apis/product-controller-api';
 export * from './apis/review-controller-api';
 export * from './apis/seller-controller-api';

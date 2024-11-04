@@ -35,7 +35,7 @@ const UserAddressCard: React.FC<UserAddressCardProps> = ({
     }
   };
   return (
-    <div className="p-5 rounded-md border flex justify-between items-center">
+    <div className="p-5 rounded-md border flex justify-between items-center w-10/12">
       <section>
         <div className="space-y-3">
           <h1>{name}</h1>

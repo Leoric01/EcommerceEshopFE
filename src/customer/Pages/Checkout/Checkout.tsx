@@ -75,6 +75,10 @@ const Checkout = () => {
               <div className="pr-3">
                 <Divider />
               </div>
+              <h1 className="text-red font-medium pb-2 text-center">
+                ONLY STRIPE ACTUALLY IMPLEMENTED IN BACKEND, ITS HARDCODED TO
+                ALLWAYS GO STRIPE
+              </h1>
             </div>
             <RadioGroup
               row

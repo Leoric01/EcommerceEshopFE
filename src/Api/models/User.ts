@@ -154,6 +154,12 @@ export interface User {
     'username'?: string;
     /**
      * 
+     * @type {boolean}
+     * @memberof User
+     */
+    'signedOut'?: boolean;
+    /**
+     * 
      * @type {Array<GrantedAuthority>}
      * @memberof User
      */
@@ -163,19 +169,13 @@ export interface User {
      * @type {boolean}
      * @memberof User
      */
-    'signedOut'?: boolean;
+    'credentialsNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof User
      */
     'accountNonExpired'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof User
-     */
-    'credentialsNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}

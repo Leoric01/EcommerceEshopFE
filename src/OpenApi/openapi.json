@@ -1545,6 +1545,42 @@
         }
       }
     },
+    "/api/payment/{paymentId}": {
+      "get": {
+        "tags": ["payment-controller"],
+        "operationId": "paymentSuccessHandler",
+        "parameters": [
+          {
+            "name": "paymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paymentLinkId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/address": {
       "get": {
         "tags": ["address-controller"],
@@ -2102,14 +2138,17 @@
             "type": "string",
             "format": "date-time"
           },
-          "emailVerified": {
-            "type": "boolean"
-          },
           "name": {
             "type": "string"
           },
+          "emailVerified": {
+            "type": "boolean"
+          },
           "username": {
             "type": "string"
+          },
+          "signedOut": {
+            "type": "boolean"
           },
           "authorities": {
             "type": "array",
@@ -2117,19 +2156,16 @@
               "$ref": "#/components/schemas/GrantedAuthority"
             }
           },
-          "signedOut": {
-            "type": "boolean"
-          },
           "vat": {
             "type": "string"
           },
           "enabled": {
             "type": "boolean"
           },
-          "accountNonExpired": {
+          "credentialsNonExpired": {
             "type": "boolean"
           },
-          "credentialsNonExpired": {
+          "accountNonExpired": {
             "type": "boolean"
           },
           "accountNonLocked": {
@@ -2231,19 +2267,19 @@
           "username": {
             "type": "string"
           },
+          "signedOut": {
+            "type": "boolean"
+          },
           "authorities": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GrantedAuthority"
             }
           },
-          "signedOut": {
+          "credentialsNonExpired": {
             "type": "boolean"
           },
           "accountNonExpired": {
-            "type": "boolean"
-          },
-          "credentialsNonExpired": {
             "type": "boolean"
           },
           "accountNonLocked": {
@@ -3055,16 +3091,6 @@
             "type": "integer",
             "format": "int64"
           },
-          "first": {
-            "type": "boolean"
-          },
-          "last": {
-            "type": "boolean"
-          },
-          "numberOfElements": {
-            "type": "integer",
-            "format": "int32"
-          },
           "size": {
             "type": "integer",
             "format": "int32"
@@ -3084,6 +3110,16 @@
             "items": {
               "$ref": "#/components/schemas/SortObject"
             }
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
           },
           "pageable": {
             "$ref": "#/components/schemas/PageableObject"
@@ -3106,9 +3142,6 @@
               "$ref": "#/components/schemas/SortObject"
             }
           },
-          "paged": {
-            "type": "boolean"
-          },
           "pageSize": {
             "type": "integer",
             "format": "int32"
@@ -3116,6 +3149,9 @@
           "pageNumber": {
             "type": "integer",
             "format": "int32"
+          },
+          "paged": {
+            "type": "boolean"
           },
           "unpaged": {
             "type": "boolean"
@@ -3220,6 +3256,21 @@
           }
         }
       },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
       "ResultListHomeCategory": {
         "type": "object",
         "properties": {
@@ -3280,21 +3331,6 @@
           "user_id": {
             "type": "integer",
             "format": "int64"
-          }
-        }
-      },
-      "ApiResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          },
-          "status": {
-            "type": "boolean"
           }
         }
       }

@@ -17,6 +17,7 @@ import AdminDashboard from "./Admin/Pages/Dashboard/AdminDashboard";
 import { useAuthGuard } from "./State/interceptors/AuthGuard";
 import ProtectedRoute from "./State/interceptors/ProtectedRoute";
 import Auth from "./Customer/Pages/Auth/Auth";
+import PaymentSuccess from "./Customer/Pages/Payment/PaymentSuccess";
 
 function App() {
   useAuthGuard();
@@ -34,7 +35,14 @@ function App() {
             element={<ProductDetails />}
           />
           <Route path="/become-seller" element={<BecomeSeller />} />
-
+          <Route
+            path="/payment-success/:orderId"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_CUSTOMER"]}>
+                <PaymentSuccess />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/cart"
             element={

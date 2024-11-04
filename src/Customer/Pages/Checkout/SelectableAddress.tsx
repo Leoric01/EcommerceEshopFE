@@ -24,7 +24,7 @@ const SelectableAddress: React.FC<SelectableAddressProps> = ({
     <div>
       <Address
         renderAddress={(address: AddressInterface) => (
-          <div key={address.id} className="flex items-center">
+          <div key={address.id} className="flex items-center justify-between">
             <UserAddressCard
               addressId={address.id ?? -1}
               name={address.name ?? "N/A"}

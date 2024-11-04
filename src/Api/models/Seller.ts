@@ -100,6 +100,12 @@ export interface Seller {
     'lastSignOut'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof Seller
+     */
+    'name'?: string;
+    /**
+     * 
      * @type {boolean}
      * @memberof Seller
      */
@@ -109,25 +115,19 @@ export interface Seller {
      * @type {string}
      * @memberof Seller
      */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Seller
-     */
     'username'?: string;
-    /**
-     * 
-     * @type {Array<GrantedAuthority>}
-     * @memberof Seller
-     */
-    'authorities'?: Array<GrantedAuthority>;
     /**
      * 
      * @type {boolean}
      * @memberof Seller
      */
     'signedOut'?: boolean;
+    /**
+     * 
+     * @type {Array<GrantedAuthority>}
+     * @memberof Seller
+     */
+    'authorities'?: Array<GrantedAuthority>;
     /**
      * 
      * @type {string}
@@ -145,13 +145,13 @@ export interface Seller {
      * @type {boolean}
      * @memberof Seller
      */
-    'accountNonExpired'?: boolean;
+    'credentialsNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Seller
      */
-    'credentialsNonExpired'?: boolean;
+    'accountNonExpired'?: boolean;
     /**
      * 
      * @type {boolean}

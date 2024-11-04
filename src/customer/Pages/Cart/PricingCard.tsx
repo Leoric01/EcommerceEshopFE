@@ -62,7 +62,9 @@ const PricingCard: React.FC<PricingCardProps> = ({ selectedAddressId }) => {
             variant="contained"
             className="w-full bg-primary-custom"
           >
-            {location.pathname === "/checkout" ? "Go to Cart" : "Buy Now"}
+            {location.pathname === "/checkout"
+              ? "Proceed to GateWay"
+              : "Buy Now"}
           </Button>
         </div>
       </div>

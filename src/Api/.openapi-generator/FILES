@@ -1,6 +1,5 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 apis/address-controller-api.ts
 apis/admin-controller-api.ts
@@ -10,6 +9,7 @@ apis/cart-controller-api.ts
 apis/deal-controller-api.ts
 apis/home-category-controller-api.ts
 apis/order-controller-api.ts
+apis/payment-controller-api.ts
 apis/product-controller-api.ts
 apis/review-controller-api.ts
 apis/seller-controller-api.ts
