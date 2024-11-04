@@ -1,9 +1,10 @@
 import { ElectricBolt } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import teal from "@mui/material/colors/teal";
-import React from "react";
+import { OrderItem as OrderItemInterface } from "../../../Api";
 
-const OrderItem = () => {
+const OrderItem = ({ item }: { item: OrderItemInterface }) => {
+  console.log("OrderItem: ", item);
   return (
     <div className="text-sm bg-white p-5 space-y-4 border rounded-md cursor-pointer">
       <div className="flex items-center gap-5">
@@ -21,8 +22,8 @@ const OrderItem = () => {
         <div className="">
           <img
             className="w-[80px]"
-            src="https://live.staticflickr.com/7709/17111109088_bc15dcc27a_n.jpg"
-            alt="smart watch"
+            src={item.product?.image?.[0] ?? ""}
+            alt={item.product?.title}
           />
         </div>
         <div className="w-full space-y-2">

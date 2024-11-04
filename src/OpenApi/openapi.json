@@ -1405,7 +1405,7 @@
     "/orders/user": {
       "get": {
         "tags": ["order-controller"],
-        "operationId": "usersOrderHistoryHandlers",
+        "operationId": "usersOrderHistoryHandler",
         "responses": {
           "200": {
             "description": "OK",
@@ -2144,9 +2144,6 @@
           "emailVerified": {
             "type": "boolean"
           },
-          "username": {
-            "type": "string"
-          },
           "signedOut": {
             "type": "boolean"
           },
@@ -2155,6 +2152,9 @@
             "items": {
               "$ref": "#/components/schemas/GrantedAuthority"
             }
+          },
+          "username": {
+            "type": "string"
           },
           "vat": {
             "type": "string"
@@ -2264,9 +2264,6 @@
           "name": {
             "type": "string"
           },
-          "username": {
-            "type": "string"
-          },
           "signedOut": {
             "type": "boolean"
           },
@@ -2275,6 +2272,9 @@
             "items": {
               "$ref": "#/components/schemas/GrantedAuthority"
             }
+          },
+          "username": {
+            "type": "string"
           },
           "credentialsNonExpired": {
             "type": "boolean"
@@ -3142,16 +3142,16 @@
               "$ref": "#/components/schemas/SortObject"
             }
           },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
+          "paged": {
+            "type": "boolean"
           },
           "pageNumber": {
             "type": "integer",
             "format": "int32"
           },
-          "paged": {
-            "type": "boolean"
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
           },
           "unpaged": {
             "type": "boolean"

@@ -148,12 +148,6 @@ export interface User {
     'name'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof User
-     */
-    'username'?: string;
-    /**
-     * 
      * @type {boolean}
      * @memberof User
      */
@@ -164,6 +158,12 @@ export interface User {
      * @memberof User
      */
     'authorities'?: Array<GrantedAuthority>;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'username'?: string;
     /**
      * 
      * @type {boolean}

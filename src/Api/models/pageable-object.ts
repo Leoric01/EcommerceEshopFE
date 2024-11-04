@@ -37,10 +37,10 @@ export interface PageableObject {
     'sort'?: Array<SortObject>;
     /**
      * 
-     * @type {number}
+     * @type {boolean}
      * @memberof PageableObject
      */
-    'pageSize'?: number;
+    'paged'?: boolean;
     /**
      * 
      * @type {number}
@@ -49,10 +49,10 @@ export interface PageableObject {
     'pageNumber'?: number;
     /**
      * 
-     * @type {boolean}
+     * @type {number}
      * @memberof PageableObject
      */
-    'paged'?: boolean;
+    'pageSize'?: number;
     /**
      * 
      * @type {boolean}

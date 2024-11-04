@@ -179,7 +179,7 @@ export const OrderControllerApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersOrderHistoryHandlers: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usersOrderHistoryHandler: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/orders/user`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -267,10 +267,10 @@ export const OrderControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersOrderHistoryHandlers(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultListOrder>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersOrderHistoryHandlers(options);
+        async usersOrderHistoryHandler(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultListOrder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersOrderHistoryHandler(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrderControllerApi.usersOrderHistoryHandlers']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrderControllerApi.usersOrderHistoryHandler']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -325,8 +325,8 @@ export const OrderControllerApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersOrderHistoryHandlers(options?: RawAxiosRequestConfig): AxiosPromise<ResultListOrder> {
-            return localVarFp.usersOrderHistoryHandlers(options).then((request) => request(axios, basePath));
+        usersOrderHistoryHandler(options?: RawAxiosRequestConfig): AxiosPromise<ResultListOrder> {
+            return localVarFp.usersOrderHistoryHandler(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -380,7 +380,7 @@ export interface OrderControllerApiInterface {
      * @throws {RequiredError}
      * @memberof OrderControllerApiInterface
      */
-    usersOrderHistoryHandlers(options?: RawAxiosRequestConfig): AxiosPromise<ResultListOrder>;
+    usersOrderHistoryHandler(options?: RawAxiosRequestConfig): AxiosPromise<ResultListOrder>;
 
 }
 
@@ -442,8 +442,8 @@ export class OrderControllerApi extends BaseAPI implements OrderControllerApiInt
      * @throws {RequiredError}
      * @memberof OrderControllerApi
      */
-    public usersOrderHistoryHandlers(options?: RawAxiosRequestConfig) {
-        return OrderControllerApiFp(this.configuration).usersOrderHistoryHandlers(options).then((request) => request(this.axios, this.basePath));
+    public usersOrderHistoryHandler(options?: RawAxiosRequestConfig) {
+        return OrderControllerApiFp(this.configuration).usersOrderHistoryHandler(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

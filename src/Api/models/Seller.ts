@@ -112,12 +112,6 @@ export interface Seller {
     'emailVerified'?: boolean;
     /**
      * 
-     * @type {string}
-     * @memberof Seller
-     */
-    'username'?: string;
-    /**
-     * 
      * @type {boolean}
      * @memberof Seller
      */
@@ -128,6 +122,12 @@ export interface Seller {
      * @memberof Seller
      */
     'authorities'?: Array<GrantedAuthority>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Seller
+     */
+    'username'?: string;
     /**
      * 
      * @type {string}
