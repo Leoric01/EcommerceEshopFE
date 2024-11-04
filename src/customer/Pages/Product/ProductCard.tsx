@@ -1,17 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import "./ProductCard.css";
 import { Button } from "@mui/material";
 import { Favorite, ModeComment } from "@mui/icons-material";
 import { teal } from "@mui/material/colors";
 import { Product } from "../../../Api";
 import { useNavigate } from "react-router-dom";
+import { wishApi } from "../../../State/configAxios/wishApi";
 
 const ProductCard = ({ item }: { item: Product }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const images = item?.image || [];
   const navigate = useNavigate();
-
+  const handleSeeReviews = (event: MouseEvent) => {
+    event.stopPropagation();
+    navigate(`/reviews/${item.id}`);
+  };
+  const handleAddToWishlist = async (event: MouseEvent) => {
+    event.stopPropagation();
+    try {
+      if (item?.id !== undefined) {
+        await wishApi.addProductToWishList(item.id);
+      } else {
+        console.error("Product ID is undefined");
+      }
+    } catch (error) {
+      console.error("Failed to add product to wishlist:", error);
+    }
+  };
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
 
@@ -62,10 +78,18 @@ const ProductCard = ({ item }: { item: Product }) => {
           {isHovered && images.length > 0 && (
             <div className="indicator flex flex-col items-center space-y-2">
               <div className="flex gap-3">
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleAddToWishlist}
+                >
                   <Favorite sx={{ color: teal[500] }} />
                 </Button>
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleSeeReviews}
+                >
                   <ModeComment sx={{ color: teal[500] }} />
                 </Button>
               </div>
