@@ -1,6 +1,5 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 apis/address-controller-api.ts
 apis/admin-controller-api.ts
@@ -65,6 +64,7 @@ models/result-home-category.ts
 models/result-home.ts
 models/result-list-account-detail-dto.ts
 models/result-list-coupon-dto-response.ts
+models/result-list-deal.ts
 models/result-list-home-category.ts
 models/result-list-order.ts
 models/result-list-product.ts

@@ -614,6 +614,22 @@
       }
     },
     "/admin/deals": {
+      "get": {
+        "tags": ["deal-controller"],
+        "operationId": "getAllDeals",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListDeal"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": ["deal-controller"],
         "operationId": "createDeal",
@@ -2198,6 +2214,9 @@
           "username": {
             "type": "string"
           },
+          "signedOut": {
+            "type": "boolean"
+          },
           "authorities": {
             "type": "array",
             "items": {
@@ -2206,9 +2225,6 @@
           },
           "vat": {
             "type": "string"
-          },
-          "signedOut": {
-            "type": "boolean"
           },
           "enabled": {
             "type": "boolean"
@@ -2318,14 +2334,14 @@
           "username": {
             "type": "string"
           },
+          "signedOut": {
+            "type": "boolean"
+          },
           "authorities": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GrantedAuthority"
             }
-          },
-          "signedOut": {
-            "type": "boolean"
           },
           "accountNonExpired": {
             "type": "boolean"
@@ -3129,13 +3145,13 @@
       "PageProduct": {
         "type": "object",
         "properties": {
-          "totalElements": {
-            "type": "integer",
-            "format": "int64"
-          },
           "totalPages": {
             "type": "integer",
             "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
           },
           "size": {
             "type": "integer",
@@ -3188,16 +3204,16 @@
               "$ref": "#/components/schemas/SortObject"
             }
           },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
           "pageSize": {
             "type": "integer",
             "format": "int32"
           },
           "paged": {
             "type": "boolean"
-          },
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
           },
           "unpaged": {
             "type": "boolean"
@@ -3365,6 +3381,27 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HomeCategory"
+            }
+          }
+        }
+      },
+      "ResultListDeal": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Deal"
             }
           }
         }

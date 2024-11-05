@@ -26,6 +26,8 @@ import type { Deal } from '../models';
 // @ts-ignore
 import type { ResultDeal } from '../models';
 // @ts-ignore
+import type { ResultListDeal } from '../models';
+// @ts-ignore
 import type { ResultVoid } from '../models';
 /**
  * DealControllerApi - axios parameter creator
@@ -140,6 +142,35 @@ export const DealControllerApiAxiosParamCreator = function (configuration?: Conf
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllDeals: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/admin/deals`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -187,6 +218,17 @@ export const DealControllerApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['DealControllerApi.deleteDeal']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllDeals(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultListDeal>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllDeals(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DealControllerApi.getAllDeals']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -225,6 +267,14 @@ export const DealControllerApiFactory = function (configuration?: Configuration,
         deleteDeal(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid> {
             return localVarFp.deleteDeal(id, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllDeals(options?: RawAxiosRequestConfig): AxiosPromise<ResultListDeal> {
+            return localVarFp.getAllDeals(options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -261,6 +311,14 @@ export interface DealControllerApiInterface {
      * @memberof DealControllerApiInterface
      */
     deleteDeal(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResultVoid>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DealControllerApiInterface
+     */
+    getAllDeals(options?: RawAxiosRequestConfig): AxiosPromise<ResultListDeal>;
 
 }
 
@@ -303,6 +361,16 @@ export class DealControllerApi extends BaseAPI implements DealControllerApiInter
      */
     public deleteDeal(id: number, options?: RawAxiosRequestConfig) {
         return DealControllerApiFp(this.configuration).deleteDeal(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DealControllerApi
+     */
+    public getAllDeals(options?: RawAxiosRequestConfig) {
+        return DealControllerApiFp(this.configuration).getAllDeals(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

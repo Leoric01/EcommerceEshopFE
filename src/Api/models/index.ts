@@ -37,6 +37,7 @@ export * from './result-home';
 export * from './result-home-category';
 export * from './result-list-account-detail-dto';
 export * from './result-list-coupon-dto-response';
+export * from './result-list-deal';
 export * from './result-list-home-category';
 export * from './result-list-order';
 export * from './result-list-product';
