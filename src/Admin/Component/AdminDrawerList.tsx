@@ -17,7 +17,7 @@ const menu = [
   },
   {
     name: "Coupons",
-    path: "/admin/coupon",
+    path: "/admin/coupons",
     icon: <IntegrationInstructionsIcon className="text-primary-color" />,
     activeIcon: <IntegrationInstructionsIcon className="text-white" />,
   },

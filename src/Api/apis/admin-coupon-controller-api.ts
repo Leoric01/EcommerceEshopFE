@@ -28,7 +28,7 @@ import type { ResultCart } from '../models';
 // @ts-ignore
 import type { ResultCoupon } from '../models';
 // @ts-ignore
-import type { ResultListCoupon } from '../models';
+import type { ResultListCouponDtoResponse } from '../models';
 // @ts-ignore
 import type { ResultVoid } from '../models';
 /**
@@ -237,7 +237,7 @@ export const AdminCouponControllerApiFp = function(configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllCoupons(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultListCoupon>> {
+        async getAllCoupons(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultListCouponDtoResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllCoupons(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AdminCouponControllerApi.getAllCoupons']?.[localVarOperationServerIndex]?.url;
@@ -287,7 +287,7 @@ export const AdminCouponControllerApiFactory = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllCoupons(options?: RawAxiosRequestConfig): AxiosPromise<ResultListCoupon> {
+        getAllCoupons(options?: RawAxiosRequestConfig): AxiosPromise<ResultListCouponDtoResponse> {
             return localVarFp.getAllCoupons(options).then((request) => request(axios, basePath));
         },
     };
@@ -334,7 +334,7 @@ export interface AdminCouponControllerApiInterface {
      * @throws {RequiredError}
      * @memberof AdminCouponControllerApiInterface
      */
-    getAllCoupons(options?: RawAxiosRequestConfig): AxiosPromise<ResultListCoupon>;
+    getAllCoupons(options?: RawAxiosRequestConfig): AxiosPromise<ResultListCouponDtoResponse>;
 
 }
 

@@ -15,37 +15,37 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Coupon } from './coupon';
+import type { CouponDtoResponse } from './coupon-dto-response';
 
 /**
  * 
  * @export
- * @interface ResultListCoupon
+ * @interface ResultListCouponDtoResponse
  */
-export interface ResultListCoupon {
+export interface ResultListCouponDtoResponse {
     /**
      * 
      * @type {boolean}
-     * @memberof ResultListCoupon
+     * @memberof ResultListCouponDtoResponse
      */
     'success'?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof ResultListCoupon
+     * @memberof ResultListCouponDtoResponse
      */
     'code'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ResultListCoupon
+     * @memberof ResultListCouponDtoResponse
      */
     'message'?: string;
     /**
      * 
-     * @type {Array<Coupon>}
-     * @memberof ResultListCoupon
+     * @type {Array<CouponDtoResponse>}
+     * @memberof ResultListCouponDtoResponse
      */
-    'data'?: Array<Coupon>;
+    'data'?: Array<CouponDtoResponse>;
 }
 

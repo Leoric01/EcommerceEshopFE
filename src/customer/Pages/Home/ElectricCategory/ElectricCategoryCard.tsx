@@ -1,16 +1,15 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const ElectricCategoryCard = () => {
+const ElectricCategoryCard = ({ item }: any) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex mx-3 gap-2 flex-col justify-between">
-      <div className="item-center">
-        <img
-          className="object-contain w-100% h-10"
-          src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="laptop"
-        />
-        <h2 className="font-semibold text-sm">Laptop</h2>
-      </div>
+    <div
+      onClick={() => navigate(`/products/${item.categoryId}`)}
+      className="flex w-20 flex-col items-center gap-3 cursor-pointer"
+    >
+      <img className="object-contain h-10" src={item.image} alt={item.name} />
+      <h2 className="font-semibold text-sm text-center">{item.name}</h2>
     </div>
   );
 };

@@ -38,6 +38,7 @@ models/cart-item-quantity-update-req.ts
 models/cart-item.ts
 models/cart.ts
 models/category.ts
+models/coupon-dto-response.ts
 models/coupon.ts
 models/create-product-req.ts
 models/create-review-request.ts
@@ -63,7 +64,7 @@ models/result-deal.ts
 models/result-home-category.ts
 models/result-home.ts
 models/result-list-account-detail-dto.ts
-models/result-list-coupon.ts
+models/result-list-coupon-dto-response.ts
 models/result-list-home-category.ts
 models/result-list-order.ts
 models/result-list-product.ts

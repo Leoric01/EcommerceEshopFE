@@ -2,12 +2,17 @@ import DealCard from "./DealCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useState } from "react";
+import { Deal as DealInterface, Home as HomeInterface } from "../../../../Api/models";
 
-const Deal = () => {
-  const settings = {
-    dots: false,
+interface DealSliderProps {
+  homePage: HomeInterface;
+}
+const DealSlider: React.FC<DealSliderProps> = ({ homePage }) => {
+  var settings = {
+    dots: true,
     infinite: true,
-    slidesToShow: 5,
+    slidesToShow: 6,
     slidesToScroll: 1,
     autoplay: true,
     speed: 2000,
@@ -15,39 +20,36 @@ const Deal = () => {
     cssEase: "linear",
     responsive: [
       {
-        breakpoint: 1200,
+        breakpoint: 1024, // Large screen
         settings: {
           slidesToShow: 4,
+          slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 900,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 600,
+        breakpoint: 768, // Tablet
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 480, // Mobile
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
         },
       },
     ],
   };
-
   return (
-    <div className="py-5">
-      <div className="flex gap-1 slider-container"></div>
-      <div className="slider-container">
+    <div className=" py-5 lg:px-20">
+      <div className="slide-container  ">
         <Slider {...settings}>
-          {[1, 1, 1, 1, 1, 1].map((item, index) => (
-            <DealCard key={index} />
+          {homePage.deals?.map((item: DealInterface) => (
+            <div className="border flex flex-col items-center justify-center">
+              <DealCard deal={item} />
+            </div>
           ))}
         </Slider>
       </div>
@@ -55,4 +57,4 @@ const Deal = () => {
   );
 };
 
-export default Deal;
+export default DealSlider;

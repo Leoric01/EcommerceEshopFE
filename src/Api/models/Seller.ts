@@ -118,16 +118,16 @@ export interface Seller {
     'username'?: string;
     /**
      * 
-     * @type {Array<GrantedAuthority>}
-     * @memberof Seller
-     */
-    'authorities'?: Array<GrantedAuthority>;
-    /**
-     * 
      * @type {boolean}
      * @memberof Seller
      */
     'signedOut'?: boolean;
+    /**
+     * 
+     * @type {Array<GrantedAuthority>}
+     * @memberof Seller
+     */
+    'authorities'?: Array<GrantedAuthority>;
     /**
      * 
      * @type {string}

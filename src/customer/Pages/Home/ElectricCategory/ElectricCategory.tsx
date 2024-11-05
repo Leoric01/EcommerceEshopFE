@@ -1,13 +1,21 @@
 import React from "react";
 import ElectricCategoryCard from "./ElectricCategoryCard";
+import { Home as HomeInterface } from "../../../../Api/models";
+import { useMediaQuery } from "@mui/material";
 
-export const ElectricCategory = () => {
+interface ElectricCategoryProps {
+  homePage: HomeInterface;
+}
+
+const ElectricCategory: React.FC<ElectricCategoryProps> = ({ homePage }) => {
+  const isSmallScreen = useMediaQuery("(max-width:800px)");
+  console.log("Electric Categories:", homePage.electricCategories);
   return (
     <div className="flex flex-wrap justify-between py-5 lg:px-20 border-b">
-      {[1, 1, 1, 1, 1, 1, 1].map((item, index) => (
-        <ElectricCategoryCard key={index} />
+      {homePage.electricCategories?.slice(0, isSmallScreen ? 5 : 10).map((item: any) => (
+        <ElectricCategoryCard item={item} />
       ))}
-      <div></div>
     </div>
   );
 };
+export default ElectricCategory;
