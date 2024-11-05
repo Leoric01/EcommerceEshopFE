@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import {
   TableContainer,
   Table,
@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
-import { Delete } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import { adminCouponApi } from "../../../State/configAxios/couponApi";
 import { CouponDtoResponse } from "../../../Api/models";
 
@@ -155,9 +155,9 @@ const Coupon = () => {
                     size="small"
                     onClick={(e) => coupon.id !== undefined && handleClick(e, coupon.id)}
                     color="primary"
-                    className="bg-primary-color"
+                    className="bg-primary-custom"
                   >
-                    Change Status
+                    <Edit />
                   </Button>
                   <Menu
                     id={`status-menu-${coupon.code}`}

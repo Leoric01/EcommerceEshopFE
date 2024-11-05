@@ -1,9 +1,11 @@
-import HomeCategoryTable from './HomeCategoryTable'
+import HomeCategoryTable from "./HomeCategoryTable";
 
 const DealCategoryTable = () => {
   return (
-    <div><HomeCategoryTable/></div>
-  )
-}
+    <div>
+      <HomeCategoryTable categories={[]} />
+    </div>
+  );
+};
 
-export default DealCategoryTable
+export default DealCategoryTable;

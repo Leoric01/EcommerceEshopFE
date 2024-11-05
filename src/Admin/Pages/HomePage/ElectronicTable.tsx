@@ -1,11 +1,11 @@
-import HomeCategoryTable from './HomeCategoryTable'
+import HomeCategoryTable from "./HomeCategoryTable";
 
 const ElectronicTable = () => {
   return (
     <div>
-      <HomeCategoryTable />
+      <HomeCategoryTable categories={[]} />
     </div>
-  )
-}
+  );
+};
 
-export default ElectronicTable
+export default ElectronicTable;

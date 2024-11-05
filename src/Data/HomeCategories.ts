@@ -259,23 +259,3 @@ export const homeCategories = [
       "https://rukminim2.flixcart.com/image/612/612/xif0q/ethnic-set/o/n/o/l-02-langit-original-imah4jwwctkjtman.jpeg?q=70",
   },
 ];
-const findDuplicates = (arr: { [key: string]: any }[], key: string) => {
-  const seen = new Set();
-  const duplicates = new Set();
-  arr.forEach((item) => {
-    if (seen.has(item[key])) {
-      duplicates.add(item[key]);
-    } else {
-      seen.add(item[key]);
-    }
-  });
-  return duplicates;
-};
-
-const nameDuplicates = findDuplicates(homeCategories, "name");
-const categoryIdDuplicates = findDuplicates(homeCategories, "categoryId");
-const imageDuplicates = findDuplicates(homeCategories, "image");
-
-console.log("Duplicate names:", nameDuplicates);
-console.log("Duplicate categoryIds:", categoryIdDuplicates);
-console.log("Duplicate images:", imageDuplicates);
