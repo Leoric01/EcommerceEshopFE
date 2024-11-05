@@ -184,6 +184,43 @@ export const AdminCouponControllerApiAxiosParamCreator = function (configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} couponId 
+         * @param {string} status 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCouponStatus: async (couponId: number, status: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'couponId' is not null or undefined
+            assertParamExists('updateCouponStatus', 'couponId', couponId)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('updateCouponStatus', 'status', status)
+            const localVarPath = `/coupon/admin/{couponId}/{status}`
+                .replace(`{${"couponId"}}`, encodeURIComponent(String(couponId)))
+                .replace(`{${"status"}}`, encodeURIComponent(String(status)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -243,6 +280,19 @@ export const AdminCouponControllerApiFp = function(configuration?: Configuration
             const localVarOperationServerBasePath = operationServerMap['AdminCouponControllerApi.getAllCoupons']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {number} couponId 
+         * @param {string} status 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateCouponStatus(couponId: number, status: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResultCoupon>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCouponStatus(couponId, status, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AdminCouponControllerApi.updateCouponStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -290,6 +340,16 @@ export const AdminCouponControllerApiFactory = function (configuration?: Configu
         getAllCoupons(options?: RawAxiosRequestConfig): AxiosPromise<ResultListCouponDtoResponse> {
             return localVarFp.getAllCoupons(options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {number} couponId 
+         * @param {string} status 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCouponStatus(couponId: number, status: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultCoupon> {
+            return localVarFp.updateCouponStatus(couponId, status, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -335,6 +395,16 @@ export interface AdminCouponControllerApiInterface {
      * @memberof AdminCouponControllerApiInterface
      */
     getAllCoupons(options?: RawAxiosRequestConfig): AxiosPromise<ResultListCouponDtoResponse>;
+
+    /**
+     * 
+     * @param {number} couponId 
+     * @param {string} status 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminCouponControllerApiInterface
+     */
+    updateCouponStatus(couponId: number, status: string, options?: RawAxiosRequestConfig): AxiosPromise<ResultCoupon>;
 
 }
 
@@ -388,6 +458,18 @@ export class AdminCouponControllerApi extends BaseAPI implements AdminCouponCont
      */
     public getAllCoupons(options?: RawAxiosRequestConfig) {
         return AdminCouponControllerApiFp(this.configuration).getAllCoupons(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} couponId 
+     * @param {string} status 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminCouponControllerApi
+     */
+    public updateCouponStatus(couponId: number, status: string, options?: RawAxiosRequestConfig) {
+        return AdminCouponControllerApiFp(this.configuration).updateCouponStatus(couponId, status, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

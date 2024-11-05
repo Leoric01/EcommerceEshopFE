@@ -154,16 +154,16 @@ export interface User {
     'username'?: string;
     /**
      * 
-     * @type {boolean}
-     * @memberof User
-     */
-    'signedOut'?: boolean;
-    /**
-     * 
      * @type {Array<GrantedAuthority>}
      * @memberof User
      */
     'authorities'?: Array<GrantedAuthority>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof User
+     */
+    'signedOut'?: boolean;
     /**
      * 
      * @type {boolean}

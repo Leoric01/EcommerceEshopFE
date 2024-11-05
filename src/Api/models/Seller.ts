@@ -118,12 +118,6 @@ export interface Seller {
     'username'?: string;
     /**
      * 
-     * @type {boolean}
-     * @memberof Seller
-     */
-    'signedOut'?: boolean;
-    /**
-     * 
      * @type {Array<GrantedAuthority>}
      * @memberof Seller
      */
@@ -134,6 +128,12 @@ export interface Seller {
      * @memberof Seller
      */
     'vat'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Seller
+     */
+    'signedOut'?: boolean;
     /**
      * 
      * @type {boolean}

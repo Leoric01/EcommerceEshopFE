@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, MouseEvent } from "react";
 import {
   TableContainer,
   Table,
@@ -45,7 +45,12 @@ const Coupon = () => {
   const [allCoupons, setAllCoupons] = useState<CouponDtoResponse[]>([]);
   const [filteredCoupons, setFilteredCoupons] = useState<CouponDtoResponse[]>([]);
   const [anchorEl, setAnchorEl] = useState<{ [key: number]: HTMLElement | null }>({});
-
+  const handleClick = (event: MouseEvent<HTMLButtonElement>, couponId: number) => {
+    setAnchorEl((prev) => ({
+      ...prev,
+      [couponId]: event.currentTarget,
+    }));
+  };
   const handleChange = (event: SelectChangeEvent) => {
     setCouponStatus(event.target.value);
   };
@@ -55,10 +60,26 @@ const Coupon = () => {
       const response = await adminCouponApi.getAllCoupons();
       const couponsData = response.data?.data ?? [];
       setAllCoupons(couponsData);
-      console.log("Coupons with status: ", couponsData);
+      console.log("Fetched coupons:", couponsData);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching coupons:", error);
     }
+  };
+
+  const handleAccountStatusChange = async (couponId: number, status: "ACTIVE" | "SUSPENDED") => {
+    try {
+      const response = await adminCouponApi.updateCouponStatus(couponId, status);
+      console.log("Updated coupon:", response.data?.data);
+      fetchAllCoupons();
+    } catch (error) {
+      console.error("Failed to update coupon status:", error);
+    } finally {
+      handleClose(couponId);
+    }
+  };
+
+  const handleClose = (couponId: number) => {
+    setAnchorEl((prev) => ({ ...prev, [couponId]: null }));
   };
 
   useEffect(() => {
@@ -72,29 +93,13 @@ const Coupon = () => {
     setFilteredCoupons(updatedFilteredCoupons);
   }, [couponStatus, allCoupons]);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, couponId: number) => {
-    setAnchorEl((prev) => ({
-      ...prev,
-      [couponId]: event.currentTarget,
-    }));
-  };
-
-  const handleClose = (couponId: number) => {
-    setAnchorEl((prev) => ({ ...prev, [couponId]: null }));
-  };
-
-  const handleUpdateCoupon = async (couponId: number, status: string) => {
+  const handleDeleteCoupon = async (id: number) => {
     try {
-      // Simulate API call to update coupon status
-      // await adminCouponApi.updateCouponStatus(couponId, status);
-      console.log(`Successfully updated coupon ${couponId} to status: ${status}`);
-
-      // Refresh coupons
+      const response = await adminCouponApi.deleteCoupon(id);
+      console.log("Deleted coupon success: ", response.data);
       fetchAllCoupons();
-    } catch (err) {
-      console.error("Failed to update coupon status:", err);
-    } finally {
-      handleClose(couponId);
+    } catch (error) {
+      console.error(`Failed to delete coupon with id: ${id}`, error);
     }
   };
 
@@ -111,11 +116,11 @@ const Coupon = () => {
             onChange={handleChange}
           >
             <MenuItem value="">All</MenuItem>
-            {couponStatuses.map((item) => (
-              <MenuItem key={item.status} value={item.status}>
-                {item.title}
-              </MenuItem>
-            ))}
+            <MenuItem value="ACTIVE">Active</MenuItem>
+            <MenuItem value="SUSPENDED">Suspended</MenuItem>
+            <MenuItem value="EXPIRED">Expired</MenuItem>
+            <MenuItem value="NOT_ACTIVE_YET">Not started yet</MenuItem>
+            <MenuItem value="INVALID">Invalid</MenuItem>
           </Select>
         </FormControl>
       </div>
@@ -136,7 +141,7 @@ const Coupon = () => {
           </TableHead>
           <TableBody>
             {filteredCoupons.map((coupon) => (
-              <TableRow key={coupon.code}>
+              <TableRow key={coupon.id}>
                 <StyledTableCell component="th" scope="row">
                   {coupon.code}
                 </StyledTableCell>
@@ -144,36 +149,36 @@ const Coupon = () => {
                 <StyledTableCell align="right">{coupon.validityEndDate}</StyledTableCell>
                 <StyledTableCell align="right">${coupon.minimumOrderValue}</StyledTableCell>
                 <StyledTableCell align="right">{coupon.discountPercentage}%</StyledTableCell>
-                <StyledTableCell align="right">
-                  {couponStatuses.find((status) => status.status === coupon.status)?.title}
-                </StyledTableCell>
+                <StyledTableCell align="right">{coupon.status}</StyledTableCell>
                 <StyledTableCell align="right">
                   <Button
                     size="small"
-                    onClick={(e) => coupon.code && handleClick(e, coupon.code.hashCode())}
+                    onClick={(e) => coupon.id !== undefined && handleClick(e, coupon.id)}
                     color="primary"
                     className="bg-primary-color"
                   >
-                    Status
+                    Change Status
                   </Button>
                   <Menu
                     id={`status-menu-${coupon.code}`}
-                    anchorEl={coupon.code ? anchorEl[coupon.code.hashCode()] : null}
-                    open={Boolean(coupon.code && anchorEl[coupon.code.hashCode()])}
-                    onClose={() => coupon.code && handleClose(coupon.code.hashCode())}
+                    anchorEl={coupon.id !== undefined ? anchorEl[coupon.id] : null}
+                    open={Boolean(coupon.id && anchorEl[coupon.id])}
+                    onClose={() => coupon.id && handleClose(coupon.id)}
                   >
-                    {couponStatuses.map((status) => (
-                      <MenuItem
-                        key={status.status}
-                        onClick={() => coupon.code && handleUpdateCoupon(coupon.code.hashCode(), status.status)}
-                      >
-                        {status.title}
+                    {
+                      <MenuItem onClick={() => coupon.id && handleAccountStatusChange(coupon.id, "SUSPENDED")}>
+                        Suspend
                       </MenuItem>
-                    ))}
+                    }
+                    {
+                      <MenuItem onClick={() => coupon.id && handleAccountStatusChange(coupon.id, "ACTIVE")}>
+                        Activate
+                      </MenuItem>
+                    }
                   </Menu>
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <Button variant="text" color="error">
+                  <Button variant="text" color="error" onClick={() => coupon.id && handleDeleteCoupon(coupon.id)}>
                     <Delete />
                   </Button>
                 </StyledTableCell>
